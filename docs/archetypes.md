@@ -160,6 +160,11 @@ deterministic 1200×630 SVGs built from the giraffe/borrel design tokens
 the site has on-brand promo/social art today; a code agent can't call an AI image
 model, so real raster art is a later, optional swap.
 
+> The image links under each archetype above use a **repo-relative** path
+> (`../public/archetypes/<id>.svg`) so they render in GitHub / Markdown viewers.
+> The **served** URL at runtime is `/archetypes/<id>.svg` — that is the value on
+> `Archetype.image` in `content/archetypes/index.ts`.
+
 **To regenerate the placeholder SVGs** (e.g. after retuning names/taglines): edit
 the archetype table in the generator and re-run it, writing to
 `public/archetypes/<id>.svg` (filename must equal each archetype's `id` so
