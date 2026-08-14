@@ -1,9 +1,10 @@
 ---
 id: BORREL-2.1
 title: Analyze and finalize the survey question list
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-08-14 14:07'
+updated_date: '2026-08-14 14:29'
 labels:
   - story
 dependencies: []
@@ -26,11 +27,11 @@ Branch: BORREL-2.1/finalize-survey-questions
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 docs/survey-final-questions.md lists every final question with its answer options, marked required/optional and closed/open
-- [ ] #2 Each question is annotated for its analytic role (identity, aggregate stat, archetype-clustering feature, or open showcase)
-- [ ] #3 Duplicates and ambiguities in the raw set are resolved, each change with a stated rationale
-- [ ] #4 The two open questions are flagged as showcase-only (not fed into clustering)
-- [ ] #5 The doc is human-readable and scannable, suitable for the owner to review and approve
+- [x] #1 docs/survey-final-questions.md lists every final question with its answer options, marked required/optional and closed/open
+- [x] #2 Each question is annotated for its analytic role (identity, aggregate stat, archetype-clustering feature, or open showcase)
+- [x] #3 Duplicates and ambiguities in the raw set are resolved, each change with a stated rationale
+- [x] #4 The two open questions are flagged as showcase-only (not fed into clustering)
+- [x] #5 The doc is human-readable and scannable, suitable for the owner to review and approve
 <!-- AC:END -->
 
 ## Implementation Plan
@@ -73,4 +74,14 @@ DE TEST
 - Kies een: Ochtendmens / Avondmens
 - Maak de zin af: Je weet dat je een Kompaan bent als... (open)
 - Welke eigenschap MOET de ultieme Kompaan volgens jou hebben? (open)
+
+Review gate (dipsaus-ai:story-reviewer): verdict PASS — all 5 ACs met, no scope violations. One advisory (section 2 uses prose 'all single/cluster' rather than per-row Type/Rol columns); accepted as-is — repeating identical columns 14x adds noise, the prose header is intentional for scannability.
+
+Post-delivery enrichment (owner request): added 6 playful questions Q23-Q28 (hoofd stoten; 'weer daarboven'-reactie; vaste borrel-drankje; app-groep-rol; dansvloer/zijlijn; meest-gehoorde lengte-opmerking). Q24-Q27 join the clustering features (18 total), Q28 joins the showcase quotes. Tone kept speels. Committed ec5eb39 on the same branch/PR; summary counts updated to 28 questions.
 <!-- SECTION:NOTES:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Produced docs/survey-final-questions.md — the settled 22-question set (1 identity, 5 stats incl. the 29-aug RSVP, 14 clustering features Q7-Q20, 2 open showcase) with per-question options, required/optional, open/single/number type, analytic role, ordinal-vs-nominal encoding guidance for the clustering spike, and a raw->final changes-rationale table. Open questions flagged showcase-only (never clustered). Unblocks BORREL-2.2 (data schema). Reviewer verdict: pass.
+<!-- SECTION:FINAL_SUMMARY:END -->
