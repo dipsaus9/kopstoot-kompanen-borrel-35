@@ -1,11 +1,11 @@
 ---
 id: BORREL-2.5
 title: 'Spike: choose and prototype archetype clustering on mock data'
-status: To Do
+status: In Progress
 assignee: []
 created_date: '2026-08-14 14:08'
-labels:
-  - needs-info
+updated_date: '2026-08-14 20:06'
+labels: []
 dependencies:
   - BORREL-2.2
 references:
