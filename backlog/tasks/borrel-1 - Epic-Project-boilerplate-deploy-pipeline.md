@@ -1,9 +1,10 @@
 ---
 id: BORREL-1
 title: 'Epic: Project boilerplate & deploy pipeline'
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-08-14 13:45'
+updated_date: '2026-08-14 20:23'
 labels:
   - epic
 dependencies: []
