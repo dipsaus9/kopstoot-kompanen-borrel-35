@@ -1,0 +1,101 @@
+/**
+ * Borrel 35 — playful, bold, vertical, giraffe-motif design tokens.
+ *
+ * This is the RAW token + semantic-mapping layer. It sits on top of the shadcn
+ * base variables (defined in app/globals.css) and overrides them so the whole
+ * app speaks one giraffe/borrel visual language. The palette is tuned to the six
+ * Kompaan archetypes (see content/archetypes/index.ts, docs/archetypes.md):
+ * warm savanna + giraffe gold for the shared borrel identity, and one accent per
+ * archetype family (park-green, festival-flamingo, night, salmari-liquorice,
+ * kroeg-wine) reused for charts and archetype cards.
+ *
+ * Human-readable spec: docs/design-system.md.
+ */
+
+:root {
+  /* ---------------------------------------------------------------------- *
+   * 1. Brand palette (OKLCH) — the raw giraffe/borrel colours
+   * ---------------------------------------------------------------------- */
+
+  /* Savanna neutrals — warm paper, sand and cocoa "giraffe-patch" ink */
+  --brand-cream: oklch(0.97 0.018 85); /* page paper */
+  --brand-sand: oklch(0.93 0.03 82); /* muted surfaces */
+  --brand-tan: oklch(0.82 0.06 74); /* borders, hairlines */
+  --brand-cocoa: oklch(0.29 0.045 66); /* ink / giraffe patch */
+  --brand-cocoa-deep: oklch(0.22 0.035 64); /* darkest ink, dark bg */
+
+  /* Giraffe gold — the signature accent */
+  --brand-giraffe: oklch(0.79 0.145 78); /* primary gold */
+  --brand-ochre: oklch(0.68 0.15 66); /* deeper gold, hover */
+
+  /* Archetype accent family (one hue per archetype cluster) */
+  --brand-park: oklch(0.72 0.15 148); /* Parkborrelprofessional · Verantwoordelijke Kompaan — natuur/groen */
+  --brand-flamingo: oklch(0.72 0.17 15); /* Festival-Flamingo — festival coral */
+  --brand-liquorice: oklch(0.31 0.05 300); /* Salmari-Soldaat — salmiak/stad */
+  --brand-night: oklch(0.5 0.13 268); /* Lange Nachtbraker — nacht indigo */
+  --brand-wine: oklch(0.46 0.14 20); /* Bedtijd-Baron — kroeg/wijn claret */
+
+  /* ---------------------------------------------------------------------- *
+   * 2. Type scale — oversized, vertical, bold-first
+   * ---------------------------------------------------------------------- */
+  /* Prefixed --fs-* so app/globals.css can map them into Tailwind's own
+   * --text-* namespace via @theme inline without a self-reference. */
+  --fs-caption: 0.75rem; /* 12px — eyebrow / meta */
+  --fs-body: 1rem; /* 16px — base body */
+  --fs-body-lg: 1.125rem; /* 18px */
+  --fs-lead: 1.375rem; /* 22px — intros */
+  --fs-title: 1.75rem; /* 28px — card titles */
+  --fs-headline: 2.25rem; /* 36px — section headings */
+  --fs-display-sm: 3rem; /* 48px */
+  --fs-display: 4.5rem; /* 72px — hero */
+  --fs-display-lg: 6rem; /* 96px — oversized numbers */
+  --fs-colossus: 8.5rem; /* 136px — the vertical statement */
+
+  /* Line-heights — tight for display, airy for body (vertical rhythm) */
+  --lh-colossus: 0.9;
+  --lh-display: 0.98;
+  --lh-heading: 1.08;
+  --lh-body: 1.6;
+
+  /* Weights — playful and heavy at the top of the scale */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+  --fw-black: 900;
+
+  /* Tracking — negative on display, wide on uppercase eyebrows */
+  --ls-display: -0.03em;
+  --ls-heading: -0.015em;
+  --ls-eyebrow: 0.14em;
+
+  /* ---------------------------------------------------------------------- *
+   * 3. Spacing & vertical rhythm — verticality is the brand
+   * ---------------------------------------------------------------------- */
+  --rhythm: 1.5rem; /* baseline vertical unit */
+  --stack-xs: 0.5rem;
+  --stack-sm: 0.75rem;
+  --stack-md: 1.5rem; /* 1 rhythm */
+  --stack-lg: 3rem; /* 2 rhythm */
+  --stack-xl: 4.5rem; /* 3 rhythm */
+  --stack-section: 7.5rem; /* 5 rhythm — between page sections */
+  --measure: 60ch; /* max reading width */
+
+  /* ---------------------------------------------------------------------- *
+   * 4. Radii — soft and playful (extends shadcn's --radius scale).
+   *    The base --radius is bumped to a rounder value in app/globals.css;
+   *    --radius-pill is the fully-rounded token for chips and buttons.
+   * ---------------------------------------------------------------------- */
+  --r-pill: 999px; /* mapped to --radius-pill / rounded-pill in app/globals.css */
+
+  /* ---------------------------------------------------------------------- *
+   * 5. Dark-mode brand tints — the few palette values that shift at night.
+   *    The semantic shadcn vars are mapped to these in app/globals.css.
+   * ---------------------------------------------------------------------- */
+  --brand-giraffe-lifted: oklch(0.83 0.15 80); /* gold, brighter on dark */
+  --brand-park-lifted: oklch(0.78 0.15 148);
+  --brand-flamingo-lifted: oklch(0.76 0.17 16);
+  --brand-night-lifted: oklch(0.66 0.14 268);
+  --brand-wine-lifted: oklch(0.62 0.15 20);
+  --brand-cocoa-surface: oklch(0.26 0.04 66); /* dark card/popover */
+  --brand-cocoa-raised: oklch(0.34 0.045 66); /* dark muted/secondary */
+}

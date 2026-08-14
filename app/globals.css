@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+/* Borrel 35 playful/vertical giraffe design tokens (raw palette + scales). */
+@import "./theme/tokens.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -46,75 +48,131 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-pill: var(--r-pill);
+
+  /* ---- Borrel 35 brand tokens exposed as Tailwind utilities ---- */
+  /* Palette → bg-giraffe, text-cocoa, border-tan, bg-flamingo, … */
+  --color-cream: var(--brand-cream);
+  --color-sand: var(--brand-sand);
+  --color-tan: var(--brand-tan);
+  --color-cocoa: var(--brand-cocoa);
+  --color-giraffe: var(--brand-giraffe);
+  --color-ochre: var(--brand-ochre);
+  --color-park: var(--brand-park);
+  --color-flamingo: var(--brand-flamingo);
+  --color-liquorice: var(--brand-liquorice);
+  --color-night: var(--brand-night);
+  --color-wine: var(--brand-wine);
+
+  /* Vertical type scale → text-display, text-colossus, … */
+  --text-caption: var(--fs-caption);
+  --text-body: var(--fs-body);
+  --text-body-lg: var(--fs-body-lg);
+  --text-lead: var(--fs-lead);
+  --text-title: var(--fs-title);
+  --text-headline: var(--fs-headline);
+  --text-display-sm: var(--fs-display-sm);
+  --text-display: var(--fs-display);
+  --text-display-lg: var(--fs-display-lg);
+  --text-colossus: var(--fs-colossus);
+
+  /* Line-heights → leading-display, leading-body, … */
+  --leading-colossus: var(--lh-colossus);
+  --leading-display: var(--lh-display);
+  --leading-heading: var(--lh-heading);
+  --leading-body: var(--lh-body);
+
+  /* Weights → font-black, font-bold, … */
+  --font-weight-regular: var(--fw-regular);
+  --font-weight-medium: var(--fw-medium);
+  --font-weight-bold: var(--fw-bold);
+  --font-weight-black: var(--fw-black);
+
+  /* Tracking → tracking-display, tracking-eyebrow, … */
+  --tracking-display: var(--ls-display);
+  --tracking-heading: var(--ls-heading);
+  --tracking-eyebrow: var(--ls-eyebrow);
+
+  /* Vertical rhythm → gap-stack-md, space-y-stack-lg, p-stack-section, … */
+  --spacing-stack-xs: var(--stack-xs);
+  --spacing-stack-sm: var(--stack-sm);
+  --spacing-stack-md: var(--stack-md);
+  --spacing-stack-lg: var(--stack-lg);
+  --spacing-stack-xl: var(--stack-xl);
+  --spacing-stack-section: var(--stack-section);
 }
 
+/* Semantic layer — shadcn base variables remapped to the Borrel 35 giraffe
+ * palette (raw tokens live in app/theme/tokens.css). Light theme = savanna. */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --background: var(--brand-cream);
+  --foreground: var(--brand-cocoa);
+  --card: oklch(0.99 0.01 85);
+  --card-foreground: var(--brand-cocoa);
+  --popover: oklch(0.99 0.01 85);
+  --popover-foreground: var(--brand-cocoa);
+  --primary: var(--brand-giraffe);
+  --primary-foreground: var(--brand-cocoa-deep);
+  --secondary: var(--brand-sand);
+  --secondary-foreground: var(--brand-cocoa);
+  --muted: var(--brand-sand);
+  --muted-foreground: oklch(0.52 0.04 66);
+  --accent: var(--brand-flamingo);
+  --accent-foreground: var(--brand-cream);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --border: var(--brand-tan);
+  --input: var(--brand-tan);
+  --ring: var(--brand-giraffe);
+  /* Chart ramp = archetype accent family, in cluster order */
+  --chart-1: var(--brand-giraffe);
+  --chart-2: var(--brand-park);
+  --chart-3: var(--brand-flamingo);
+  --chart-4: var(--brand-night);
+  --chart-5: var(--brand-wine);
+  --radius: 0.875rem;
+  --sidebar: oklch(0.99 0.01 85);
+  --sidebar-foreground: var(--brand-cocoa);
+  --sidebar-primary: var(--brand-giraffe);
+  --sidebar-primary-foreground: var(--brand-cocoa-deep);
+  --sidebar-accent: var(--brand-sand);
+  --sidebar-accent-foreground: var(--brand-cocoa);
+  --sidebar-border: var(--brand-tan);
+  --sidebar-ring: var(--brand-giraffe);
 }
 
+/* Dark theme = night-savanna: deep cocoa ground, gold + accents lifted. */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --background: var(--brand-cocoa-deep);
+  --foreground: var(--brand-cream);
+  --card: var(--brand-cocoa-surface);
+  --card-foreground: var(--brand-cream);
+  --popover: var(--brand-cocoa-surface);
+  --popover-foreground: var(--brand-cream);
+  --primary: var(--brand-giraffe-lifted);
+  --primary-foreground: var(--brand-cocoa-deep);
+  --secondary: var(--brand-cocoa-raised);
+  --secondary-foreground: var(--brand-cream);
+  --muted: var(--brand-cocoa-raised);
+  --muted-foreground: oklch(0.75 0.04 78);
+  --accent: var(--brand-flamingo-lifted);
+  --accent-foreground: var(--brand-cocoa-deep);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: var(--brand-giraffe-lifted);
+  --chart-1: var(--brand-giraffe-lifted);
+  --chart-2: var(--brand-park-lifted);
+  --chart-3: var(--brand-flamingo-lifted);
+  --chart-4: var(--brand-night-lifted);
+  --chart-5: var(--brand-wine-lifted);
+  --sidebar: var(--brand-cocoa-surface);
+  --sidebar-foreground: var(--brand-cream);
+  --sidebar-primary: var(--brand-giraffe-lifted);
+  --sidebar-primary-foreground: var(--brand-cocoa-deep);
+  --sidebar-accent: var(--brand-cocoa-raised);
+  --sidebar-accent-foreground: var(--brand-cream);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: var(--brand-giraffe-lifted);
 }
 
 @layer base {
@@ -127,4 +185,44 @@
   html {
     @apply font-sans;
   }
+  /* Bold, tight, vertical voice for headings out of the box. */
+  h1,
+  h2,
+  h3 {
+    font-weight: var(--fw-black);
+    letter-spacing: var(--ls-heading);
+    line-height: var(--lh-heading);
+    text-wrap: balance;
+  }
+}
+
+/* Giraffe-spot motif — a reusable patch texture for hero blocks and accents.
+ * Usage: <div class="giraffe-spots"> or compose with any brand colour. */
+@utility giraffe-spots {
+  background-color: var(--brand-giraffe);
+  background-image: radial-gradient(
+      ellipse 34% 40% at 20% 24%,
+      var(--brand-ochre) 0 42%,
+      transparent 44%
+    ),
+    radial-gradient(
+      ellipse 30% 44% at 74% 16%,
+      var(--brand-ochre) 0 42%,
+      transparent 44%
+    ),
+    radial-gradient(
+      ellipse 38% 34% at 58% 62%,
+      var(--brand-ochre) 0 42%,
+      transparent 44%
+    ),
+    radial-gradient(
+      ellipse 26% 40% at 12% 78%,
+      var(--brand-ochre) 0 42%,
+      transparent 44%
+    ),
+    radial-gradient(
+      ellipse 32% 36% at 88% 82%,
+      var(--brand-ochre) 0 42%,
+      transparent 44%
+    );
 }
