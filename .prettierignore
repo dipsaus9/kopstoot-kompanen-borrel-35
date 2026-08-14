@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+build
+coverage
+bun.lock
+next-env.d.ts
+
+# Data + docs (backlog files are CLI-managed; keep the formatter off them)
+.claude
+backlog
+*.md
