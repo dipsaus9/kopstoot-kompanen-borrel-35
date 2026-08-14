@@ -86,6 +86,28 @@ may set these to optional (○) if response rate suffers — they are the only t
 
 ---
 
+## 3b. Extra / leuke vragen (nieuw — playful add-ons)
+
+Six added questions to boost the fun, strengthen the archetypes and feed the superlatives. Tone kept
+in line with the rest (speels, giraffe-humor, uit de liefdeshoek).
+
+| # | Vraag | Type | Verplicht | Opties | Rol | % match |
+|---|-------|------|:--:|--------|-----|:--:|
+| 23 | Hoe vaak stoot je je hoofd? | single | ● | Dagelijks · Wekelijks · Alleen bij lage deuren · Nooit, ik duik automatisch | stat (superlatief, ordinaal) | — |
+| 24 | Jouw standaard reactie op "hoe is het weer daarboven?" | single | ● | Lach maar mee · Negeren · Gevat terugkaatsen · Elke keer verzin ik wat nieuws · Ik glimlach en sterf vanbinnen | cluster | ✓ |
+| 25 | Jouw vaste borrel-drankje? | single | ● | Bier · Wijn · Shot(s) · Fris/0.0 · Cocktail · Wat er maar is | cluster (+ superlatief) | ✓ |
+| 26 | Jouw rol in de app-groep? | single | ● | De planner · De ghost · De meme-spammer · Het "ik-kom-eraan"-liegbeest · De sfeermaker | cluster | ✓ |
+| 27 | Kies één | single | ● | Dansvloer · Zijlijn | cluster (binair) | ✓ |
+| 28 | Meest gehoorde lengte-opmerking waar je klaar mee bent? | open | ● | — (vrije tekst) | showcase | — |
+
+**Notes**
+- **Q25 (drankje)** and **Q26 (app-rol)** are strong archetype signals — great for the typetjes; Q25 also drives a superlatief ("meest voorkomende Kompanen-drankje").
+- **Q23 (hoofd stoten)** is a superlatief/fun stat, encode **ordinal**.
+- **Encoding for `BORREL-2.5`**: Q23 ordinal · Q24/Q25/Q26 nominal (one-hot) · Q27 binary.
+- **Q28** joins the quote-wall with Q21/Q22 — **showcase only, not clustered**.
+
+---
+
 ## 4. Changes & rationale (raw → final)
 
 | Change | Rationale |
@@ -98,13 +120,14 @@ may set these to optional (○) if response rate suffers — they are the only t
 | Q9 / Q11 marked **ordinal** | They have a natural order; encoding them ordinally gives the clustering more signal than one-hot. |
 | Q19 keuken flagged **low-weight / droppable** | Food preference correlates weakly with the borrel archetypes; keep it fun but don't let it dominate. |
 | No duplicates removed | The current raw set has no true duplicates (the old "leeftijdscategorie" is now folded into Q2). |
+| **Added 6 playful questions (Q23–Q28)** — head-bumping, "weer daarboven"-reactie, vaste drankje, app-groep-rol, dansvloer/zijlijn, meest-gehoorde lengte-opmerking | More lol + stronger archetype signal & superlatives; tone kept playful. Q23–Q27 closed, Q28 open showcase. |
 
 ## 5. Summary
 
-- **22 questions**: 1 identity · 5 stats (1 RSVP) · 14 clustering features · 2 open showcase.
-- **Clustering (`BORREL-2.5`) uses Q7–Q20** (14 features).
-- **% gemiddelde Kompaan** uses Q2–Q5 (stats) + Q7–Q20 (clustering) — a Kompaan is measured on both their numbers and their type.
-- **Open Q21/Q22** are quotes only.
+- **28 questions**: 1 identity · 6 stats (1 RSVP) · 18 clustering features · 3 open showcase.
+- **Clustering (`BORREL-2.5`) uses Q7–Q20 + Q24–Q27** (18 features).
+- **% gemiddelde Kompaan** uses Q2–Q5 (stats) + Q7–Q20 + Q24–Q27 (clustering) — a Kompaan is measured on both their numbers and their type.
+- **Open Q21/Q22/Q28** are quotes only.
 - CSV column order should follow this numbering so `BORREL-2.2` can map headers → schema fields directly.
 
 > **Owner action**: approve this list (or edit inline), then it's frozen into the Google Form and
