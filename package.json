@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "archetypes": "bun run scripts/archetypes/cluster.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "format": "prettier --write .",
