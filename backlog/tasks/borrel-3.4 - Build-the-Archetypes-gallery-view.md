@@ -1,10 +1,10 @@
 ---
 id: BORREL-3.4
 title: Build the Archetypes gallery view
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-08-14 21:02'
-updated_date: '2026-08-14 21:02'
+updated_date: '2026-08-14 21:30'
 labels:
   - story
 dependencies:
@@ -30,10 +30,10 @@ Branch: BORREL-3.4/archetypes-gallery
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 All six ARCHETYPES render as character cards at /typetjes
-- [ ] #2 Each card shows the archetype name, description and defining traits
-- [ ] #3 Each card shows its member count/list, resolved from the cluster assignments
-- [ ] #4 Each archetype is individually deep-linkable (target for the find-yourself badge)
+- [x] #1 All six ARCHETYPES render as character cards at /typetjes
+- [x] #2 Each card shows the archetype name, description and defining traits
+- [x] #3 Each card shows its member count/list, resolved from the cluster assignments
+- [x] #4 Each archetype is individually deep-linkable (target for the find-yourself badge)
 <!-- AC:END -->
 
 ## Implementation Plan
@@ -45,5 +45,5 @@ Branch: BORREL-3.4/archetypes-gallery
 ## Implementation Notes
 
 <!-- SECTION:NOTES:BEGIN -->
-Depends on BORREL-3.2 (shell/nav), BORREL-2.3 (tokens) and BORREL-2.6 (named archetypes: content/archetypes/index.ts, read-only). Archetype names/traits are a template derived from mock data — render ARCHETYPES as data so a retune needs no layout change. Server component, build-time data. Verify: bun run lint, bun run typecheck, bun run test.
+Delivered /typetjes: six ARCHETYPES render as giraffe-voiced character cards (components/archetypes/) with name, description and defining traits. Member count/list resolved from scripts/archetypes/archetypes.json assignments grouped by cluster and matched via sourceClusterId (members.ts). Each card is deep-linkable (id=archetype slug + scroll-mt + :target ring; jump-links nav). Server component, build-time data, no runtime fetch (/typetjes prerenders Static). Styled with BORREL-2.3 tokens, each archetype's mapped brand hue as decorative accent. No archetype.image referenced. Green: lint, typecheck, test (13), build. Reviewer: pass, no findings, no scope violations.
 <!-- SECTION:NOTES:END -->
