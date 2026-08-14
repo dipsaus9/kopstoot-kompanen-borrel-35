@@ -35,6 +35,38 @@ bun install
 bun run dev
 ```
 
+## Deploy
+
+The site is hosted on **Vercel** and deploys straight from this repo. Deploy config lives in
+[`vercel.json`](./vercel.json), so the settings below are picked up automatically.
+
+### Connect the repo
+
+1. In the [Vercel dashboard](https://vercel.com/new), choose **Add New… → Project**.
+2. Import this Git repository and select it.
+3. Vercel detects the **Next.js** framework and reads `vercel.json`. Keep the defaults it offers.
+4. Deploy. Every push to `main` ships a production deployment; pull requests get preview
+   deployments automatically.
+
+### Build settings
+
+These come from `vercel.json` — you should not need to change them in the dashboard:
+
+| Setting          | Value           |
+| ---------------- | --------------- |
+| Framework Preset | Next.js         |
+| Install Command  | `bun install`   |
+| Build Command    | `bun run build` |
+| Output Directory | `.next`         |
+
+### Environment variables
+
+The app reads its data from a CSV exported from the public Google Form. If that source is wired
+through an environment variable (e.g. the CSV URL), add it under **Project Settings → Environment
+Variables** in Vercel for the **Production** (and, if you want previews to work, **Preview**)
+environments, then redeploy. There are no secret keys required to build the site today — add
+variables here only as data sources are introduced. Never commit values from `.env*` files.
+
 ## Development workflow
 
 This repo uses the Backlog.md + Claude workflow. Config lives in
