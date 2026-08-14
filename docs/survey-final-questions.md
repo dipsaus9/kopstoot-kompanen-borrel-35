@@ -49,7 +49,7 @@ All `single`, all required (●), all `cluster` + count toward the **% match** (
 | 9 | Hoe vaak krijg jij de vraag "Hoe lang ben jij?"? | Dagelijks · Wekelijks · Regelmatig · Bijna nooit meer · Nooit |
 | 10 | Wat is het grootste voordeel van lang zijn? | Overal bij kunnen · Altijd goed zicht · Mensen terugvinden op festivals · Indrukwekkend zijn zonder iets te doen · Welk voordeel? |
 | 11 | Hoe laat ben jij normaal op een borrel? | Als één van de eersten · Keurig op tijd · Modieus te laat · "Ik kom eraan!" terwijl ik nog thuis ben · Als allerlaatste |
-| 12 | Hoe eindigt jouw gemiddelde Kompanenborrel? | Verantwoord naar huis · Nog even één drankje · SHOTJESSSS · Met eten · Geen idee meer |
+| 12 | Hoe eindigt jouw gemiddelde Kompanenborrel? | Verantwoord naar huis · Nog even één drankje · SHOTJESS · Met eten · Geen idee meer |
 | 13 | Wat is jouw ideale borrel? | Parkborrel · Kroegborrel · Themaborrel · Gala · Feestborrel |
 | 14 | Op een borrel ben ik meestal… | De sociale butterfly · De vaste-kliek-hanger · De organisator · De verdwijntruc · Degene die iedereen drank geeft · Degene die ineens een diep gesprek heeft |
 
@@ -115,7 +115,6 @@ in line with the rest (speels, giraffe-humor, uit de liefdeshoek).
 | Q2 "Hoe jong ben je?" → **numeric age** (was ambiguous; earlier draft used a bracket) | A number aggregates to a real average and can be bucketed later; a bracket loses information permanently. |
 | Q4 provincie → **enumerated 12 provinces + "Buiten Nederland"** | Raw gave no options; a fixed list keeps the province stat clean and comparable. |
 | Q6 aanwezigheid → tagged **RSVP stat, excluded from clustering & % match** | It's event logistics, not a personality trait — clustering on it would pollute the archetypes. |
-| Q12 "SHOTJESS" → **"SHOTJESSSS"** | Spelling standardized (keep the playful energy, one canonical value for the CSV). |
 | "Kies een" → **"Kies één"** | Correct spelling; keep the four (now six) quick-choice items grouped. |
 | Q9 / Q11 marked **ordinal** | They have a natural order; encoding them ordinally gives the clustering more signal than one-hot. |
 | Q19 keuken flagged **low-weight / droppable** | Food preference correlates weakly with the borrel archetypes; keep it fun but don't let it dominate. |
