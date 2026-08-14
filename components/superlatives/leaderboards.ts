@@ -147,9 +147,12 @@ const CATEGORIES: readonly Category[] = [
     title: "Modieus te laat",
     blurb: '"Ik kom eraan!" — terwijl ze nog thuis op de bank zitten.',
     hueVar: "--brand-night",
-    // Latest arriver: flip the ordinal so the last option wins.
-    metric: (r) =>
-      BORREL_ARRIVAL.length + 1 - ordinalScore(BORREL_ARRIVAL, r.borrelArrival),
+    // Latest arriver: flip the ordinal so the last option wins. Unknown options
+    // keep a negative score so the `metric >= 0` guard still drops them.
+    metric: (r) => {
+      const score = ordinalScore(BORREL_ARRIVAL, r.borrelArrival);
+      return score < 0 ? -1 : BORREL_ARRIVAL.length + 1 - score;
+    },
     display: (r) => r.borrelArrival,
   },
   {
