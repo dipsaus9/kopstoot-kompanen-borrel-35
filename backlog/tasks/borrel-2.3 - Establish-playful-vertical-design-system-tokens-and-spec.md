@@ -4,19 +4,20 @@ title: Establish playful/vertical design system tokens and spec
 status: To Do
 assignee: []
 created_date: '2026-08-14 14:08'
-updated_date: '2026-08-14 14:09'
+updated_date: '2026-08-14 19:37'
 labels:
   - story
 dependencies:
   - BORREL-1.1
   - BORREL-1.3
+  - BORREL-2.5
 references:
   - app/globals.css
   - app/theme/
   - docs/design-system.md
 parent_task_id: BORREL-2
 type: feature
-ordinal: 11000
+ordinal: 13500
 ---
 
 ## Description
@@ -47,4 +48,6 @@ Branch: BORREL-2.3/design-system-tokens
 
 <!-- SECTION:NOTES:BEGIN -->
 No new dependencies — CSS/token work only, so no bun.lock. Depends on BORREL-1.1 (app/) and BORREL-1.3 (shadcn base theme in app/globals.css); layers on top of shadcn rather than replacing it. Verify: bun run lint && bun run typecheck.
+
+Reordered to follow BORREL-2.5: base design tokens/styling are defined AFTER the archetypes are settled and must visually match the archetype identities.
 <!-- SECTION:NOTES:END -->
