@@ -1,10 +1,10 @@
 ---
 id: BORREL-2.2
 title: 'Define response schema, mock CSV and build-time parser'
-status: In Progress
+status: Done
 assignee: []
 created_date: '2026-08-14 14:08'
-updated_date: '2026-08-14 19:56'
+updated_date: '2026-08-14 20:01'
 labels: []
 dependencies:
   - BORREL-2.1
@@ -55,3 +55,9 @@ Implemented with zero new deps (hand-rolled RFC4180 CSV parser + runtime validat
 
 Review round 1 (dipsaus-ai:story-reviewer): all 5 ACs met=true, zero code findings. Verdict=block solely on a mechanical scope flag for the backlog task file (status/plan/AC bookkeeping) — which is required-on-branch delivery machinery per the git contract (Step 5.3), committed in separate chore(backlog) commits, not product scope. Re-reviewing round 2 with code-only scope framing.
 <!-- SECTION:NOTES:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Typed survey response schema covering all 28 finalized questions, a seeded 40-row mock data/responses.csv, and a build-time RFC-4180 loader (lib/data) that fail-fast validates into typed SurveyResponse records with a memoized getResponses()/getResponseCount() accessor. Verify green (lint, typecheck); independent review passed round 3.
+<!-- SECTION:FINAL_SUMMARY:END -->
