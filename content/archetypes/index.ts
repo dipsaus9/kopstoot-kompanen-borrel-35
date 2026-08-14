@@ -31,6 +31,13 @@ export interface Archetype {
   readonly definingTraits: readonly string[];
   /** Cluster `id` in `scripts/archetypes/archetypes.json` this maps to. */
   readonly sourceClusterId: number;
+  /**
+   * Public path to this archetype's promo/social banner (1200×630 SVG under
+   * `public/archetypes/`, filename === `id`). On-brand, code-generated
+   * placeholder art (BORREL-2.7); swap for AI raster art via the prompts in
+   * `docs/archetypes.md` → "Image regeneration".
+   */
+  readonly image: string;
 }
 
 export const ARCHETYPES: readonly Archetype[] = [
@@ -46,6 +53,7 @@ export const ARCHETYPES: readonly Archetype[] = [
       "Danst vanaf de zijlijn (57%) en gaat verantwoord naar huis (57%)",
     ],
     sourceClusterId: 0,
+    image: "/archetypes/parkborrelprofessional.svg",
   },
   {
     id: "festival-flamingo",
@@ -59,6 +67,7 @@ export const ARCHETYPES: readonly Archetype[] = [
       "Sluit de avond af met eten (66%)",
     ],
     sourceClusterId: 1,
+    image: "/archetypes/festival-flamingo.svg",
   },
   {
     id: "salmari-soldaat",
@@ -72,6 +81,7 @@ export const ARCHETYPES: readonly Archetype[] = [
       "Kiest terras boven festival als het even kan (100%)",
     ],
     sourceClusterId: 2,
+    image: "/archetypes/salmari-soldaat.svg",
   },
   {
     id: "lange-nachtbraker",
@@ -85,6 +95,7 @@ export const ARCHETYPES: readonly Archetype[] = [
       "Festivalganger als het uitkomt (66%)",
     ],
     sourceClusterId: 3,
+    image: "/archetypes/lange-nachtbraker.svg",
   },
   {
     id: "verantwoordelijke-kompaan",
@@ -98,6 +109,7 @@ export const ARCHETYPES: readonly Archetype[] = [
       "De stille ghost in de groepsapp (66%)",
     ],
     sourceClusterId: 4,
+    image: "/archetypes/verantwoordelijke-kompaan.svg",
   },
   {
     id: "bedtijd-baron",
@@ -111,5 +123,6 @@ export const ARCHETYPES: readonly Archetype[] = [
       "Danst het liefst vanaf de zijlijn (62%)",
     ],
     sourceClusterId: 5,
+    image: "/archetypes/bedtijd-baron.svg",
   },
 ];
