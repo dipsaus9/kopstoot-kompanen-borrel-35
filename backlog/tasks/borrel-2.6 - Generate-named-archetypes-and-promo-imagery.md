@@ -4,13 +4,12 @@ title: Generate named archetypes and promo imagery
 status: To Do
 assignee: []
 created_date: '2026-08-14 14:08'
-labels:
-  - needs-info
+updated_date: '2026-08-14 20:22'
+labels: []
 dependencies:
   - BORREL-2.5
 references:
   - content/archetypes/
-  - public/archetypes/
   - docs/archetypes.md
   - package.json
   - bun.lock
@@ -32,9 +31,8 @@ Branch: BORREL-2.6/archetype-generation
 <!-- AC:BEGIN -->
 - [ ] #1 Each cluster from the clustering output is mapped to a named archetype with a short description, stored typed under content/archetypes/
 - [ ] #2 docs/archetypes.md presents the final archetypes human-readably (name, description, defining traits)
-- [ ] #3 One image per archetype is generated and stored under public/archetypes/, sized/usable as banners and promo material
-- [ ] #4 Archetype names and imagery match the playful/vertical/giraffe design direction
-- [ ] #5 bun run lint and bun run typecheck pass
+- [ ] #3 bun run lint and bun run typecheck pass
+- [ ] #4 Archetype names and descriptions match the playful/vertical/giraffe design direction
 <!-- AC:END -->
 
 ## Implementation Plan
@@ -47,4 +45,6 @@ Branch: BORREL-2.6/archetype-generation
 
 <!-- SECTION:NOTES:BEGIN -->
 needs-info: built on mock clusters until the real CSV arrives. Image-generation method (AI generation vs commissioned) left to the implementer; store final assets in public/archetypes. May install an image lib (e.g. sharp) so package.json + bun.lock are listed. public/archetypes/ overlaps BORREL-1.1 public/ but is ordered after it via the dependency chain. Promo material — schedule generation before 2026-08-29. Verify: bun run lint && bun run typecheck.
+
+Imagery deferred to a follow-up story per owner decision (2026-08-14); this story delivers named archetypes + descriptions only. Regenerate/retune on the real Google-Form CSV.
 <!-- SECTION:NOTES:END -->
