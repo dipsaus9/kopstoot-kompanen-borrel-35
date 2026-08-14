@@ -1,9 +1,10 @@
 ---
 id: BORREL-3
 title: 'Epic: Launch build — core views & analytics'
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-08-14 21:00'
+updated_date: '2026-08-14 21:51'
 labels:
   - epic
 dependencies: []
@@ -25,3 +26,9 @@ Chosen approach: a SINGLE lean launch epic rather than four separate build epics
 - [ ] #3 Vercel Web Analytics is wired into the deployed app
 - [ ] #4 Every view reads survey data at build time via getResponses() (no runtime data fetch), consistent with the static-explorer decision
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Launch build epic delivered: aggregation & match library (3.1), themed site shell + Dutch nav (3.2), average Kompaan landing (3.3), archetypes gallery /typetjes (3.4), find-yourself /vind-jezelf (3.5), superlatives /superlatieven (3.6), Vercel Analytics (3.7). All server components, build-time data, static-explorer.
+<!-- SECTION:FINAL_SUMMARY:END -->
