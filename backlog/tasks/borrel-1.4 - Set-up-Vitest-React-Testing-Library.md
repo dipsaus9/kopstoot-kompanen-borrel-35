@@ -1,9 +1,10 @@
 ---
 id: BORREL-1.4
 title: Set up Vitest + React Testing Library
-status: To Do
+status: In Progress
 assignee: []
 created_date: '2026-08-14 13:47'
+updated_date: '2026-08-14 19:31'
 labels:
   - story
 dependencies:
@@ -14,6 +15,7 @@ references:
   - vitest.config.ts
   - vitest.setup.ts
   - test/
+  - bun.lock
 parent_task_id: BORREL-1
 type: chore
 ordinal: 5000
