@@ -1,10 +1,10 @@
 ---
 id: BORREL-3.2
 title: Replace boilerplate with themed site shell & navigation
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-08-14 21:01'
-updated_date: '2026-08-14 21:01'
+updated_date: '2026-08-14 21:17'
 labels:
   - story
 dependencies:
@@ -28,10 +28,10 @@ Branch: BORREL-3.2/site-shell-navigation
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 app/layout.tsx has real site metadata (title + description), not the create-next-app defaults
-- [ ] #2 A global navigation component links all four view routes (/ , /vind-jezelf, /typetjes, /superlatieven)
-- [ ] #3 The shell renders using the BORREL-2.3 design-system tokens
-- [ ] #4 No create-next-app boilerplate remains in the root layout
+- [x] #1 app/layout.tsx has real site metadata (title + description), not the create-next-app defaults
+- [x] #2 A global navigation component links all four view routes (/ , /vind-jezelf, /typetjes, /superlatieven)
+- [x] #3 The shell renders using the BORREL-2.3 design-system tokens
+- [x] #4 No create-next-app boilerplate remains in the root layout
 <!-- AC:END -->
 
 ## Implementation Plan
@@ -43,5 +43,5 @@ Branch: BORREL-3.2/site-shell-navigation
 ## Implementation Notes
 
 <!-- SECTION:NOTES:BEGIN -->
-Depends on BORREL-2.3 (design system: app/globals.css, app/theme/, docs/design-system.md) — do NOT modify those files, they are 2.3's scope. Server components; no runtime data fetch. Verify: bun run lint, bun run typecheck, bun run test.
+Delivered: root layout (app/layout.tsx) now carries real Borrel 35 metadata (title default+template, Dutch description, applicationName), lang=nl, and renders the themed SiteHeader + main wrapper. New components/site/ holds NAV_ITEMS (four Dutch routes), SiteNav, SiteHeader (barrel index.ts) — all server components, no runtime fetch, styled purely with BORREL-2.3 design tokens. lint/typecheck/test(13)/build all green. Reviewer verdict: pass, no findings or scope violations.
 <!-- SECTION:NOTES:END -->
