@@ -4,7 +4,7 @@ title: Build the Superlatives / leaderboards view
 status: To Do
 assignee: []
 created_date: '2026-08-14 21:02'
-updated_date: '2026-08-14 21:02'
+updated_date: '2026-08-14 21:42'
 labels:
   - story
 dependencies:
@@ -13,6 +13,7 @@ dependencies:
 references:
   - app/superlatieven/
   - components/superlatives/
+  - test/superlatives.test.ts
 parent_task_id: BORREL-3
 type: feature
 ordinal: 21000
