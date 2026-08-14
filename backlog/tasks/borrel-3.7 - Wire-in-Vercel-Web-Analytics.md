@@ -1,10 +1,10 @@
 ---
 id: BORREL-3.7
 title: Wire in Vercel Web Analytics
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-08-14 21:03'
-updated_date: '2026-08-14 21:03'
+updated_date: '2026-08-14 21:50'
 labels:
   - story
 dependencies:
@@ -29,9 +29,9 @@ Branch: BORREL-3.7/vercel-web-analytics
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 @vercel/analytics is added to package.json dependencies and reflected in bun.lock
-- [ ] #2 The <Analytics/> component (from @vercel/analytics/next) is mounted in app/layout.tsx
-- [ ] #3 bun run build passes with analytics wired in
+- [x] #1 @vercel/analytics is added to package.json dependencies and reflected in bun.lock
+- [x] #2 The <Analytics/> component (from @vercel/analytics/next) is mounted in app/layout.tsx
+- [x] #3 bun run build passes with analytics wired in
 <!-- AC:END -->
 
 ## Implementation Plan
@@ -43,5 +43,5 @@ Branch: BORREL-3.7/vercel-web-analytics
 ## Implementation Notes
 
 <!-- SECTION:NOTES:BEGIN -->
-Depends on BORREL-3.2 — both edit app/layout.tsx, so the dependency edge serializes them (must land after the themed shell, never in parallel). bun.lock listed in References per the repo dep-install rule. Verify: bun run lint, bun run typecheck, bun run test, bun run build.
+Installed @vercel/analytics ^2.0.1 (package.json + bun.lock) and mounted <Analytics/> from @vercel/analytics/next in app/layout.tsx root body. Layout stays a server component; Analytics is client-tagged by the package. Verified green: lint, typecheck, test (24 passed), build. story-reviewer verdict: pass (all 3 ACs met, no scope violations).
 <!-- SECTION:NOTES:END -->
