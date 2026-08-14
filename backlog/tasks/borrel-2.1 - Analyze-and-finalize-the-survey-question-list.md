@@ -4,7 +4,7 @@ title: Analyze and finalize the survey question list
 status: Done
 assignee: []
 created_date: '2026-08-14 14:07'
-updated_date: '2026-08-14 14:18'
+updated_date: '2026-08-14 14:29'
 labels:
   - story
 dependencies: []
@@ -76,6 +76,8 @@ DE TEST
 - Welke eigenschap MOET de ultieme Kompaan volgens jou hebben? (open)
 
 Review gate (dipsaus-ai:story-reviewer): verdict PASS — all 5 ACs met, no scope violations. One advisory (section 2 uses prose 'all single/cluster' rather than per-row Type/Rol columns); accepted as-is — repeating identical columns 14x adds noise, the prose header is intentional for scannability.
+
+Post-delivery enrichment (owner request): added 6 playful questions Q23-Q28 (hoofd stoten; 'weer daarboven'-reactie; vaste borrel-drankje; app-groep-rol; dansvloer/zijlijn; meest-gehoorde lengte-opmerking). Q24-Q27 join the clustering features (18 total), Q28 joins the showcase quotes. Tone kept speels. Committed ec5eb39 on the same branch/PR; summary counts updated to 28 questions.
 <!-- SECTION:NOTES:END -->
 
 ## Final Summary
