@@ -2,9 +2,11 @@
  * Build-time archetype clustering prototype (BORREL-2.5 spike).
  *
  * Loads the validated survey responses, encodes ONLY the closed cluster-role
- * questions, runs seeded k-means with silhouette-based cluster-count selection,
- * and writes the respondent→cluster assignments plus a per-cluster answer
- * signature to `scripts/archetypes/archetypes.json`.
+ * questions, runs seeded k-means at a pinned cluster count (silhouette is
+ * uninformative on the uniform-random mock data, so the design-desired count is
+ * pinned; override with ARCHETYPE_K), and writes the respondent→cluster
+ * assignments plus a per-cluster answer signature to
+ * `scripts/archetypes/archetypes.json`.
  *
  * Deterministic: the same `data/responses.csv` + SEED always produce identical
  * output. Rerun with:  bun run archetypes  (or: bun run scripts/archetypes/cluster.ts)
@@ -94,10 +96,16 @@ function main(): void {
     return { k, silhouette: result.silhouette, inertia: result.inertia };
   });
 
-  const best = evaluations.reduce((a, b) =>
-    b.silhouette > a.silhouette ? b : a,
-  );
-  const selectedK = best.k;
+  // On the uniform-random mock data every k scores ≈equally (silhouette ≈0.05),
+  // so silhouette selection is uninformative — pin the design-desired archetype
+  // count (6 giraffe archetypes). `ARCHETYPE_K` overrides for experimentation.
+  // Retune (and let silhouette actually decide) once the real CSV lands.
+  const DEFAULT_K = 6;
+  const envK = Number(process.env.ARCHETYPE_K);
+  const selectedK =
+    Number.isInteger(envK) && envK >= 2 && envK <= responses.length
+      ? envK
+      : DEFAULT_K;
 
   // Re-run the winning k to get its assignments (same seed → same clustering).
   const final = kmeans(matrix, selectedK, { seed: SEED, restarts: RESTARTS });

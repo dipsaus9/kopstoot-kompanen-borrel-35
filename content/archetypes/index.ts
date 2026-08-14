@@ -8,11 +8,13 @@
  * cluster's dominant answer signature.
  *
  * Honesty note: the current signatures come from the *mock* CSV
- * (`data/responses.csv`), whose rows are uniform-random, so the three clusters
- * are only weakly separated (silhouette ≈ 0.05). Treat the names and
- * descriptions below as a **template** to re-derive once the real Google-Form
- * responses land — the giraffe voice stays, the traits get retuned. See
- * `docs/archetypes.md`.
+ * (`data/responses.csv`), whose rows are uniform-random, so the six clusters are
+ * barely separated (silhouette ≈ 0.03) and the cluster count is *pinned* at 6 by
+ * design, not chosen by the data. Treat the names and descriptions below as a
+ * **template** to re-derive once the real Google-Form responses land — the
+ * giraffe voice stays, the traits (and maybe the count) get retuned. Some
+ * clusters mix contradictory answers (mock noise); each name leans on that
+ * cluster's most coherent, defining signals. See `docs/archetypes.md`.
  */
 
 export interface Archetype {
@@ -33,48 +35,81 @@ export interface Archetype {
 
 export const ARCHETYPES: readonly Archetype[] = [
   {
-    id: "plan-giraffe",
-    name: "De Plan-Giraffe",
+    id: "parkborrelprofessional",
+    name: "De Parkborrelprofessional",
     description:
-      "Torent kalm boven de chaos uit met een strak plan in de hand. Regelt de borrel, claimt het terras en houdt het overzicht — spontaan is voor andere dieren.",
+      "Regelt de borrel alsof het een gala is: locatie in het groen, terras geclaimd, draaiboek in de hand. Torent kalm boven de chaos uit en overziet alles vanaf de zijlijn — spontaan is voor andere dieren.",
     definingTraits: [
-      'Plant álles: 100% kiest "Plannen" boven spontaan',
-      "Natuurmens in hart en nieren (73% Natuur boven Stad)",
-      "Terraskoning (60% Terras boven Festival)",
-      "De organisator (33%) én sfeermaker (33%) van het gezelschap",
-      'Komt als één van de eersten binnen (40%) en houdt het bij "nog even één drankje" (53%)',
-      "Avondmens (67%), maar danst het liefst vanaf de zijlijn (60%)",
+      "Natuurmens in hart en nieren (100% Natuur boven Stad)",
+      "Plant álles (71%) en is dé organisator van het gezelschap (57%)",
+      "Terraskoning (71%) met een zwak voor een gala (42%)",
+      "Danst vanaf de zijlijn (57%) en gaat verantwoord naar huis (57%)",
     ],
     sourceClusterId: 0,
   },
   {
-    id: "kom-eraan-giraffe",
-    name: "De Kom-Eraan-Giraffe",
+    id: "festival-flamingo",
+    name: "De Festival-Flamingo",
     description:
-      'Roept al een uur "Ik kom eraan!" vanaf de bank thuis. Duikt spontaan op, danst de hele avond en verdwijnt daarna zonder gedag — de vaste ster van elke themaborrel.',
+      "Lange poten, fel aanwezig, en op elk festival als eerste op de dansvloer. Roept dat-ie eraan komt, duikt spontaan op bij elke themaborrel en sluit de avond af met een hap eten.",
     definingTraits: [
-      "100% ochtendmens — vroeg wakker, laat op de borrel",
-      'Het "ik-kom-eraan"-liegbeest (29%) dat roept dat-ie onderweg is terwijl-ie nog thuis zit (36%)',
-      "Meester van de verdwijntruc (43%)",
-      "Spontaan (64%), stadsmens (71%) en festivalganger (64%)",
-      "Staat wél gewoon op de dansvloer (71%)",
-      "Houdt van een themaborrel (43%) en sluit af met eten (43%)",
+      "Festivalbeest (100% Festival) en staat altijd op de dansvloer (83%)",
+      "Spontaan (66%) en gek op een themaborrel (66%)",
+      'Het "ik-kom-eraan"-liegbeest in de groepsapp (50%)',
+      "Sluit de avond af met eten (66%)",
     ],
     sourceClusterId: 1,
   },
   {
-    id: "verantwoorde-reus",
-    name: "De Verantwoorde Reus",
+    id: "salmari-soldaat",
+    name: "De Salmari-Soldaat",
     description:
-      "Te lang voor elk bed, te verstandig voor de laatste ronde. Blijft trouw bij de vaste kliek, gaat op tijd naar huis en glimlacht dapper bij de zoveelste lengtegrap.",
+      "Marcheert de stad in, recht de dansvloer op, en gaat door op shots en 'nog even één drankje'. Meester van de verdwijntruc: het ene moment middenin het feest, het volgende spoorloos.",
     definingTraits: [
-      "Gaat verantwoord naar huis (55%) en vroeg naar bed (91%)",
-      "Trouw aan de vaste kliek (55%)",
-      "De ghost in de groepsapp (45%)",
-      "Voeten steken uit elk bed (45%) en krijgt wekelijks de lengtevraag (36%)",
-      "Avondmens vanbinnen (91%), maar danst vanaf de zijlijn (64%)",
-      'Glimlacht bij de zoveelste lengtegrap en "sterft vanbinnen" (27%)',
+      "Altijd op de dansvloer (100%) en echt een stadsmens (100%)",
+      "Meester van de verdwijntruc (75%) en door en door spontaan (75%)",
+      "Shots (50%) en het klassieke \"nog even één drankje\" (50%)",
+      "Kiest terras boven festival als het even kan (100%)",
     ],
     sourceClusterId: 2,
+  },
+  {
+    id: "lange-nachtbraker",
+    name: "De Lange Nachtbraker",
+    description:
+      "Avondmens tot in de tenen: begint pas los te komen als de rest al gaapt, en houdt het bij 'nog even één drankje' tot diep in de nacht. Plant zijn avonden strak, maar danst het liefst vanaf de zijlijn.",
+    definingTraits: [
+      "Onverbeterlijke avondmens (88%)",
+      'Blijft hangen voor "nog even één drankje" (77%)',
+      "Plant zijn avond strak (77%) en danst vanaf de zijlijn (77%)",
+      "Festivalganger als het uitkomt (66%)",
+    ],
+    sourceClusterId: 3,
+  },
+  {
+    id: "verantwoordelijke-kompaan",
+    name: "De Verantwoordelijke Kompaan",
+    description:
+      "De trouwe kompaan van de vaste kliek: komt voor de gezelligheid, gaat op tijd verantwoord naar huis en ligt vroeg op één oor. Een feestborrel in het groen, maar wel met een oogje op de klok.",
+    definingTraits: [
+      "Vroeg naar bed (83%) en gaat verantwoord naar huis (66%)",
+      "Trouw aan de vaste kliek (50%)",
+      "Natuurmens (83%) met een voorliefde voor de feestborrel (66%)",
+      "De stille ghost in de groepsapp (66%)",
+    ],
+    sourceClusterId: 4,
+  },
+  {
+    id: "bedtijd-baron",
+    name: "De Bedtijd-Baron",
+    description:
+      "Brengt de sfeer, schenkt de wijn en maakt de kroegborrel — maar heerst met ijzeren hand over de eigen bedtijd. Om twaalf uur verandert deze pompoen resoluut in een uitgeruste ochtendmens.",
+    definingTraits: [
+      "Onwrikbaar vroeg naar bed (100%)",
+      "Ochtendmens (62%) die tóch de sfeermaker is (37%)",
+      "Houdt van een kroegborrel (37%) met een glas wijn (37%)",
+      "Danst het liefst vanaf de zijlijn (62%)",
+    ],
+    sourceClusterId: 5,
   },
 ];

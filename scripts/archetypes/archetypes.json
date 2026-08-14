@@ -111,243 +111,480 @@
       "inertia": 171.66852678571428
     }
   ],
-  "selectedK": 3,
-  "selectedSilhouette": 0.048590989240551385,
+  "selectedK": 6,
+  "selectedSilhouette": 0.032388209118729874,
   "clusters": [
     {
       "id": 0,
-      "size": 15,
+      "size": 7,
       "name": null,
       "signature": {
         "tallStruggle": {
-          "option": "Te weinig beenruimte",
-          "share": 0.26666666666666666
+          "option": "Bedden waar mijn voeten uitsteken",
+          "share": 0.5714285714285714
         },
         "planeSeat": {
           "option": "Gangpad",
-          "share": 0.6666666666666666
+          "share": 0.2857142857142857
         },
         "heightQuestionFreq": {
-          "option": "Nooit",
-          "share": 0.3333333333333333
+          "option": "Wekelijks",
+          "share": 0.5714285714285714
         },
         "tallAdvantage": {
-          "option": "Mensen terugvinden op festivals",
-          "share": 0.4666666666666667
+          "option": "Welk voordeel?",
+          "share": 0.42857142857142855
         },
         "borrelArrival": {
           "option": "Als één van de eersten",
-          "share": 0.4
+          "share": 0.42857142857142855
         },
         "borrelEnding": {
-          "option": "Nog even één drankje",
-          "share": 0.5333333333333333
+          "option": "Verantwoord naar huis",
+          "share": 0.5714285714285714
         },
         "idealBorrel": {
-          "option": "Kroegborrel",
-          "share": 0.26666666666666666
+          "option": "Gala",
+          "share": 0.42857142857142855
         },
         "borrelRole": {
           "option": "De organisator",
-          "share": 0.3333333333333333
+          "share": 0.5714285714285714
         },
         "planSpontaneous": {
           "option": "Plannen",
-          "share": 1
+          "share": 0.7142857142857143
         },
         "cityNature": {
           "option": "Natuur",
-          "share": 0.7333333333333333
+          "share": 1
         },
         "festivalTerrace": {
           "option": "Terras",
-          "share": 0.6
+          "share": 0.7142857142857143
         },
         "earlyBedLate": {
           "option": "We zien wel waar dit eindigt",
-          "share": 0.8
+          "share": 0.8571428571428571
         },
         "cuisine": {
           "option": "Anders",
-          "share": 0.4
+          "share": 0.42857142857142855
         },
         "morningEvening": {
-          "option": "Avondmens",
-          "share": 0.6666666666666666
+          "option": "Ochtendmens",
+          "share": 0.5714285714285714
         },
         "weatherReaction": {
           "option": "Lach maar mee",
-          "share": 0.5333333333333333
+          "share": 0.7142857142857143
         },
         "drink": {
-          "option": "Fris/0.0",
-          "share": 0.26666666666666666
+          "option": "Wat er maar is",
+          "share": 0.42857142857142855
         },
         "appGroupRole": {
           "option": "De sfeermaker",
-          "share": 0.3333333333333333
+          "share": 0.42857142857142855
         },
         "danceSideline": {
           "option": "Zijlijn",
-          "share": 0.6
+          "share": 0.5714285714285714
         }
       }
     },
     {
       "id": 1,
-      "size": 14,
+      "size": 6,
       "name": null,
       "signature": {
         "tallStruggle": {
           "option": "Mensen die vragen of ik basketbal",
-          "share": 0.2857142857142857
+          "share": 0.5
         },
         "planeSeat": {
           "option": "Nooduitgang",
-          "share": 0.42857142857142855
+          "share": 0.6666666666666666
         },
         "heightQuestionFreq": {
           "option": "Bijna nooit meer",
-          "share": 0.35714285714285715
+          "share": 0.3333333333333333
         },
         "tallAdvantage": {
-          "option": "Altijd goed zicht",
-          "share": 0.35714285714285715
+          "option": "Welk voordeel?",
+          "share": 0.3333333333333333
         },
         "borrelArrival": {
-          "option": "\"Ik kom eraan!\" terwijl ik nog thuis ben",
-          "share": 0.35714285714285715
+          "option": "Als allerlaatste",
+          "share": 0.5
         },
         "borrelEnding": {
           "option": "Met eten",
-          "share": 0.42857142857142855
+          "share": 0.6666666666666666
         },
         "idealBorrel": {
           "option": "Themaborrel",
-          "share": 0.42857142857142855
+          "share": 0.6666666666666666
         },
         "borrelRole": {
           "option": "De verdwijntruc",
-          "share": 0.42857142857142855
+          "share": 0.3333333333333333
         },
         "planSpontaneous": {
           "option": "Spontaan",
-          "share": 0.6428571428571429
+          "share": 0.6666666666666666
         },
         "cityNature": {
           "option": "Stad",
-          "share": 0.7142857142857143
+          "share": 0.6666666666666666
         },
         "festivalTerrace": {
           "option": "Festival",
-          "share": 0.6428571428571429
+          "share": 1
         },
         "earlyBedLate": {
           "option": "We zien wel waar dit eindigt",
-          "share": 0.6428571428571429
+          "share": 0.8333333333333334
         },
         "cuisine": {
           "option": "Aziatische",
-          "share": 0.42857142857142855
+          "share": 0.5
+        },
+        "morningEvening": {
+          "option": "Ochtendmens",
+          "share": 0.8333333333333334
+        },
+        "weatherReaction": {
+          "option": "Ik glimlach en sterf vanbinnen",
+          "share": 0.3333333333333333
+        },
+        "drink": {
+          "option": "Fris/0.0",
+          "share": 0.5
+        },
+        "appGroupRole": {
+          "option": "Het \"ik-kom-eraan\"-liegbeest",
+          "share": 0.5
+        },
+        "danceSideline": {
+          "option": "Dansvloer",
+          "share": 0.8333333333333334
+        }
+      }
+    },
+    {
+      "id": 2,
+      "size": 4,
+      "name": null,
+      "signature": {
+        "tallStruggle": {
+          "option": "Kleding die nooit lang genoeg is",
+          "share": 0.5
+        },
+        "planeSeat": {
+          "option": "Gangpad",
+          "share": 0.75
+        },
+        "heightQuestionFreq": {
+          "option": "Bijna nooit meer",
+          "share": 0.5
+        },
+        "tallAdvantage": {
+          "option": "Indrukwekkend zijn zonder iets te doen",
+          "share": 0.75
+        },
+        "borrelArrival": {
+          "option": "Als allerlaatste",
+          "share": 0.5
+        },
+        "borrelEnding": {
+          "option": "Nog even één drankje",
+          "share": 0.5
+        },
+        "idealBorrel": {
+          "option": "Themaborrel",
+          "share": 0.5
+        },
+        "borrelRole": {
+          "option": "De verdwijntruc",
+          "share": 0.75
+        },
+        "planSpontaneous": {
+          "option": "Spontaan",
+          "share": 0.75
+        },
+        "cityNature": {
+          "option": "Stad",
+          "share": 1
+        },
+        "festivalTerrace": {
+          "option": "Terras",
+          "share": 1
+        },
+        "earlyBedLate": {
+          "option": "We zien wel waar dit eindigt",
+          "share": 0.75
+        },
+        "cuisine": {
+          "option": "Mexicaanse",
+          "share": 0.5
         },
         "morningEvening": {
           "option": "Ochtendmens",
           "share": 1
         },
         "weatherReaction": {
-          "option": "Negeren",
-          "share": 0.35714285714285715
+          "option": "Gevat terugkaatsen",
+          "share": 0.5
         },
         "drink": {
-          "option": "Fris/0.0",
-          "share": 0.2857142857142857
+          "option": "Shot(s)",
+          "share": 0.5
         },
         "appGroupRole": {
-          "option": "Het \"ik-kom-eraan\"-liegbeest",
-          "share": 0.2857142857142857
+          "option": "De ghost",
+          "share": 0.5
         },
         "danceSideline": {
           "option": "Dansvloer",
-          "share": 0.7142857142857143
+          "share": 1
         }
       }
     },
     {
-      "id": 2,
-      "size": 11,
+      "id": 3,
+      "size": 9,
       "name": null,
       "signature": {
         "tallStruggle": {
-          "option": "Bedden waar mijn voeten uitsteken",
-          "share": 0.45454545454545453
+          "option": "Te weinig beenruimte",
+          "share": 0.3333333333333333
         },
         "planeSeat": {
-          "option": "Nooduitgang",
-          "share": 0.45454545454545453
+          "option": "Gangpad",
+          "share": 0.8888888888888888
         },
         "heightQuestionFreq": {
-          "option": "Wekelijks",
-          "share": 0.36363636363636365
+          "option": "Nooit",
+          "share": 0.6666666666666666
         },
         "tallAdvantage": {
           "option": "Mensen terugvinden op festivals",
-          "share": 0.36363636363636365
+          "share": 0.4444444444444444
         },
         "borrelArrival": {
           "option": "Als één van de eersten",
-          "share": 0.2727272727272727
+          "share": 0.3333333333333333
         },
         "borrelEnding": {
-          "option": "Verantwoord naar huis",
-          "share": 0.5454545454545454
+          "option": "Nog even één drankje",
+          "share": 0.7777777777777778
         },
         "idealBorrel": {
-          "option": "Feestborrel",
-          "share": 0.36363636363636365
+          "option": "Themaborrel",
+          "share": 0.3333333333333333
         },
         "borrelRole": {
           "option": "De vaste-kliek-hanger",
-          "share": 0.5454545454545454
+          "share": 0.2222222222222222
         },
         "planSpontaneous": {
-          "option": "Spontaan",
-          "share": 0.6363636363636364
+          "option": "Plannen",
+          "share": 0.7777777777777778
         },
         "cityNature": {
           "option": "Stad",
-          "share": 0.5454545454545454
+          "share": 0.5555555555555556
         },
         "festivalTerrace": {
           "option": "Festival",
-          "share": 0.6363636363636364
+          "share": 0.6666666666666666
         },
         "earlyBedLate": {
-          "option": "Vroeg naar bed",
-          "share": 0.9090909090909091
+          "option": "We zien wel waar dit eindigt",
+          "share": 0.7777777777777778
         },
         "cuisine": {
           "option": "Nederlandse",
-          "share": 0.36363636363636365
+          "share": 0.4444444444444444
         },
         "morningEvening": {
           "option": "Avondmens",
-          "share": 0.9090909090909091
+          "share": 0.8888888888888888
         },
         "weatherReaction": {
-          "option": "Ik glimlach en sterf vanbinnen",
-          "share": 0.2727272727272727
+          "option": "Lach maar mee",
+          "share": 0.4444444444444444
         },
         "drink": {
           "option": "Fris/0.0",
-          "share": 0.36363636363636365
+          "share": 0.3333333333333333
         },
         "appGroupRole": {
           "option": "De ghost",
-          "share": 0.45454545454545453
+          "share": 0.4444444444444444
         },
         "danceSideline": {
           "option": "Zijlijn",
-          "share": 0.6363636363636364
+          "share": 0.7777777777777778
+        }
+      }
+    },
+    {
+      "id": 4,
+      "size": 6,
+      "name": null,
+      "signature": {
+        "tallStruggle": {
+          "option": "Kleding die nooit lang genoeg is",
+          "share": 0.3333333333333333
+        },
+        "planeSeat": {
+          "option": "Nooduitgang",
+          "share": 0.5
+        },
+        "heightQuestionFreq": {
+          "option": "Bijna nooit meer",
+          "share": 0.3333333333333333
+        },
+        "tallAdvantage": {
+          "option": "Mensen terugvinden op festivals",
+          "share": 0.8333333333333334
+        },
+        "borrelArrival": {
+          "option": "Als allerlaatste",
+          "share": 0.3333333333333333
+        },
+        "borrelEnding": {
+          "option": "Verantwoord naar huis",
+          "share": 0.6666666666666666
+        },
+        "idealBorrel": {
+          "option": "Feestborrel",
+          "share": 0.6666666666666666
+        },
+        "borrelRole": {
+          "option": "De vaste-kliek-hanger",
+          "share": 0.5
+        },
+        "planSpontaneous": {
+          "option": "Plannen",
+          "share": 0.6666666666666666
+        },
+        "cityNature": {
+          "option": "Natuur",
+          "share": 0.8333333333333334
+        },
+        "festivalTerrace": {
+          "option": "Terras",
+          "share": 0.5
+        },
+        "earlyBedLate": {
+          "option": "Vroeg naar bed",
+          "share": 0.8333333333333334
+        },
+        "cuisine": {
+          "option": "Nederlandse",
+          "share": 0.5
+        },
+        "morningEvening": {
+          "option": "Avondmens",
+          "share": 0.8333333333333334
+        },
+        "weatherReaction": {
+          "option": "Ik glimlach en sterf vanbinnen",
+          "share": 0.6666666666666666
+        },
+        "drink": {
+          "option": "Bier",
+          "share": 0.3333333333333333
+        },
+        "appGroupRole": {
+          "option": "De ghost",
+          "share": 0.6666666666666666
+        },
+        "danceSideline": {
+          "option": "Zijlijn",
+          "share": 0.5
+        }
+      }
+    },
+    {
+      "id": 5,
+      "size": 8,
+      "name": null,
+      "signature": {
+        "tallStruggle": {
+          "option": "Altijd \"hoe lang ben jij?\" horen",
+          "share": 0.5
+        },
+        "planeSeat": {
+          "option": "Nooduitgang",
+          "share": 0.625
+        },
+        "heightQuestionFreq": {
+          "option": "Wekelijks",
+          "share": 0.375
+        },
+        "tallAdvantage": {
+          "option": "Altijd goed zicht",
+          "share": 0.625
+        },
+        "borrelArrival": {
+          "option": "Modieus te laat",
+          "share": 0.25
+        },
+        "borrelEnding": {
+          "option": "Met eten",
+          "share": 0.375
+        },
+        "idealBorrel": {
+          "option": "Kroegborrel",
+          "share": 0.375
+        },
+        "borrelRole": {
+          "option": "De vaste-kliek-hanger",
+          "share": 0.25
+        },
+        "planSpontaneous": {
+          "option": "Plannen",
+          "share": 0.625
+        },
+        "cityNature": {
+          "option": "Stad",
+          "share": 0.75
+        },
+        "festivalTerrace": {
+          "option": "Festival",
+          "share": 0.625
+        },
+        "earlyBedLate": {
+          "option": "Vroeg naar bed",
+          "share": 1
+        },
+        "cuisine": {
+          "option": "Mexicaanse",
+          "share": 0.5
+        },
+        "morningEvening": {
+          "option": "Ochtendmens",
+          "share": 0.625
+        },
+        "weatherReaction": {
+          "option": "Negeren",
+          "share": 0.5
+        },
+        "drink": {
+          "option": "Wijn",
+          "share": 0.375
+        },
+        "appGroupRole": {
+          "option": "De sfeermaker",
+          "share": 0.375
+        },
+        "danceSideline": {
+          "option": "Zijlijn",
+          "share": 0.625
         }
       }
     }
@@ -361,22 +598,22 @@
     {
       "index": 1,
       "name": "Emma",
-      "cluster": 0
+      "cluster": 3
     },
     {
       "index": 2,
       "name": "Anouk",
-      "cluster": 0
+      "cluster": 3
     },
     {
       "index": 3,
       "name": "Elin",
-      "cluster": 2
+      "cluster": 3
     },
     {
       "index": 4,
       "name": "Fleur",
-      "cluster": 2
+      "cluster": 4
     },
     {
       "index": 5,
@@ -386,32 +623,32 @@
     {
       "index": 6,
       "name": "Ruben",
-      "cluster": 0
+      "cluster": 3
     },
     {
       "index": 7,
       "name": "Lars",
-      "cluster": 0
+      "cluster": 3
     },
     {
       "index": 8,
       "name": "Maud",
-      "cluster": 2
+      "cluster": 4
     },
     {
       "index": 9,
       "name": "Isa",
-      "cluster": 2
+      "cluster": 0
     },
     {
       "index": 10,
       "name": "Cait",
-      "cluster": 1
+      "cluster": 5
     },
     {
       "index": 11,
       "name": "Bram",
-      "cluster": 1
+      "cluster": 5
     },
     {
       "index": 12,
@@ -421,7 +658,7 @@
     {
       "index": 13,
       "name": "Puck",
-      "cluster": 1
+      "cluster": 2
     },
     {
       "index": 14,
@@ -441,37 +678,37 @@
     {
       "index": 17,
       "name": "Hanna",
-      "cluster": 2
+      "cluster": 5
     },
     {
       "index": 18,
       "name": "Nora",
-      "cluster": 2
+      "cluster": 5
     },
     {
       "index": 19,
       "name": "Fleur",
-      "cluster": 1
+      "cluster": 2
     },
     {
       "index": 20,
       "name": "Ruben",
-      "cluster": 1
+      "cluster": 2
     },
     {
       "index": 21,
       "name": "Koen",
-      "cluster": 0
+      "cluster": 4
     },
     {
       "index": 22,
       "name": "Fleur",
-      "cluster": 2
+      "cluster": 5
     },
     {
       "index": 23,
       "name": "Daan",
-      "cluster": 0
+      "cluster": 5
     },
     {
       "index": 24,
@@ -481,17 +718,17 @@
     {
       "index": 25,
       "name": "Tijn",
-      "cluster": 2
+      "cluster": 0
     },
     {
       "index": 26,
       "name": "Stijn",
-      "cluster": 0
+      "cluster": 4
     },
     {
       "index": 27,
       "name": "Gijs",
-      "cluster": 0
+      "cluster": 3
     },
     {
       "index": 28,
@@ -501,12 +738,12 @@
     {
       "index": 29,
       "name": "Nora",
-      "cluster": 1
+      "cluster": 3
     },
     {
       "index": 30,
       "name": "Cait",
-      "cluster": 2
+      "cluster": 4
     },
     {
       "index": 31,
@@ -516,27 +753,27 @@
     {
       "index": 32,
       "name": "Fleur",
-      "cluster": 1
+      "cluster": 2
     },
     {
       "index": 33,
       "name": "Marit",
-      "cluster": 2
+      "cluster": 1
     },
     {
       "index": 34,
       "name": "Nora",
-      "cluster": 2
+      "cluster": 4
     },
     {
       "index": 35,
       "name": "Noor",
-      "cluster": 0
+      "cluster": 3
     },
     {
       "index": 36,
       "name": "Noor",
-      "cluster": 1
+      "cluster": 5
     },
     {
       "index": 37,
@@ -546,12 +783,12 @@
     {
       "index": 38,
       "name": "Roos",
-      "cluster": 1
+      "cluster": 5
     },
     {
       "index": 39,
       "name": "Nora",
-      "cluster": 0
+      "cluster": 3
     }
   ]
 }

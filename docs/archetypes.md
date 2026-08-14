@@ -9,79 +9,128 @@
 > Promo imagery was **deferred to a follow-up story** by owner decision
 > (2026-08-14).
 
-## Read this first — built on mock data
+## Read this first — built on mock data, count pinned
 
 The clustering that produced these archetypes currently runs on the **mock** CSV
 (`data/responses.csv`, 40 seeded rows). Those rows are drawn from a **uniform
-random pick per question**, so they carry no latent structure: the three
-clusters are only **weakly separated** (silhouette ≈ **0.05**, essentially
-noise). See `docs/archetype-approach.md` → *Retuning on real data*.
+random pick per question**, so they carry no latent structure: at every cluster
+count the clusters are **barely separated** (silhouette ≈ **0.03**, essentially
+noise). Because silhouette can't meaningfully choose, the cluster count is
+**pinned at `k = 6`** by design (`DEFAULT_K` in `cluster.ts`; override with
+`ARCHETYPE_K`), not selected by the data. See `docs/archetype-approach.md` →
+*Retuning on real data*.
 
 So treat everything below as a **template**, not a finding. The giraffe voice and
-the shape of each profile are the deliverable; the specific dominant answers
-(the percentages) **must be re-derived** once the real Google-Form responses
-land. Rerun `bun run archetypes`, then update the traits and, if needed, the
-names in `content/archetypes/index.ts` and this file.
+the shape of each profile are the deliverable; the specific dominant answers (the
+percentages) — and possibly the right number of archetypes — **must be
+re-derived** once the real Google-Form responses land. Rerun `bun run archetypes`,
+then update the traits and, if needed, the names in
+`content/archetypes/index.ts` and this file.
 
-Each archetype maps 1:1 to a cluster in `scripts/archetypes/archetypes.json`
-(`k = 3`). The percentages cited under *Defining traits* are the share of that
-cluster's members giving the dominant answer to the question.
-
----
-
-## De Plan-Giraffe
-
-_Cluster 0 · 15 respondents_
-
-Torent kalm boven de chaos uit met een strak plan in de hand. Regelt de borrel,
-claimt het terras en houdt het overzicht — spontaan is voor andere dieren.
-
-**Defining traits**
-
-- Plant álles: **100%** kiest "Plannen" boven spontaan.
-- Natuurmens in hart en nieren (**73%** Natuur boven Stad).
-- Terraskoning (**60%** Terras boven Festival).
-- De organisator (**33%**) én sfeermaker (**33%**) van het gezelschap.
-- Komt als één van de eersten binnen (**40%**) en houdt het bij "nog even één
-  drankje" (**53%**).
-- Avondmens (**67%**), maar danst het liefst vanaf de zijlijn (**60%**).
+Because the clusters are noise, some mix contradictory answers; each name leans
+on that cluster's **most coherent, defining signals** and ignores the rest. Each
+archetype maps 1:1 to a cluster in `scripts/archetypes/archetypes.json` (`k = 6`).
+The percentages cited under *Defining traits* are the share of that cluster's
+members giving the dominant answer to the question.
 
 ---
 
-## De Kom-Eraan-Giraffe
+## De Parkborrelprofessional
 
-_Cluster 1 · 14 respondents_
+_Cluster 0 · 7 respondents_
 
-Roept al een uur "Ik kom eraan!" vanaf de bank thuis. Duikt spontaan op, danst
-de hele avond en verdwijnt daarna zonder gedag — de vaste ster van elke
-themaborrel.
+Regelt de borrel alsof het een gala is: locatie in het groen, terras geclaimd,
+draaiboek in de hand. Torent kalm boven de chaos uit en overziet alles vanaf de
+zijlijn — spontaan is voor andere dieren.
 
 **Defining traits**
 
-- **100%** ochtendmens — vroeg wakker, laat op de borrel.
-- Het "ik-kom-eraan"-liegbeest (**29%**) dat roept dat-ie onderweg is terwijl-ie
-  nog thuis zit (**36%**).
-- Meester van de verdwijntruc (**43%**).
-- Spontaan (**64%**), stadsmens (**71%**) en festivalganger (**64%**).
-- Staat wél gewoon op de dansvloer (**71%**).
-- Houdt van een themaborrel (**43%**) en sluit af met eten (**43%**).
+- Natuurmens in hart en nieren (**100%** Natuur boven Stad).
+- Plant álles (**71%**) en is dé organisator van het gezelschap (**57%**).
+- Terraskoning (**71%**) met een zwak voor een gala (**42%**).
+- Danst vanaf de zijlijn (**57%**) en gaat verantwoord naar huis (**57%**).
 
 ---
 
-## De Verantwoorde Reus
+## De Festival-Flamingo
 
-_Cluster 2 · 11 respondents_
+_Cluster 1 · 6 respondents_
 
-Te lang voor elk bed, te verstandig voor de laatste ronde. Blijft trouw bij de
-vaste kliek, gaat op tijd naar huis en glimlacht dapper bij de zoveelste
-lengtegrap.
+Lange poten, fel aanwezig, en op elk festival als eerste op de dansvloer. Roept
+dat-ie eraan komt, duikt spontaan op bij elke themaborrel en sluit de avond af
+met een hap eten.
 
 **Defining traits**
 
-- Gaat verantwoord naar huis (**55%**) en vroeg naar bed (**91%**).
-- Trouw aan de vaste kliek (**55%**).
-- De ghost in de groepsapp (**45%**).
-- Voeten steken uit elk bed (**45%**) en krijgt wekelijks de lengtevraag
-  (**36%**).
-- Avondmens vanbinnen (**91%**), maar danst vanaf de zijlijn (**64%**).
-- Glimlacht bij de zoveelste lengtegrap en "sterft vanbinnen" (**27%**).
+- Festivalbeest (**100%** Festival) en staat altijd op de dansvloer (**83%**).
+- Spontaan (**66%**) en gek op een themaborrel (**66%**).
+- Het "ik-kom-eraan"-liegbeest in de groepsapp (**50%**).
+- Sluit de avond af met eten (**66%**).
+
+---
+
+## De Salmari-Soldaat
+
+_Cluster 2 · 4 respondents_
+
+Marcheert de stad in, recht de dansvloer op, en gaat door op shots en "nog even
+één drankje". Meester van de verdwijntruc: het ene moment middenin het feest, het
+volgende spoorloos.
+
+**Defining traits**
+
+- Altijd op de dansvloer (**100%**) en echt een stadsmens (**100%**).
+- Meester van de verdwijntruc (**75%**) en door en door spontaan (**75%**).
+- Shots (**50%**) en het klassieke "nog even één drankje" (**50%**).
+- Kiest terras boven festival als het even kan (**100%**).
+
+---
+
+## De Lange Nachtbraker
+
+_Cluster 3 · 9 respondents_
+
+Avondmens tot in de tenen: begint pas los te komen als de rest al gaapt, en
+houdt het bij "nog even één drankje" tot diep in de nacht. Plant zijn avonden
+strak, maar danst het liefst vanaf de zijlijn.
+
+**Defining traits**
+
+- Onverbeterlijke avondmens (**88%**).
+- Blijft hangen voor "nog even één drankje" (**77%**).
+- Plant zijn avond strak (**77%**) en danst vanaf de zijlijn (**77%**).
+- Festivalganger als het uitkomt (**66%**).
+
+---
+
+## De Verantwoordelijke Kompaan
+
+_Cluster 4 · 6 respondents_
+
+De trouwe kompaan van de vaste kliek: komt voor de gezelligheid, gaat op tijd
+verantwoord naar huis en ligt vroeg op één oor. Een feestborrel in het groen,
+maar wel met een oogje op de klok.
+
+**Defining traits**
+
+- Vroeg naar bed (**83%**) en gaat verantwoord naar huis (**66%**).
+- Trouw aan de vaste kliek (**50%**).
+- Natuurmens (**83%**) met een voorliefde voor de feestborrel (**66%**).
+- De stille ghost in de groepsapp (**66%**).
+
+---
+
+## De Bedtijd-Baron
+
+_Cluster 5 · 8 respondents_
+
+Brengt de sfeer, schenkt de wijn en maakt de kroegborrel — maar heerst met
+ijzeren hand over de eigen bedtijd. Om twaalf uur verandert deze pompoen resoluut
+in een uitgeruste ochtendmens.
+
+**Defining traits**
+
+- Onwrikbaar vroeg naar bed (**100%**).
+- Ochtendmens (**62%**) die tóch de sfeermaker is (**37%**).
+- Houdt van een kroegborrel (**37%**) met een glas wijn (**37%**).
+- Danst het liefst vanaf de zijlijn (**62%**).
