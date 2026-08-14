@@ -15,6 +15,7 @@ dependencies:
 references:
   - app/vind-jezelf/
   - components/find-yourself/
+  - test/find-yourself.test.ts
 parent_task_id: BORREL-3
 type: feature
 ordinal: 20000
