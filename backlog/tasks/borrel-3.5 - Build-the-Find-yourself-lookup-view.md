@@ -1,10 +1,10 @@
 ---
 id: BORREL-3.5
 title: Build the Find-yourself lookup view
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-08-14 21:02'
-updated_date: '2026-08-14 21:02'
+updated_date: '2026-08-14 21:40'
 labels:
   - story
 dependencies:
@@ -32,10 +32,10 @@ Branch: BORREL-3.5/find-yourself-lookup
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 A visitor can select their name from the committed responses at /vind-jezelf
-- [ ] #2 The card shows that person's own answers
-- [ ] #3 The card shows their "% gemiddelde Kompaan" score and matched-trait readout from the aggregation library
-- [ ] #4 The card shows their archetype badge deep-linking to that archetype in the gallery
+- [x] #1 A visitor can select their name from the committed responses at /vind-jezelf
+- [x] #2 The card shows that person's own answers
+- [x] #3 The card shows their "% gemiddelde Kompaan" score and matched-trait readout from the aggregation library
+- [x] #4 The card shows their archetype badge deep-linking to that archetype in the gallery
 <!-- AC:END -->
 
 ## Implementation Plan
@@ -47,5 +47,5 @@ Branch: BORREL-3.5/find-yourself-lookup
 ## Implementation Notes
 
 <!-- SECTION:NOTES:BEGIN -->
-Depends on BORREL-3.1 (match/archetype fns), BORREL-3.2 (shell/nav), BORREL-2.3 (tokens), BORREL-2.6 (named archetypes). Real names shown openly. Not matchmaking — no person-to-person matching. Server component / build-time data; mock data until the real CSV. Verify: bun run lint, bun run typecheck, bun run test.
+Delivered on shared branch BORREL-3/launch-build. /vind-jezelf is a server component (app/vind-jezelf/page.tsx) that precomputes every respondent via getFindYourselfPeople() over getResponses()/getAggregate() at build time and embeds the dataset into a thin client selector (components/find-yourself/find-yourself.tsx) — no runtime fetch/DB (static explorer); the route prerenders as static content. PersonCard shows the person's own stats/answers/quotes, their % gemiddelde Kompaan score + matched-trait readout (matchAgainst, BORREL-3.1), and their archetype badge as a next/link to /typetjes#<id> (resolveArchetype, BORREL-3.1 + gallery BORREL-3.4). Real names shown openly; rows keyed by positional id so duplicate names never collide. No archetype.image referenced. Green: lint, typecheck, test (18 pass incl. 5 new), build. Reviewer verdict: pass.
 <!-- SECTION:NOTES:END -->
