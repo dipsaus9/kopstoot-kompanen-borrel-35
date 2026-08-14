@@ -4,11 +4,10 @@ title: 'Define response schema, mock CSV and build-time parser'
 status: To Do
 assignee: []
 created_date: '2026-08-14 14:08'
-labels:
-  - needs-info
+updated_date: '2026-08-14 19:37'
+labels: []
 dependencies:
   - BORREL-2.1
-  - BORREL-1.4
 references:
   - data/
   - lib/data/
