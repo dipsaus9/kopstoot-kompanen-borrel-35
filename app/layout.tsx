@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: "%s · Borrel 35",
   },
   description:
-    "Ontdek het gemiddelde Borrel 35-profiel, vergelijk jezelf met de groep, vind je borrel-archetype en bewonder de superlatieven — de giraffe-enquête van Kompanen.",
+    "Ontdek het gemiddelde Borrel 35-profiel, vergelijk jezelf met de groep, vind je borrel-archetype en bewonder de toppers — de giraffe-enquête van Kompanen.",
   applicationName: "Borrel 35",
 };
 

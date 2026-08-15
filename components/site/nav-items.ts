@@ -31,8 +31,8 @@ export const NAV_ITEMS: readonly NavItem[] = [
     description: "Het gemiddelde Borrel 35-profiel",
   },
   {
-    href: "/superlatieven",
-    label: "Superlatieven",
+    href: "/toppers",
+    label: "Toppers",
     description: "De uitschieters en records",
   },
 ];
