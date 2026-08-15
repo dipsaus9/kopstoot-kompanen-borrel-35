@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { FindYourself, getFindYourselfPeople } from "@/components/find-yourself";
+import { GraffitiHero } from "@/components/proof/graffiti-hero";
 
 /**
  * The find-yourself view (BORREL-3.5): the /vind-jezelf personal lookup. A
@@ -20,8 +21,11 @@ export default function VindJezelfPage() {
   const people = getFindYourselfPeople();
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-stack-md py-stack-lg">
-      <FindYourself people={people} />
-    </div>
+    <>
+      <GraffitiHero eyebrow="Vind jezelf" title="Vind jezelf terug" />
+      <div className="mx-auto w-full max-w-6xl px-stack-md py-stack-lg">
+        <FindYourself people={people} />
+      </div>
+    </>
   );
 }

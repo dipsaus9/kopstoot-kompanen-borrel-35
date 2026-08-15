@@ -5,7 +5,17 @@
  * A `feTurbulence`+`feDisplacementMap` filter roughens edges so shapes read as
  * painted, not vector-clean. Original art, inspired by the references, not copied.
  */
-export function SkateScene({ className }: { className?: string }) {
+export function SkateScene({
+  className,
+  tint,
+  hideCharacter,
+}: {
+  className?: string;
+  /** Optional CSS colour that washes the wall toward a type's signature hue. */
+  tint?: string;
+  /** Hide the built-in character silhouette (when the page supplies its own). */
+  hideCharacter?: boolean;
+}) {
   const streaks = [
     { x: 60, w: 120, h: 300, c: "#3fb0c0", r: -4 },
     { x: 250, w: 150, h: 340, c: "#b05aa0", r: 3 },
@@ -93,7 +103,7 @@ export function SkateScene({ className }: { className?: string }) {
       </g>
 
       {/* Reserved character-portrait slot (real anime art later) */}
-      <g transform="translate(830 70)">
+      <g transform="translate(830 70)" display={hideCharacter ? "none" : undefined}>
         <rect x="0" y="0" width="320" height="470" rx="10" fill="#1a1120" opacity="0.18" filter="url(#rough)" />
         <rect x="0" y="0" width="320" height="470" rx="10" fill="none" stroke="#faf3e6" strokeWidth="4" strokeDasharray="14 12" opacity="0.55" />
         {/* soft anime bust silhouette */}
@@ -103,6 +113,11 @@ export function SkateScene({ className }: { className?: string }) {
         </g>
         <text x="160" y="420" textAnchor="middle" fontFamily="var(--font-display), Impact, sans-serif" fontSize="26" fill="#faf3e6" opacity="0.75" letterSpacing="0.05em">ANIME-ART VOLGT</text>
       </g>
+
+      {/* Optional type-hue wash */}
+      {tint ? (
+        <rect x="0" y="0" width="1200" height="620" fill={tint} opacity="0.4" style={{ mixBlendMode: "overlay" }} />
+      ) : null}
 
       {/* Film grain over everything */}
       <rect x="0" y="0" width="1200" height="620" filter="url(#grain)" opacity="0.2" />

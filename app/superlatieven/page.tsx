@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { GraffitiHero } from "@/components/proof/graffiti-hero";
 import { SuperlativesView, getSuperlatives } from "@/components/superlatives";
 
 /**
@@ -21,8 +22,11 @@ export default function SuperlatievenPage() {
   const superlatives = getSuperlatives();
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-stack-md py-stack-lg">
-      <SuperlativesView superlatives={superlatives} />
-    </div>
+    <>
+      <GraffitiHero eyebrow="Records" title="Superlatieven" />
+      <div className="mx-auto w-full max-w-6xl px-stack-md py-stack-lg">
+        <SuperlativesView superlatives={superlatives} />
+      </div>
+    </>
   );
 }

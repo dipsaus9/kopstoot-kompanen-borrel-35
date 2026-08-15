@@ -78,7 +78,7 @@ export function CompareView({ people }: CompareViewProps) {
 
   return (
     <div className="flex flex-col gap-stack-lg">
-      <header className="giraffe-spots sticker relative overflow-hidden rounded-4xl p-stack-lg text-cocoa">
+      <header className="sr-only">
         <p className="text-caption font-bold tracking-eyebrow uppercase">
           Zet Kompanen naast elkaar
         </p>
