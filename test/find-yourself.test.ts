@@ -37,7 +37,7 @@ describe("getFindYourselfPeople", () => {
       const archetype = resolveArchetype(responses[index]);
       expect(person.archetype.id).toBe(archetype.id);
       expect(person.archetype.name).toBe(archetype.name);
-      expect(person.archetype.href).toBe(`/typetjes#${archetype.id}`);
+      expect(person.archetype.href).toBe(`/typetjes/${archetype.id}`);
       expect(person.archetype.emoji.length).toBeGreaterThan(0);
       expect(person.archetype.hueVar).toMatch(/^--brand-/);
     });
