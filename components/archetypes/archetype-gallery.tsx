@@ -1,19 +1,21 @@
 /**
- * The archetypes gallery (BORREL-3.4) — the /typetjes view.
+ * The type index gallery (BORREL-4.5) — the /typetjes view.
  *
- * Composes a bold, vertical intro with the six {@link ArchetypeCard}s in a
- * responsive grid. Presentational: the resolved entries are loaded at build time
- * by the server component in `app/typetjes/page.tsx` and handed down as a prop.
- * The jump-links row exposes each card's anchor so the individual archetypes are
- * discoverable and directly linkable (the find-yourself badge deep-links the
- * same anchors).
+ * A loud, graffiti/anime INDEX of the six Kompaan _types_: a bold vertical intro
+ * over a mobile-first responsive grid of {@link ArchetypeCard} tiles. Each tile
+ * wears its own type theme and links through to that type's page at
+ * `/typetjes/<id>` (per-type route in BORREL-4.6), so the gallery is the
+ * jumping-off point for the type-centric site.
+ *
+ * Presentational: the resolved entries are loaded at build time by the server
+ * component in `app/typetjes/page.tsx` and handed down as a prop.
  */
 
 import type { ArchetypeGalleryEntry } from "./members";
 import { ArchetypeCard } from "./archetype-card";
 
 export interface ArchetypeGalleryProps {
-  /** The six archetypes resolved to members + accent, in content order. */
+  /** The six archetypes resolved to member count + accent, in content order. */
   readonly entries: readonly ArchetypeGalleryEntry[];
 }
 
@@ -26,37 +28,21 @@ export function ArchetypeGallery({ entries }: ArchetypeGalleryProps) {
   return (
     <div className="flex flex-col gap-stack-lg">
       <header>
-        <p className="text-caption font-bold tracking-eyebrow text-muted-foreground uppercase">
-          De borrel-archetypes
+        <p className="text-caption font-bold uppercase tracking-eyebrow text-muted-foreground">
+          De borrel-types
         </p>
-        <h1 className="mt-stack-sm text-display-sm font-black leading-display tracking-display text-foreground text-balance">
+        <h1 className="mt-stack-sm text-display font-black leading-display tracking-display text-foreground text-balance">
           De typetjes van Borrel 35
         </h1>
         <p className="mt-stack-md max-w-[46ch] text-body-lg font-medium leading-body text-muted-foreground text-pretty">
-          {entries.length} giraffe-typetjes, samengesteld uit {totalMembers}{" "}
-          ingevulde enquêtes. Elk type verzamelt de Kompanen die op de borrel
+          {entries.length} typetjes, samengesteld uit {totalMembers} ingevulde
+          enquêtes. Tik op een type en duik in de Kompanen die op de borrel
           hetzelfde tekenen — vind jezelf terug.
         </p>
-
-        <nav aria-label="Spring naar een typetje" className="mt-stack-md">
-          <ul className="flex flex-wrap gap-stack-xs">
-            {entries.map((entry) => (
-              <li key={entry.archetype.id}>
-                <a
-                  href={`#${entry.archetype.id}`}
-                  className="inline-flex items-center gap-2 rounded-pill border border-border bg-card px-stack-sm py-1 text-caption font-bold text-foreground transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
-                >
-                  <span aria-hidden>{entry.emoji}</span>
-                  {entry.archetype.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
       </header>
 
       <section aria-label="De zes typetjes">
-        <ul className="grid grid-cols-1 gap-stack-md md:grid-cols-2 xl:grid-cols-3">
+        <ul className="grid grid-cols-1 gap-stack-md sm:grid-cols-2 xl:grid-cols-3">
           {entries.map((entry) => (
             <li key={entry.archetype.id} className="flex">
               <ArchetypeCard entry={entry} />
