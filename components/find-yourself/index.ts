@@ -6,6 +6,11 @@
  */
 
 export { FindYourself, type FindYourselfProps } from "./find-yourself";
+export {
+  FindYourType,
+  type FindYourTypeProps,
+  type TypeFinderOption,
+} from "./find-your-type";
 export { PersonCard, type PersonCardProps } from "./person-card";
 export {
   getFindYourselfPeople,

@@ -1,9 +1,10 @@
 ---
 id: BORREL-4.2
 title: 'Per-type visual identity: docs spec + typed theme data'
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-08-15 07:49'
+updated_date: '2026-08-15 09:37'
 labels:
   - story
 dependencies:
@@ -26,14 +27,14 @@ Branch: BORREL-4.2/per-type-visual-identity
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 docs/type-visual-specs.md describes, for each of the 6 types: appearance, defining traits, colors, vibe and image direction
-- [ ] #2 app/theme/type-themes.ts exports a typed theme map keyed by archetype id (palette/accent tokens) that matches the docs 1:1
-- [ ] #3 The theme map implements the per-type theming contract from BORREL-4.1
-- [ ] #4 bun run lint and typecheck pass
+- [x] #1 docs/type-visual-specs.md describes, for each of the 6 types: appearance, defining traits, colors, vibe and image direction
+- [x] #2 app/theme/type-themes.ts exports a typed theme map keyed by archetype id (palette/accent tokens) that matches the docs 1:1
+- [x] #3 The theme map implements the per-type theming contract from BORREL-4.1
+- [x] #4 bun run lint and typecheck pass
 <!-- AC:END -->
 
 ## Implementation Notes
 
 <!-- SECTION:NOTES:BEGIN -->
-Keys = archetype ids from content/archetypes (read-only). Colors must satisfy WCAG AA against their intended text. Verify: bun run lint && bun run typecheck.
+Delivered on shared branch BORREL-4/launch-build. docs/type-visual-specs.md gives all 6 types a full graffiti/anime identity (appearance, defining traits, colours+roles, vibe, image direction). app/theme/type-themes.ts exports the typed TYPE_THEMES map (Record<ArchetypeId, TypeTheme>) keyed by the 6 archetype ids, each pointing only at --brand-* tokens and matching the docs 1:1; typeThemeVars() projects accent/accentStrong/accentInk onto the 4.1 contract knobs (--type-accent, --type-accent-strong, --type-accent-ink), and a load-time guard keeps the map in lockstep with content/archetypes. Ink chosen for WCAG-AA (cocoa-deep on light accents, cream on deep-jewel accents); night+wine sit at ~4.4:1, AA for the bold/large on-accent display text as documented. lint + typecheck green. Reviewer verdict: pass.
 <!-- SECTION:NOTES:END -->

@@ -3,11 +3,12 @@ import type { Metadata } from "next";
 import { ArchetypeGallery, getArchetypeGallery } from "@/components/archetypes";
 
 /**
- * The typetjes view (BORREL-3.4): a gallery of the six named Kompaan archetypes
- * as giraffe-voiced character cards. A server component that resolves the
- * archetypes and their members at build/server time via `getArchetypeGallery()`
- * (no runtime fetch, no client data). Each card is individually deep-linkable —
- * the target the find-yourself archetype badge points into.
+ * The typetjes view (BORREL-4.5): a loud graffiti/anime INDEX of the six named
+ * Kompaan types. A server component that resolves the archetypes and their
+ * member counts at build/server time via `getArchetypeGallery()` (no runtime
+ * fetch, no client data). Each tile wears its own type theme and links through
+ * to that type's page at `/typetjes/<id>` (per-type route in BORREL-4.6), so the
+ * gallery is the jumping-off point for the type-centric site.
  */
 export const metadata: Metadata = {
   title: "Typetjes",

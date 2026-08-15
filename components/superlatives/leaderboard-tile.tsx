@@ -6,9 +6,12 @@
  * with real names and their headline value. All data is embedded at build time
  * by the server page; nothing is fetched here.
  *
- * The category's mapped brand hue (BORREL-2.3) is bound to a local `--tile-hue`
- * custom property used only as decoration (the top border, the badge disc, the
- * leading rank), so text contrast never depends on the light/dark-varying accent.
+ * Graffiti/anime look (BORREL-4.9): the whole card wears a die-cut `sticker`
+ * (thick ink outline + hard offset shadow); the category's mapped brand hue
+ * (BORREL-2.3) is bound to a local `--tile-hue` and used ONLY as decoration on
+ * the aria-hidden emoji badge, so text contrast never rides on the
+ * light/dark-varying accent. Ranked rows keep the AA-safe paper/ink + neutral
+ * `secondary` rank discs used across the rebranded surfaces.
  */
 
 import type { CSSProperties } from "react";
@@ -30,12 +33,12 @@ export function LeaderboardTile({ leaderboard }: LeaderboardTileProps) {
     <article
       id={id}
       style={hueStyle}
-      className="flex flex-col gap-stack-md rounded-3xl border border-t-4 border-border border-t-[color:var(--tile-hue)] bg-card p-stack-md shadow-sm"
+      className="sticker flex scroll-mt-32 flex-col gap-stack-md rounded-3xl bg-card p-stack-md"
     >
       <header className="flex items-start gap-stack-sm">
         <span
           aria-hidden
-          className="flex size-11 shrink-0 items-center justify-center rounded-pill bg-[color:var(--tile-hue)] text-title leading-none"
+          className="sticker-sm flex size-12 shrink-0 items-center justify-center rounded-pill bg-[color:var(--tile-hue)] text-title leading-none"
         >
           {emoji}
         </span>
@@ -54,18 +57,18 @@ export function LeaderboardTile({ leaderboard }: LeaderboardTileProps) {
           {entries.map((entry) => (
             <li
               key={entry.rank}
-              className="flex items-center gap-stack-sm rounded-2xl border border-border bg-secondary/40 px-stack-sm py-2"
+              className="ink-outline flex items-center gap-stack-sm rounded-2xl bg-secondary/50 px-stack-sm py-2"
             >
               <span
                 aria-hidden
-                className="flex size-7 shrink-0 items-center justify-center rounded-pill bg-[color:var(--tile-hue)] text-caption font-black leading-none text-cocoa"
+                className="flex size-7 shrink-0 items-center justify-center rounded-pill bg-secondary text-caption font-black leading-none text-secondary-foreground"
               >
                 {entry.rank}
               </span>
               <span className="min-w-0 flex-1 truncate text-body font-bold leading-body text-foreground">
                 {entry.name}
               </span>
-              <span className="shrink-0 text-body font-black leading-body text-primary">
+              <span className="shrink-0 text-body font-black leading-body tabular-nums text-primary">
                 {entry.value}
               </span>
             </li>

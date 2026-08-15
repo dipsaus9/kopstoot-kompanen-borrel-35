@@ -1,9 +1,10 @@
 ---
 id: BORREL-4.9
 title: Restyle the superlatives view to the new theme
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-08-15 07:51'
+updated_date: '2026-08-15 10:22'
 labels:
   - story
 dependencies:
@@ -27,13 +28,13 @@ Branch: BORREL-4.9/superlatives-restyle
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 /superlatieven (app/superlatieven/page.tsx + components/superlatives/) is restyled to the graffiti/anime look, consistent with the other surfaces
-- [ ] #2 Mobile-first; A11Y
-- [ ] #3 bun run lint, typecheck and build pass
+- [x] #1 /superlatieven (app/superlatieven/page.tsx + components/superlatives/) is restyled to the graffiti/anime look, consistent with the other surfaces
+- [x] #2 Mobile-first; A11Y
+- [x] #3 bun run lint, typecheck and build pass
 <!-- AC:END -->
 
 ## Implementation Notes
 
 <!-- SECTION:NOTES:BEGIN -->
-Styling only; the leaderboard data/logic stays unchanged. Verify: bun run lint && bun run typecheck && bun run build.
+Restyled /superlatieven to the graffiti/anime theme, consistent with the rebranded surfaces. superlatives.tsx: giraffe-spots+sticker hero. leaderboard-tile.tsx: die-cut sticker cards with hue-decorated (aria-hidden) emoji badges, ink-outline ranked rows, and AA-safe neutral bg-secondary rank discs (no text on the light/dark-varying accent). quote-strip.tsx: sticker showcase cards. Styling only — leaderboards.ts data/logic unchanged. Semantic h1/article/figure headings, 44px+ tap targets preserved. lint/typecheck/build green; story-reviewer: pass, no findings.
 <!-- SECTION:NOTES:END -->

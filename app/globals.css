@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-/* Borrel 35 playful/vertical giraffe design tokens (raw palette + scales). */
+/* Borrel 35 graffiti/anime design tokens (raw palette + scales). */
 @import "./theme/tokens.css";
 
 @custom-variant dark (&:is(.dark *));
@@ -63,6 +63,11 @@
   --color-liquorice: var(--brand-liquorice);
   --color-night: var(--brand-night);
   --color-wine: var(--brand-wine);
+  /* Live per-type accent → bg-type / text-type / border-type. Reads the
+   * per-type theming contract (see [data-type] below): resolves the scoped
+   * --type-accent set by a type theme, or the neutral pop default. */
+  --color-type: var(--type-accent, var(--type-accent-default));
+  --color-type-ink: var(--type-accent-ink, var(--type-accent-ink-default));
 
   /* Vertical type scale → text-display, text-colossus, … */
   --text-caption: var(--fs-caption);
@@ -100,37 +105,38 @@
   --spacing-stack-lg: var(--stack-lg);
   --spacing-stack-xl: var(--stack-xl);
   --spacing-stack-section: var(--stack-section);
+  --spacing-tap: var(--tap-min);
 }
 
-/* Semantic layer — shadcn base variables remapped to the Borrel 35 giraffe
- * palette (raw tokens live in app/theme/tokens.css). Light theme = savanna. */
+/* Semantic layer — shadcn base variables remapped to the Borrel 35 graffiti
+ * palette (raw tokens live in app/theme/tokens.css). Light theme = paper. */
 :root {
   --background: var(--brand-cream);
   --foreground: var(--brand-cocoa);
-  --card: oklch(0.99 0.01 85);
+  --card: oklch(0.99 0.012 96);
   --card-foreground: var(--brand-cocoa);
-  --popover: oklch(0.99 0.01 85);
+  --popover: oklch(0.99 0.012 96);
   --popover-foreground: var(--brand-cocoa);
   --primary: var(--brand-giraffe);
   --primary-foreground: var(--brand-cocoa-deep);
   --secondary: var(--brand-sand);
   --secondary-foreground: var(--brand-cocoa);
   --muted: var(--brand-sand);
-  --muted-foreground: oklch(0.52 0.04 66);
+  --muted-foreground: oklch(0.44 0.04 274);
   --accent: var(--brand-flamingo);
-  --accent-foreground: var(--brand-cream);
+  --accent-foreground: var(--brand-cocoa-deep); /* ink on pop pink → AA-safe */
   --destructive: oklch(0.577 0.245 27.325);
   --border: var(--brand-tan);
   --input: var(--brand-tan);
   --ring: var(--brand-giraffe);
-  /* Chart ramp = archetype accent family, in cluster order */
+  /* Chart ramp = type accent family, in cluster order */
   --chart-1: var(--brand-giraffe);
   --chart-2: var(--brand-park);
   --chart-3: var(--brand-flamingo);
   --chart-4: var(--brand-night);
   --chart-5: var(--brand-wine);
   --radius: 0.875rem;
-  --sidebar: oklch(0.99 0.01 85);
+  --sidebar: oklch(0.99 0.012 96);
   --sidebar-foreground: var(--brand-cocoa);
   --sidebar-primary: var(--brand-giraffe);
   --sidebar-primary-foreground: var(--brand-cocoa-deep);
@@ -140,7 +146,7 @@
   --sidebar-ring: var(--brand-giraffe);
 }
 
-/* Dark theme = night-savanna: deep cocoa ground, gold + accents lifted. */
+/* Dark theme = neon-night: deep ink ground, pop accents lifted for contrast. */
 .dark {
   --background: var(--brand-cocoa-deep);
   --foreground: var(--brand-cream);
@@ -153,12 +159,12 @@
   --secondary: var(--brand-cocoa-raised);
   --secondary-foreground: var(--brand-cream);
   --muted: var(--brand-cocoa-raised);
-  --muted-foreground: oklch(0.75 0.04 78);
+  --muted-foreground: oklch(0.78 0.035 96);
   --accent: var(--brand-flamingo-lifted);
   --accent-foreground: var(--brand-cocoa-deep);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 16%);
+  --border: oklch(1 0 0 / 16%);
+  --input: oklch(1 0 0 / 20%);
   --ring: var(--brand-giraffe-lifted);
   --chart-1: var(--brand-giraffe-lifted);
   --chart-2: var(--brand-park-lifted);
@@ -171,8 +177,42 @@
   --sidebar-primary-foreground: var(--brand-cocoa-deep);
   --sidebar-accent: var(--brand-cocoa-raised);
   --sidebar-accent-foreground: var(--brand-cream);
-  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-border: oklch(1 0 0 / 16%);
   --sidebar-ring: var(--brand-giraffe-lifted);
+}
+
+/* ---------------------------------------------------------------------- *
+ * PER-TYPE THEMING CONTRACT (BORREL-4.1)
+ *
+ * Put `data-type="<id>"` (or class `.type-theme`) on any element — a page
+ * wrapper, a card, a section — and every base component inside it that reads
+ * the accent semantics (Button `bg-primary`, focus `--ring`, `bg-accent`
+ * chips, `bg-type` utilities) recolours to that type.
+ *
+ * This block is ONLY the mechanism + neutral defaults. A theme supplies the
+ * colour DATA by setting the `--type-accent*` knobs — nothing type-specific is
+ * hardcoded here (that is BORREL-4.2). Because each semantic var reads
+ * `var(--type-accent, <default>)`, an unset knob falls back to the signature
+ * pop, so a bare `data-type` with no matching data rule is still valid.
+ *
+ * Contract (the three knobs a type theme sets):
+ *   --type-accent        base accent colour for this type
+ *   --type-accent-strong strong/hover variant (optional; falls back to accent)
+ *   --type-accent-ink    text/ink colour that sits legibly ON the accent
+ * ---------------------------------------------------------------------- */
+[data-type],
+.type-theme {
+  --primary: var(--type-accent, var(--type-accent-default));
+  --primary-foreground: var(--type-accent-ink, var(--type-accent-ink-default));
+  --accent: var(--type-accent, var(--type-accent-default));
+  --accent-foreground: var(--type-accent-ink, var(--type-accent-ink-default));
+  --ring: var(--type-accent, var(--type-accent-default));
+  --sidebar-primary: var(--type-accent, var(--type-accent-default));
+  --sidebar-primary-foreground: var(
+    --type-accent-ink,
+    var(--type-accent-ink-default)
+  );
+  --sidebar-ring: var(--type-accent, var(--type-accent-default));
 }
 
 @layer base {
@@ -181,11 +221,28 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Subtle paper tooth so the ground doesn't read as flat corporate white. */
+    background-image: radial-gradient(
+        oklch(0 0 0 / 3.5%) 0.75px,
+        transparent 0.75px
+      ),
+      radial-gradient(oklch(0 0 0 / 3.5%) 0.75px, transparent 0.75px);
+    background-position:
+      0 0,
+      9px 9px;
+    background-size: 18px 18px;
+  }
+  .dark body {
+    background-image: radial-gradient(
+        oklch(1 0 0 / 4%) 0.75px,
+        transparent 0.75px
+      ),
+      radial-gradient(oklch(1 0 0 / 4%) 0.75px, transparent 0.75px);
   }
   html {
     @apply font-sans;
   }
-  /* Bold, tight, vertical voice for headings out of the box. */
+  /* Loud, tight, vertical voice for headings out of the box. */
   h1,
   h2,
   h3 {
@@ -194,10 +251,21 @@
     line-height: var(--lh-heading);
     text-wrap: balance;
   }
+  /* A11Y — a bold, always-visible focus ring for every keyboard focus,
+   * on top of shadcn's component-level rings. */
+  :focus-visible {
+    outline: var(--outline-2) solid var(--ring);
+    outline-offset: 2px;
+  }
 }
 
-/* Giraffe-spot motif — a reusable patch texture for hero blocks and accents.
- * Usage: <div class="giraffe-spots"> or compose with any brand colour. */
+/* ---------------------------------------------------------------------- *
+ * Graffiti / anime motif utilities
+ * ---------------------------------------------------------------------- */
+
+/* Giraffe-spot / tag texture — a reusable pop-patch for hero blocks and
+ * accents (kept from the previous theme; now ink-edged and louder).
+ * Usage: <div class="giraffe-spots">. Pair with text-cocoa for legible copy. */
 @utility giraffe-spots {
   background-color: var(--brand-giraffe);
   background-image: radial-gradient(
@@ -225,4 +293,77 @@
       var(--brand-ochre) 0 42%,
       transparent 44%
     );
+}
+
+/* Sticker — thick ink outline + hard offset drop shadow, like a slapped-on
+ * die-cut sticker. Usage: <div class="sticker">. */
+@utility sticker {
+  border: var(--outline-2) solid var(--brand-cocoa-deep);
+  box-shadow: var(--sticker-shadow);
+}
+
+@utility sticker-sm {
+  border: var(--outline-1) solid var(--brand-cocoa-deep);
+  box-shadow: var(--sticker-shadow-sm);
+}
+
+/* Ink outline only — the graffiti marker line without the shadow. */
+@utility ink-outline {
+  border: var(--outline-2) solid var(--brand-cocoa-deep);
+}
+
+/* Cel-shade — the flat two-tone anime cel gradient (light plane meets shadow
+ * plane at a hard-ish edge). Tint follows the current type/primary accent. */
+@utility cel-shade {
+  background-image: linear-gradient(
+    150deg,
+    color-mix(in oklch, var(--primary), white 22%) 0 52%,
+    var(--primary) 52% 100%
+  );
+}
+
+/* Speed lines — the anime motion streak. A diagonal repeating stripe field;
+ * drop it on a decorative layer (aria-hidden). Animated only when the user
+ * has NOT asked to reduce motion (see prefers-reduced-motion below). */
+@utility speed-lines {
+  background-image: repeating-linear-gradient(
+    var(--speed-angle),
+    var(--brand-cocoa-deep) 0 2px,
+    transparent 2px var(--speed-gap)
+  );
+  background-size: 200% 100%;
+}
+
+/* Tag ink — a sticker-style text outline for short display words. */
+@utility tag-ink {
+  color: var(--brand-cream);
+  text-shadow:
+    -2px -2px 0 var(--brand-cocoa-deep),
+    2px -2px 0 var(--brand-cocoa-deep),
+    -2px 2px 0 var(--brand-cocoa-deep),
+    2px 2px 0 var(--brand-cocoa-deep),
+    0 4px 0 var(--brand-cocoa-deep);
+}
+
+/* Motion: a slow drift for decorative speed-lines; the sticker press-in on
+ * active. Both are OFF for reduce-motion users. */
+@media (prefers-reduced-motion: no-preference) {
+  .speed-lines-animate {
+    animation: borrel-speed 900ms linear infinite;
+  }
+}
+@keyframes borrel-speed {
+  to {
+    background-position: -200% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

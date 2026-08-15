@@ -8,6 +8,10 @@
  *                               answer per closed question.
  *   · computeMatch(response)  — a 0–100 "% gemiddelde Kompaan" score plus the
  *                               matched traits vs the aggregate.
+ *   · computeDeviation(...)   — the mirror: a 0–100 deviation score plus the
+ *                               traits where a person diverges most.
+ *   · getAverageRanking()     — everyone ordered most→least average, and the
+ *                               single most-average Kompaan.
  *   · resolveArchetype(...)   — a response's named archetype via its cluster.
  *
  * None of these fetch at runtime or touch the browser: they read the dataset
@@ -30,5 +34,16 @@ export {
   type MatchResult,
   type MatchedTrait,
 } from "./match";
+
+export {
+  computeDeviation,
+  deviationAgainst,
+  getAverageRanking,
+  rankByAverage,
+  type DeviationResult,
+  type DivergentTrait,
+  type RankedPerson,
+  type AverageRanking,
+} from "./deviation";
 
 export { resolveArchetype } from "./archetype";

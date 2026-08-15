@@ -48,7 +48,7 @@ export function FindYourself({ people }: FindYourselfProps) {
 
   return (
     <div className="flex flex-col gap-stack-lg">
-      <header className="giraffe-spots relative overflow-hidden rounded-4xl border border-border p-stack-lg text-cocoa shadow-sm">
+      <header className="giraffe-spots sticker relative overflow-hidden rounded-4xl p-stack-lg text-cocoa">
         <p className="text-caption font-bold tracking-eyebrow uppercase">
           Vind jezelf in de borrel
         </p>
@@ -57,8 +57,8 @@ export function FindYourself({ people }: FindYourselfProps) {
         </h1>
         <p className="mt-stack-md max-w-[46ch] text-body-lg font-medium leading-body">
           Zoek je eigen naam op en ontdek hoezeer je op de gemiddelde Kompaan
-          lijkt, welke antwoorden je met de groep deelt en welk borrel-archetype
-          bij je hoort.
+          lijkt, waar je juist afwijkt, welke antwoorden je met de groep deelt en
+          welk borrel-type bij je hoort.
         </p>
       </header>
 
@@ -84,7 +84,7 @@ export function FindYourself({ people }: FindYourselfProps) {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Typ je naam…"
-            className="w-full max-w-sm rounded-pill border border-input bg-card px-stack-md py-2 text-body font-medium text-foreground shadow-sm outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="ink-outline min-h-tap w-full max-w-sm rounded-pill bg-card px-stack-md py-2 text-body font-medium text-foreground outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           />
         </div>
 
@@ -98,10 +98,10 @@ export function FindYourself({ people }: FindYourselfProps) {
                     type="button"
                     aria-pressed={isSelected}
                     onClick={() => setSelectedId(person.id)}
-                    className={`rounded-pill border px-stack-md py-2 text-body font-bold shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                    className={`ink-outline min-h-tap rounded-pill px-stack-md py-2 text-body font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                       isSelected
-                        ? "border-primary bg-primary text-primary-foreground"
-                        : "border-border bg-card text-foreground hover:border-primary hover:bg-secondary"
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-card text-foreground hover:bg-secondary"
                     }`}
                   >
                     {person.name}
@@ -121,7 +121,7 @@ export function FindYourself({ people }: FindYourselfProps) {
       {selected ? (
         <PersonCard person={selected} />
       ) : (
-        <p className="rounded-3xl border border-dashed border-border bg-card/50 p-stack-lg text-body-lg font-medium text-muted-foreground">
+        <p className="ink-outline rounded-3xl border-dashed bg-card/50 p-stack-lg text-body-lg font-medium text-muted-foreground">
           Kies hierboven je naam om jouw persoonlijke Kompaan-kaart te zien.
         </p>
       )}

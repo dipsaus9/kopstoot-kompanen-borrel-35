@@ -1,63 +1,81 @@
 /**
- * A single archetype character card (BORREL-3.4).
+ * A single type index tile (BORREL-4.5).
  *
- * Presentational only: renders one {@link ArchetypeGalleryEntry} as a playful,
- * giraffe-voiced card showing the archetype's name, description, defining
- * traits and its member count/list. The mapped brand hue (BORREL-2.3) is bound
- * to a local `--archetype-hue` custom property and used only as decoration — the
- * accent stripe, the badge disc and the trait bullets — so text contrast never
- * depends on the (light/dark-varying) accent colour.
+ * The /typetjes index is a loud, graffiti/anime gallery of the six Kompaan
+ * _types_; this is one tile in it. The whole card is a {@link Link} into that
+ * type's own page at `/typetjes/<id>` (the per-type route lands in BORREL-4.6),
+ * so the gallery is the jumping-off point for the type-centric site.
  *
- * The card is the deep-link target for the find-yourself archetype badge: its
- * `id` is the archetype slug, it carries a scroll offset for the sticky header,
- * and the `:target` state lifts a ring in the archetype's own hue.
+ * Each tile wears its OWN type theme: it sets `data-type="<id>"` and projects the
+ * BORREL-4.2 colour data onto the `--type-accent*` knobs of the BORREL-4.1
+ * per-type theming contract (via {@link typeThemeVars}). Everything inside then
+ * recolours to the type for free — the accent band (`bg-type` + AA-tuned
+ * `text-type-ink`), the trait bullets and the "bekijk"-affordance — while the
+ * body copy stays on the paper/ink semantics so text contrast never rides on the
+ * accent.
  */
 
+import Link from "next/link";
 import type { CSSProperties } from "react";
+
+import {
+  getTypeTheme,
+  typeThemeVars,
+  type ArchetypeId,
+} from "@/app/theme/type-themes";
 
 import type { ArchetypeGalleryEntry } from "./members";
 
 export interface ArchetypeCardProps {
-  /** The archetype, its members and accent to render. */
+  /** The archetype, its member count and badge emoji to render. */
   readonly entry: ArchetypeGalleryEntry;
 }
 
 export function ArchetypeCard({ entry }: ArchetypeCardProps) {
-  const { archetype, memberCount, members, hueVar, emoji } = entry;
-  const hueStyle = {
-    "--archetype-hue": `var(${hueVar})`,
-  } as CSSProperties;
+  const { archetype, memberCount, emoji } = entry;
+
+  // Dress this tile in its own type theme via the 4.1 contract: the guard in
+  // app/theme/type-themes.ts keeps the theme map exhaustive over the archetype
+  // ids, so the id maps to a theme by construction.
+  const themeStyle = typeThemeVars(
+    getTypeTheme(archetype.id as ArchetypeId),
+  ) as CSSProperties;
 
   return (
-    <article
+    <Link
+      href={`/typetjes/${archetype.id}`}
       id={archetype.id}
-      style={hueStyle}
-      className="group flex w-full scroll-mt-32 flex-col overflow-hidden rounded-4xl border border-t-4 border-border border-t-[color:var(--archetype-hue)] bg-card shadow-sm transition-shadow focus-within:ring-2 focus-within:ring-[color:var(--archetype-hue)] hover:shadow-md target:ring-2 target:ring-[color:var(--archetype-hue)] target:ring-offset-2 target:ring-offset-background"
+      data-type={archetype.id}
+      style={themeStyle}
+      aria-label={`Bekijk het type ${archetype.name}`}
+      className="group sticker flex h-full w-full scroll-mt-32 flex-col overflow-hidden rounded-3xl bg-card text-left transition-all duration-150 target:ring-2 target:ring-[color:var(--type-accent)] target:ring-offset-2 target:ring-offset-background hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[var(--sticker-shadow-pop)] focus-visible:-translate-x-0.5 focus-visible:-translate-y-0.5 focus-visible:shadow-[var(--sticker-shadow-pop)] active:translate-x-0 active:translate-y-0 active:shadow-none"
     >
-      <div className="flex flex-1 flex-col gap-stack-md p-stack-md">
-        <header className="flex items-center gap-stack-sm">
-          <span
-            aria-hidden
-            className="flex size-14 shrink-0 items-center justify-center rounded-pill bg-[color:var(--archetype-hue)] text-title leading-none shadow-sm"
-          >
-            {emoji}
-          </span>
-          <div className="min-w-0">
-            <p className="text-caption font-bold tracking-eyebrow text-muted-foreground uppercase">
-              Borrel-archetype
-            </p>
-            <h2 className="text-title font-black leading-heading tracking-heading text-foreground text-balance">
-              {archetype.name}
-            </h2>
-          </div>
-        </header>
+      {/* Accent band — solid type colour with AA-tuned ink on top. */}
+      <div className="flex items-center gap-stack-sm border-b-[3px] border-[var(--brand-cocoa-deep)] bg-type px-stack-md py-stack-sm text-type-ink">
+        <span
+          aria-hidden
+          className="sticker-sm flex size-14 shrink-0 items-center justify-center rounded-pill bg-card text-title leading-none transition-transform duration-150 group-hover:-rotate-6 group-hover:scale-110"
+        >
+          {emoji}
+        </span>
+        <div className="min-w-0">
+          <p className="text-caption font-bold uppercase tracking-eyebrow opacity-90">
+            Borrel-type
+          </p>
+          <h2 className="text-title font-black leading-heading tracking-heading text-balance">
+            {archetype.name}
+          </h2>
+        </div>
+      </div>
 
+      {/* Body — paper/ink semantics, so contrast never rides on the accent. */}
+      <div className="flex flex-1 flex-col gap-stack-md p-stack-md">
         <p className="text-body-lg font-medium leading-body text-foreground text-pretty">
           {archetype.description}
         </p>
 
         <div>
-          <h3 className="mb-stack-sm text-caption font-bold tracking-eyebrow text-muted-foreground uppercase">
+          <h3 className="mb-stack-sm text-caption font-bold uppercase tracking-eyebrow text-muted-foreground">
             Kenmerken
           </h3>
           <ul className="flex flex-col gap-stack-xs">
@@ -68,7 +86,7 @@ export function ArchetypeCard({ entry }: ArchetypeCardProps) {
               >
                 <span
                   aria-hidden
-                  className="mt-[0.5em] size-2 shrink-0 rounded-pill bg-[color:var(--archetype-hue)]"
+                  className="mt-[0.5em] size-2 shrink-0 rounded-pill bg-type"
                 />
                 <span className="text-pretty">{trait}</span>
               </li>
@@ -76,31 +94,22 @@ export function ArchetypeCard({ entry }: ArchetypeCardProps) {
           </ul>
         </div>
 
-        <div className="mt-auto border-t border-border pt-stack-md">
-          <h3 className="mb-stack-sm flex items-baseline gap-2 text-caption font-bold tracking-eyebrow text-muted-foreground uppercase">
-            <span className="text-lead font-black leading-none text-foreground">
+        {/* Footer — member-count stat + the "into the type page" affordance. */}
+        <div className="mt-auto flex items-end justify-between gap-stack-sm border-t border-border pt-stack-md">
+          <p className="flex items-baseline gap-2">
+            <span className="text-display-sm font-black leading-none text-foreground">
               {memberCount}
             </span>
-            {memberCount === 1 ? "Kompaan" : "Kompanen"}
-          </h3>
-          {members.length > 0 ? (
-            <ul className="flex flex-wrap gap-stack-xs">
-              {members.map((name, index) => (
-                <li
-                  key={`${name}-${index}`}
-                  className="rounded-pill border border-border bg-secondary px-stack-sm py-1 text-caption font-bold text-secondary-foreground"
-                >
-                  {name}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-body font-medium text-muted-foreground">
-              Nog geen Kompanen in dit type.
-            </p>
-          )}
+            <span className="text-caption font-bold uppercase tracking-eyebrow text-muted-foreground">
+              {memberCount === 1 ? "Kompaan" : "Kompanen"}
+            </span>
+          </p>
+          <span className="ink-outline inline-flex min-h-tap items-center gap-2 rounded-pill bg-type px-stack-sm text-caption font-black uppercase tracking-eyebrow text-type-ink transition-transform duration-150 group-hover:translate-x-0.5">
+            Bekijk type
+            <span aria-hidden>&rarr;</span>
+          </span>
         </div>
       </div>
-    </article>
+    </Link>
   );
 }

@@ -3,9 +3,10 @@
  *
  * `getFindYourselfPeople()` turns every canonical {@link SurveyResponse} into a
  * self-contained, serialisable {@link Person}: the respondent's own answers,
- * their "% gemiddelde Kompaan" match (via `matchAgainst`, BORREL-3.1) and their
- * resolved archetype (via `resolveArchetype`, BORREL-3.1) deep-linked into the
- * typetjes gallery (`/typetjes#<archetype-id>`, BORREL-3.4).
+ * their "% gemiddelde Kompaan" match (via `matchAgainst`, BORREL-3.1), how far
+ * they deviate from the Average Kompaan (via `deviationAgainst`, BORREL-4.3), and
+ * their resolved archetype (via `resolveArchetype`, BORREL-3.1) linked to its own
+ * per-type page (`/typetjes/<archetype-id>`, BORREL-4.6).
  *
  * Everything is computed here at build/server time and handed to the client
  * selector as a plain array — there is no runtime fetch and no DB (the static
@@ -16,9 +17,11 @@
  */
 
 import {
+  deviationAgainst,
   getAggregate,
   matchAgainst,
   resolveArchetype,
+  type DeviationResult,
   type MatchResult,
 } from "@/lib/aggregate";
 import { getResponses } from "@/lib/data";
@@ -58,9 +61,9 @@ export interface PersonQuote {
   readonly text: string;
 }
 
-/** This person's resolved archetype, ready to render as a deep-linked badge. */
+/** This person's resolved archetype, ready to render as a linked badge. */
 export interface PersonArchetype {
-  /** Archetype slug (the `/typetjes` anchor id). */
+  /** Archetype slug (the per-type page route id). */
   readonly id: string;
   /** Playful display name. */
   readonly name: string;
@@ -68,7 +71,7 @@ export interface PersonArchetype {
   readonly emoji: string;
   /** CSS custom-property name of the mapped brand hue (from tokens.css). */
   readonly hueVar: string;
-  /** Deep link into the archetype's card in the typetjes gallery. */
+  /** Link into the archetype's own per-type page (`/typetjes/<id>`, BORREL-4.6). */
   readonly href: string;
 }
 
@@ -80,7 +83,12 @@ export interface Person {
   readonly name: string;
   /** The "% gemiddelde Kompaan" score and matched-trait readout. */
   readonly match: MatchResult;
-  /** The resolved archetype badge, deep-linked into the gallery. */
+  /**
+   * How far this person diverges from the Average Kompaan: the deviation score
+   * plus the traits where they differ most (BORREL-4.3).
+   */
+  readonly deviation: DeviationResult;
+  /** The resolved archetype badge, linked to its per-type page. */
   readonly archetype: PersonArchetype;
   /** The three headline numeric stats. */
   readonly stats: readonly PersonStat[];
@@ -171,12 +179,13 @@ function buildPerson(
     id: `p${index}`,
     name: response.name,
     match: matchAgainst(response, aggregate),
+    deviation: deviationAgainst(response, aggregate),
     archetype: {
       id: archetype.id,
       name: archetype.name,
       emoji: presentation.emoji,
       hueVar: presentation.hueVar,
-      href: `/typetjes#${archetype.id}`,
+      href: `/typetjes/${archetype.id}`,
     },
     stats,
     answers,
