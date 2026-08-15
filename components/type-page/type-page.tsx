@@ -84,7 +84,7 @@ export function TypePage({ entry }: TypePageProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#1a1120]/85 via-[#1a1120]/45 to-[#1a1120]/10" />
         <div className="relative grid gap-stack-lg p-stack-lg sm:p-stack-xl lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center">
-          <div>
+          <div className="min-w-0">
             <span
               className="inline-block -rotate-2 rounded-md border-[3px] border-[#1a1120] bg-type px-3 py-1 text-caption font-black uppercase tracking-eyebrow text-type-ink"
               style={{ boxShadow: "4px 4px 0 #1a1120" }}
@@ -92,13 +92,15 @@ export function TypePage({ entry }: TypePageProps) {
               Borrel-type
             </span>
             <h1
-              className="mt-stack-sm text-[#ffd45e] text-balance"
+              className="mt-stack-sm text-[#ffd45e]"
               style={{
                 fontFamily: "var(--font-display), Impact, sans-serif",
-                fontSize: "clamp(2.75rem, 1.6rem + 5.5vw, 5rem)",
+                fontSize: "clamp(2.25rem, 1.4rem + 4vw, 4rem)",
                 lineHeight: 0.95,
-                WebkitTextStroke: "3px #1a1120",
-                textShadow: "5px 5px 0 var(--type-accent), 9px 9px 0 #1a1120",
+                WebkitTextStroke: "2.5px #1a1120",
+                textShadow: "4px 4px 0 var(--type-accent), 8px 8px 0 #1a1120",
+                overflowWrap: "break-word",
+                hyphens: "auto",
               }}
             >
               {archetype.name}
