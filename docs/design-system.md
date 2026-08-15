@@ -65,7 +65,7 @@ mechanism in `app/globals.css` reads them:
 | Custom property        | Role                                           |
 | ---------------------- | ---------------------------------------------- |
 | `--type-accent`        | Base accent colour for this type               |
-| `--type-accent-strong` | Strong / hover variant (optional)              |
+| `--type-accent-strong` | Strong / hover variant — **reserved**: declared with a neutral default but not yet wired into a semantic var (a future story consuming it, e.g. hover, can do so without changing the contract) |
 | `--type-accent-ink`    | Text/ink colour that sits legibly ON the accent |
 
 Each is optional: unset, it falls back (via `var(--type-accent, …)`) to the
