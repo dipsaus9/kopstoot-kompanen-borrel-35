@@ -40,11 +40,11 @@ export function SiteNav({ className }: { className?: string }) {
 
   function linkClass(active: boolean): string {
     return cn(
-      "inline-flex min-h-tap items-center rounded-pill px-4 py-2",
-      "text-body font-bold transition-colors focus-visible:outline-none",
+      "inline-flex min-h-tap items-center rounded-md px-3 py-1.5",
+      "text-sm font-bold uppercase tracking-wide transition-colors focus-visible:outline-none",
       active
-        ? "bg-primary text-primary-foreground shadow-[var(--sticker-shadow-sm)]"
-        : "text-foreground/80 hover:bg-accent hover:text-accent-foreground",
+        ? "border-[3px] border-[#1a1120] bg-[#ffd45e] text-[#1a1120] shadow-[3px_3px_0_#ff3d6e]"
+        : "text-[#faf3e6]/85 hover:text-[#ffd45e]",
     );
   }
 

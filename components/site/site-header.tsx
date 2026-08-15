@@ -10,17 +10,25 @@ import { SiteNav } from "./site-nav";
  */
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b-[3px] border-[var(--brand-cocoa-deep)] bg-background/90 backdrop-blur-md">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-stack-sm px-stack-md py-stack-sm">
+    <header className="sticky top-0 z-50 border-b-[5px] border-[#ffd45e] bg-[#1a1120]">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-stack-sm px-stack-md py-2">
         <Link
           href="/"
-          className="group inline-flex min-h-tap items-center gap-stack-sm rounded-pill focus-visible:outline-none"
+          className="group inline-flex min-h-tap items-center gap-2 focus-visible:outline-none"
         >
           <span
             aria-hidden
-            className="inline-block size-7 shrink-0 rounded-pill giraffe-spots ink-outline transition-transform group-hover:-rotate-6 group-hover:scale-110"
+            className="inline-block size-8 shrink-0 rounded-md border-[3px] border-[#1a1120] bg-[#ff3d6e]"
+            style={{ boxShadow: "3px 3px 0 #ffd45e" }}
           />
-          <span className="text-title font-black uppercase tracking-heading text-foreground">
+          <span
+            className="text-4xl uppercase leading-none text-[#ffd45e]"
+            style={{
+              fontFamily: "var(--font-display), Impact, sans-serif",
+              WebkitTextStroke: "1.5px #1a1120",
+              letterSpacing: "0.03em",
+            }}
+          >
             Borrel 35
           </span>
         </Link>

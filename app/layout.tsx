@@ -1,11 +1,19 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Bangers, Outfit, Geist_Mono } from "next/font/google";
 
 import { SiteHeader } from "@/components/site";
 import "./globals.css";
 
-const geistSans = Geist({
+// PROOF (design/skate-graffiti-proof): retro-anime / street typography.
+// Bangers = spray/comic display for hero + tags; Outfit = clean strong body/UI.
+const display = Bangers({
+  weight: "400",
+  variable: "--font-display",
+  subsets: ["latin"],
+});
+
+const bodySans = Outfit({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
@@ -33,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="nl">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}
+        className={`${display.variable} ${bodySans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}
       >
         <a
           href="#main"
