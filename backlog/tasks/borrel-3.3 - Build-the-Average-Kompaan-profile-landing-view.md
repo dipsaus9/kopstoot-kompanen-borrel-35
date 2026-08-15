@@ -1,10 +1,10 @@
 ---
 id: BORREL-3.3
 title: Build the Average Kompaan profile landing view
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-08-14 21:01'
-updated_date: '2026-08-14 21:01'
+updated_date: '2026-08-14 21:22'
 labels:
   - story
 dependencies:
@@ -30,10 +30,10 @@ Branch: BORREL-3.3/average-kompaan-profile
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 The home route (app/page.tsx) renders the Average Kompaan aggregate from the aggregation library
-- [ ] #2 Numeric stats (age, height, borrel count) and the modal closed answers are shown as giraffe-themed tiles
-- [ ] #3 Presentation is visual/playful — no raw percentage breakdowns
-- [ ] #4 The view is a server component reading data at build time (no runtime fetch)
+- [x] #1 The home route (app/page.tsx) renders the Average Kompaan aggregate from the aggregation library
+- [x] #2 Numeric stats (age, height, borrel count) and the modal closed answers are shown as giraffe-themed tiles
+- [x] #3 Presentation is visual/playful — no raw percentage breakdowns
+- [x] #4 The view is a server component reading data at build time (no runtime fetch)
 <!-- AC:END -->
 
 ## Implementation Plan
@@ -45,5 +45,5 @@ Branch: BORREL-3.3/average-kompaan-profile
 ## Implementation Notes
 
 <!-- SECTION:NOTES:BEGIN -->
-Depends on BORREL-3.1 (aggregate), BORREL-3.2 (shell/nav) and BORREL-2.3 (design tokens). Server component, build-time data via getResponses(); mock data until the real CSV. Verify: bun run lint, bun run typecheck, bun run test.
+Delivered on shared branch BORREL-3/launch-build. app/page.tsx is now a server component that loads getAggregate() at build time and renders the composite 'Jan Kompaan Modaal' profile via new components/profile/ tiles: ProfileHero (giraffe-spots banner), StatTile x3 (age/lengte/borrels from aggregate.means), and AnswerTile (curated modal answers from aggregate.modes, shown as traits with no percentages). Styled with BORREL-2.3 design tokens; dark-mode via semantic tokens. Verified green: lint, typecheck, test (13 pass), next build (/ prerenders static). story-reviewer verdict: pass, no findings, no scope violations.
 <!-- SECTION:NOTES:END -->

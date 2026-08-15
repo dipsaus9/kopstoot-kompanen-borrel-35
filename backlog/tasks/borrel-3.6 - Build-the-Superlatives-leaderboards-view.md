@@ -1,10 +1,10 @@
 ---
 id: BORREL-3.6
 title: Build the Superlatives / leaderboards view
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-08-14 21:02'
-updated_date: '2026-08-14 21:02'
+updated_date: '2026-08-14 21:47'
 labels:
   - story
 dependencies:
@@ -13,6 +13,7 @@ dependencies:
 references:
   - app/superlatieven/
   - components/superlatives/
+  - test/superlatives.test.ts
 parent_task_id: BORREL-3
 type: feature
 ordinal: 21000
@@ -29,10 +30,10 @@ Branch: BORREL-3.6/superlatives-leaderboards
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 A curated set of superlative categories renders at /superlatieven, each with a short top-N and real names
-- [ ] #2 Numeric/ordinal extremes (e.g. height, borrel count, head-bump frequency, arrival time) are ranked from the response data
-- [ ] #3 A showcase strip renders the open-answer quotes (kompaanIfSentence, ultimateKompaanTrait, heightRemark)
-- [ ] #4 The view is a server component reading data at build time (no runtime fetch)
+- [x] #1 A curated set of superlative categories renders at /superlatieven, each with a short top-N and real names
+- [x] #2 Numeric/ordinal extremes (e.g. height, borrel count, head-bump frequency, arrival time) are ranked from the response data
+- [x] #3 A showcase strip renders the open-answer quotes (kompaanIfSentence, ultimateKompaanTrait, heightRemark)
+- [x] #4 The view is a server component reading data at build time (no runtime fetch)
 <!-- AC:END -->
 
 ## Implementation Plan
@@ -44,5 +45,5 @@ Branch: BORREL-3.6/superlatives-leaderboards
 ## Implementation Notes
 
 <!-- SECTION:NOTES:BEGIN -->
-Depends on BORREL-3.2 (shell/nav) and BORREL-2.3 (tokens); independent of clustering/archetypes. Reads getResponses() directly; showcase questions are quote-only (never clustered). Real names shown openly. Server component, build-time data; mock data until the real CSV. Verify: bun run lint, bun run typecheck, bun run test.
+Delivered /superlatieven as a server component. components/superlatives/leaderboards.ts computes 6 curated superlative leaderboards over getResponses() at build time — tallest (heightCm) and most borrels (borrelCount) numeric; head-bump champion, earliest & latest arriver, and most-asked height question ordinal via schema option tuples — each a deterministic top-5 with real names. QuoteStrip showcases the three free-text answers (kompaanIfSentence, ultimateKompaanTrait, heightRemark), attributed and interleaved. Styled with BORREL-2.3 tokens (giraffe hues, giraffe-spots hero). Reviewer verdict: pass on all 4 ACs, no scope violations; one advisory (unknown-option filtering on the latest-arriver metric) fixed. lint/typecheck/test(24)/build all green; route prerendered static (0 B client JS).
 <!-- SECTION:NOTES:END -->
