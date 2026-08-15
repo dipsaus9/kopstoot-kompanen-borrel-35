@@ -42,7 +42,7 @@ export function ArchetypeGallery({ entries }: ArchetypeGalleryProps) {
       </header>
 
       <section aria-label="De zes typetjes">
-        <ul className="grid grid-cols-1 gap-stack-md sm:grid-cols-2 xl:grid-cols-3">
+        <ul className="grid grid-cols-1 gap-stack-md sm:grid-cols-2">
           {entries.map((entry) => (
             <li key={entry.archetype.id} className="flex">
               <ArchetypeCard entry={entry} />
