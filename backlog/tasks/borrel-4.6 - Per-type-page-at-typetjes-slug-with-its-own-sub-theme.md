@@ -1,9 +1,10 @@
 ---
 id: BORREL-4.6
 title: 'Per-type page at /typetjes/[slug] with its own sub-theme'
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-08-15 07:50'
+updated_date: '2026-08-15 10:01'
 labels:
   - story
 dependencies:
@@ -28,16 +29,16 @@ Branch: BORREL-4.6/per-type-page
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 Dynamic route app/typetjes/[slug] renders a page per type styled in that type's own sub-theme (from BORREL-4.2)
-- [ ] #2 Shows the full type description (appearance/traits/colors per the docs), defining traits, and the list of members with that type
-- [ ] #3 Reserves an image slot per type (placeholder now; real art later) in the layout
-- [ ] #4 All type slugs are statically generated (generateStaticParams); an unknown slug returns 404
-- [ ] #5 Mobile-first; A11Y (contrast holds within each sub-theme)
-- [ ] #6 bun run lint, typecheck and build pass
+- [x] #1 Dynamic route app/typetjes/[slug] renders a page per type styled in that type's own sub-theme (from BORREL-4.2)
+- [x] #2 Shows the full type description (appearance/traits/colors per the docs), defining traits, and the list of members with that type
+- [x] #3 Reserves an image slot per type (placeholder now; real art later) in the layout
+- [x] #4 All type slugs are statically generated (generateStaticParams); an unknown slug returns 404
+- [x] #5 Mobile-first; A11Y (contrast holds within each sub-theme)
+- [x] #6 bun run lint, typecheck and build pass
 <!-- AC:END -->
 
 ## Implementation Notes
 
 <!-- SECTION:NOTES:BEGIN -->
-Read content/archetypes + app/theme/type-themes + the members grouping logic (read-only). Verify: bun run lint && bun run typecheck && bun run build.
+Delivered: dynamic route app/typetjes/[slug]/page.tsx (generateStaticParams for all 6 slugs, notFound() 404 on unknown) rendering the presentational components/type-page/TypePage. Each page is dressed entirely in its type's BORREL-4.2 sub-theme (data-type + typeThemeVars on the article root) and shows the full description, defining traits (Kenmerken), signature colours (Kleuren), a 4/5 image slot (renders archetype.image if present, else a cel-shaded 'Illustratie volgt' placeholder sized for future art) and the list of members (De Kompanen) resolved read-only via getArchetypeGallery(). Mobile-first, semantic headings, AA-tuned ink on accent surfaces. Verified green: lint, typecheck, build (all 6 [slug] paths prerender as SSG). Independent story-reviewer verdict: pass (0 findings, 0 scope violations).
 <!-- SECTION:NOTES:END -->
