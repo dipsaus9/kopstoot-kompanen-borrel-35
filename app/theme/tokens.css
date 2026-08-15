@@ -1,55 +1,68 @@
 /**
- * Borrel 35 — playful, bold, vertical, giraffe-motif design tokens.
+ * Borrel 35 — graffiti / anime design tokens (BORREL-4).
  *
  * This is the RAW token + semantic-mapping layer. It sits on top of the shadcn
  * base variables (defined in app/globals.css) and overrides them so the whole
- * app speaks one giraffe/borrel visual language. The palette is tuned to the six
- * Kompaan archetypes (see content/archetypes/index.ts, docs/archetypes.md):
- * warm savanna + giraffe gold for the shared borrel identity, and one accent per
- * archetype family (park-green, festival-flamingo, night, salmari-liquorice,
- * kroeg-wine) reused for charts and archetype cards.
+ * app speaks one loud graffiti/anime language: a bold marker palette, near-black
+ * ink outlines, cel-shade gradients and sticker / speed-line motifs.
+ *
+ * The token *API* (custom-property names + the Tailwind utilities they generate:
+ * bg-giraffe, text-cocoa, border-tan, giraffe-spots, the vertical type scale, the
+ * stack-* rhythm …) is kept STABLE from the previous giraffe theme so existing
+ * components keep compiling and recolour for free — only the VALUES turn loud.
+ *
+ * Per-type theming: this file also declares the neutral defaults for the
+ * per-type theming contract (`--type-accent*`). The *mechanism* that applies
+ * them lives in app/globals.css under `[data-type]`; the per-type colour DATA is
+ * BORREL-4.2's job. Nothing type-specific is hardcoded here.
  *
  * Human-readable spec: docs/design-system.md.
  */
 
 :root {
   /* ---------------------------------------------------------------------- *
-   * 1. Brand palette (OKLCH) — the raw giraffe/borrel colours
+   * 1. Brand palette (OKLCH) — loud marker inks over warm paper
    * ---------------------------------------------------------------------- */
 
-  /* Savanna neutrals — warm paper, sand and cocoa "giraffe-patch" ink */
-  --brand-cream: oklch(0.97 0.018 85); /* page paper */
-  --brand-sand: oklch(0.93 0.03 82); /* muted surfaces */
-  --brand-tan: oklch(0.82 0.06 74); /* borders, hairlines */
-  --brand-cocoa: oklch(0.29 0.045 66); /* ink / giraffe patch */
-  --brand-cocoa-deep: oklch(0.22 0.035 64); /* darkest ink, dark bg */
+  /* Paper + ink neutrals — warm off-white ground, blue-black graffiti ink.
+   * (Names kept from the previous theme so `bg-cream`, `text-cocoa`,
+   * `border-tan`, … keep working; the values are now graffiti-loud.) */
+  --brand-cream: oklch(0.97 0.024 96); /* page paper */
+  --brand-sand: oklch(0.92 0.035 96); /* muted surfaces */
+  --brand-tan: oklch(0.28 0.03 274); /* thick INK outlines / hairlines */
+  --brand-cocoa: oklch(0.24 0.032 274); /* ink / text */
+  --brand-cocoa-deep: oklch(0.16 0.03 274); /* darkest ink, dark bg */
 
-  /* Giraffe gold — the signature accent */
-  --brand-giraffe: oklch(0.79 0.145 78); /* primary gold */
-  --brand-ochre: oklch(0.68 0.15 66); /* deeper gold, hover */
+  /* Signature pop — bold marker yellow-gold (the "giraffe" accent, now loud) */
+  --brand-giraffe: oklch(0.85 0.165 92); /* primary pop */
+  --brand-ochre: oklch(0.72 0.17 68); /* deeper pop, hover */
 
-  /* Archetype accent family (one hue per archetype cluster) */
-  --brand-park: oklch(0.72 0.15 148); /* Parkborrelprofessional · Verantwoordelijke Kompaan — natuur/groen */
-  --brand-flamingo: oklch(0.72 0.17 15); /* Festival-Flamingo — festival coral */
-  --brand-liquorice: oklch(0.31 0.05 300); /* Salmari-Soldaat — salmiak/stad */
-  --brand-night: oklch(0.5 0.13 268); /* Lange Nachtbraker — nacht indigo */
-  --brand-wine: oklch(0.46 0.14 20); /* Bedtijd-Baron — kroeg/wijn claret */
+  /* Type accent family — one saturated hue per archetype cluster.
+   * These are the raw source values a per-type theme may point --type-accent at
+   * (wired up in BORREL-4.2); here they only power charts + the accent demo. */
+  --brand-park: oklch(0.79 0.19 146); /* acid green */
+  --brand-flamingo: oklch(0.67 0.22 6); /* hot flamingo pink */
+  --brand-liquorice: oklch(0.45 0.2 300); /* electric grape */
+  --brand-night: oklch(0.56 0.2 264); /* electric indigo */
+  --brand-wine: oklch(0.58 0.23 22); /* pop red */
 
   /* ---------------------------------------------------------------------- *
-   * 2. Type scale — oversized, vertical, bold-first
+   * 2. Type scale — oversized, vertical, bold-first, fluid (mobile-first).
+   *    Display tiers use clamp() so the biggest type never overflows a phone;
+   *    they grow toward the fixed ceiling on larger viewports.
    * ---------------------------------------------------------------------- */
   /* Prefixed --fs-* so app/globals.css can map them into Tailwind's own
    * --text-* namespace via @theme inline without a self-reference. */
   --fs-caption: 0.75rem; /* 12px — eyebrow / meta */
   --fs-body: 1rem; /* 16px — base body */
   --fs-body-lg: 1.125rem; /* 18px */
-  --fs-lead: 1.375rem; /* 22px — intros */
-  --fs-title: 1.75rem; /* 28px — card titles */
-  --fs-headline: 2.25rem; /* 36px — section headings */
-  --fs-display-sm: 3rem; /* 48px */
-  --fs-display: 4.5rem; /* 72px — hero */
-  --fs-display-lg: 6rem; /* 96px — oversized numbers */
-  --fs-colossus: 8.5rem; /* 136px — the vertical statement */
+  --fs-lead: clamp(1.2rem, 1.05rem + 0.75vw, 1.375rem); /* intros */
+  --fs-title: clamp(1.5rem, 1.3rem + 1vw, 1.75rem); /* card titles */
+  --fs-headline: clamp(1.85rem, 1.4rem + 2.2vw, 2.25rem); /* section headings */
+  --fs-display-sm: clamp(2.25rem, 1.6rem + 3.2vw, 3rem);
+  --fs-display: clamp(2.75rem, 1.6rem + 5.6vw, 4.5rem); /* hero */
+  --fs-display-lg: clamp(3.5rem, 1.9rem + 8vw, 6rem); /* oversized numbers */
+  --fs-colossus: clamp(4.5rem, 2rem + 12.5vw, 8.5rem); /* vertical statement */
 
   /* Line-heights — tight for display, airy for body (vertical rhythm) */
   --lh-colossus: 0.9;
@@ -79,23 +92,52 @@
   --stack-xl: 4.5rem; /* 3 rhythm */
   --stack-section: 7.5rem; /* 5 rhythm — between page sections */
   --measure: 60ch; /* max reading width */
+  --tap-min: 2.75rem; /* 44px — minimum touch-target (mobile-first a11y) */
 
   /* ---------------------------------------------------------------------- *
-   * 4. Radii — soft and playful (extends shadcn's --radius scale).
-   *    The base --radius is bumped to a rounder value in app/globals.css;
-   *    --radius-pill is the fully-rounded token for chips and buttons.
+   * 4. Radii + graffiti hardware — thick outlines, hard sticker shadows.
+   *    The base --radius is set in app/globals.css; --r-pill is the fully
+   *    rounded token for chips and buttons.
    * ---------------------------------------------------------------------- */
   --r-pill: 999px; /* mapped to --radius-pill / rounded-pill in app/globals.css */
 
+  /* Ink outline weights — the graffiti "marker line" applied around cards,
+   * stickers and hero blocks. */
+  --outline-1: 2px;
+  --outline-2: 3px;
+  --outline-3: 5px;
+
+  /* Hard offset "sticker" shadows (no blur — a printed-sticker drop). */
+  --sticker-shadow-sm: 0.25rem 0.25rem 0 var(--brand-cocoa-deep);
+  --sticker-shadow: 0.4rem 0.4rem 0 var(--brand-cocoa-deep);
+  --sticker-shadow-pop: 0.55rem 0.55rem 0 var(--brand-cocoa-deep);
+
+  /* Speed-line motif geometry (used by the .speed-lines utility). */
+  --speed-angle: -18deg;
+  --speed-gap: 14px;
+
   /* ---------------------------------------------------------------------- *
-   * 5. Dark-mode brand tints — the few palette values that shift at night.
-   *    The semantic shadcn vars are mapped to these in app/globals.css.
+   * 5. Per-type theming contract — NEUTRAL DEFAULTS (mechanism in globals.css)
+   *
+   * `--type-accent*` are the knobs a per-type theme sets. Left unset they fall
+   * back (in the [data-type] rule in app/globals.css) to the signature pop, so
+   * the contract has a sane neutral default with NO type hardcoded here.
+   * BORREL-4.2 supplies the per-type colour DATA, e.g.:
+   *   [data-type="festival-flamingo"] { --type-accent: var(--brand-flamingo);
+   *                                     --type-accent-ink: var(--brand-cream); }
    * ---------------------------------------------------------------------- */
-  --brand-giraffe-lifted: oklch(0.83 0.15 80); /* gold, brighter on dark */
-  --brand-park-lifted: oklch(0.78 0.15 148);
-  --brand-flamingo-lifted: oklch(0.76 0.17 16);
-  --brand-night-lifted: oklch(0.66 0.14 268);
-  --brand-wine-lifted: oklch(0.62 0.15 20);
-  --brand-cocoa-surface: oklch(0.26 0.04 66); /* dark card/popover */
-  --brand-cocoa-raised: oklch(0.34 0.045 66); /* dark muted/secondary */
+  --type-accent-default: var(--brand-giraffe); /* neutral fallback accent */
+  --type-accent-strong-default: var(--brand-ochre); /* neutral hover/strong */
+  --type-accent-ink-default: var(--brand-cocoa-deep); /* neutral on-accent ink */
+
+  /* ---------------------------------------------------------------------- *
+   * 6. Dark-mode brand tints — the palette values that brighten at night.
+   * ---------------------------------------------------------------------- */
+  --brand-giraffe-lifted: oklch(0.88 0.16 94); /* pop, brighter on dark */
+  --brand-park-lifted: oklch(0.84 0.19 146);
+  --brand-flamingo-lifted: oklch(0.73 0.21 8);
+  --brand-night-lifted: oklch(0.71 0.18 264);
+  --brand-wine-lifted: oklch(0.68 0.22 22);
+  --brand-cocoa-surface: oklch(0.23 0.032 274); /* dark card/popover */
+  --brand-cocoa-raised: oklch(0.31 0.035 274); /* dark muted/secondary */
 }
