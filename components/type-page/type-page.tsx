@@ -190,16 +190,6 @@ export function TypePage({ entry }: TypePageProps) {
               Signatuurkleur
             </span>
           </div>
-          <div className="ink-outline flex min-h-tap items-center gap-stack-sm rounded-pill bg-card px-stack-md py-stack-sm text-card-foreground">
-            <span
-              aria-hidden
-              className="size-6 shrink-0 rounded-pill border-2 border-[var(--brand-cocoa-deep)]"
-              style={{ background: "var(--type-accent-strong)" }}
-            />
-            <span className="text-caption font-black uppercase tracking-eyebrow">
-              Dieper / hover
-            </span>
-          </div>
         </div>
       </section>
 

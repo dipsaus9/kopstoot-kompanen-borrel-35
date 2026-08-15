@@ -150,9 +150,6 @@ export function PersonCard({ person }: PersonCardProps) {
                   key={trait.key}
                   className="text-body font-medium leading-body text-foreground"
                 >
-                  <p className="text-caption font-bold tracking-eyebrow text-muted-foreground uppercase">
-                    {trait.label}
-                  </p>
                   <p className="text-pretty">
                     <span className="font-bold text-foreground">
                       {trait.value}
