@@ -23,7 +23,7 @@ export function QuoteStrip({ quotes }: QuoteStripProps) {
       {quotes.map((quote) => (
         <figure
           key={quote.id}
-          className="flex flex-col gap-stack-sm rounded-3xl border border-border bg-card p-stack-md shadow-sm"
+          className="sticker flex flex-col gap-stack-sm rounded-3xl bg-card p-stack-md"
         >
           <figcaption className="flex items-center gap-2 text-caption font-bold tracking-eyebrow text-muted-foreground uppercase">
             <span aria-hidden className="text-body-lg leading-none">

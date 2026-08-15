@@ -23,14 +23,14 @@ export function SuperlativesView({ superlatives }: SuperlativesViewProps) {
 
   return (
     <div className="flex flex-col gap-stack-lg">
-      <header className="giraffe-spots relative overflow-hidden rounded-4xl border border-border p-stack-lg text-cocoa shadow-sm">
+      <header className="giraffe-spots sticker relative overflow-hidden rounded-4xl p-stack-lg text-cocoa">
         <p className="text-caption font-bold tracking-eyebrow uppercase">
           De uitschieters en records
         </p>
         <h1 className="mt-stack-sm text-display font-black leading-colossus tracking-display text-balance">
           Superlatieven
         </h1>
-        <p className="mt-stack-md max-w-[46ch] text-body-lg font-medium leading-body">
+        <p className="mt-stack-md max-w-[46ch] text-body-lg font-medium leading-body text-pretty">
           De langste, de vroegste, de fanatiekste hoofdstoter — {count} Kompanen,
           een handvol eretitels en de mooiste antwoorden in hun eigen woorden.
         </p>
