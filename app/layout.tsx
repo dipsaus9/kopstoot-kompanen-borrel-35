@@ -33,10 +33,18 @@ export default function RootLayout({
   return (
     <html lang="nl">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}
       >
+        <a
+          href="#main"
+          className="sr-only rounded-pill font-black focus:not-sr-only focus:absolute focus:left-stack-md focus:top-stack-md focus:z-[100] focus:border-[3px] focus:border-[var(--brand-cocoa-deep)] focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground focus:shadow-[var(--sticker-shadow-sm)] focus:outline-none"
+        >
+          Naar inhoud
+        </a>
         <SiteHeader />
-        <main>{children}</main>
+        <main id="main" className="flex-1">
+          {children}
+        </main>
         <Analytics />
       </body>
     </html>
