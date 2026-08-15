@@ -77,8 +77,8 @@ export function CompareView({ people }: CompareViewProps) {
   }, [selected]);
 
   return (
-    <div className="flex flex-col gap-stack-lg">
-      <header className="giraffe-spots sticker relative overflow-hidden rounded-4xl p-stack-lg text-cocoa">
+    <div className="flex min-w-0 flex-col gap-stack-lg">
+      <header className="sr-only">
         <p className="text-caption font-bold tracking-eyebrow uppercase">
           Zet Kompanen naast elkaar
         </p>
@@ -167,7 +167,7 @@ export function CompareView({ people }: CompareViewProps) {
 
       {/* Side-by-side comparison */}
       {selected.length > 0 ? (
-        <section aria-labelledby="compare-heading" className="flex flex-col gap-stack-md">
+        <section aria-labelledby="compare-heading" className="flex min-w-0 flex-col gap-stack-md">
           <h2 id="compare-heading" className="sr-only">
             Vergelijking
           </h2>
@@ -175,7 +175,7 @@ export function CompareView({ people }: CompareViewProps) {
             role="region"
             aria-labelledby="compare-heading"
             tabIndex={0}
-            className="ink-outline overflow-x-auto rounded-3xl bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="ink-outline w-full min-w-0 max-w-full overflow-x-auto rounded-3xl bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             <table className="w-full border-separate border-spacing-0 text-left">
               <caption className="sr-only">
@@ -186,7 +186,7 @@ export function CompareView({ people }: CompareViewProps) {
                 <tr>
                   <th
                     scope="col"
-                    className="sticky left-0 z-20 min-w-[9rem] bg-secondary p-stack-sm align-bottom text-caption font-bold tracking-eyebrow text-muted-foreground uppercase"
+                    className="sticky left-0 z-20 min-w-[6rem] bg-secondary p-stack-sm align-bottom text-caption font-bold tracking-eyebrow text-muted-foreground uppercase sm:min-w-[9rem]"
                   >
                     Kompaan
                   </th>
@@ -199,7 +199,7 @@ export function CompareView({ people }: CompareViewProps) {
                         key={person.id}
                         scope="col"
                         style={hueStyle}
-                        className="min-w-[12rem] border-l border-[color:var(--border)] border-t-[6px] border-t-[color:var(--archetype-hue)] bg-secondary p-stack-sm align-top"
+                        className="min-w-[9.5rem] border-l border-[color:var(--border)] border-t-[6px] border-t-[color:var(--archetype-hue)] bg-secondary p-stack-sm align-top sm:min-w-[12rem]"
                       >
                         <div className="flex flex-col gap-stack-xs">
                           <div className="flex items-start justify-between gap-stack-xs">
@@ -248,7 +248,7 @@ export function CompareView({ people }: CompareViewProps) {
                           </div>
 
                           {person.deviation.keyDivergences.length > 0 && (
-                            <div className="mt-stack-xs">
+                            <div className="mt-stack-xs hidden sm:block">
                               <p className="text-caption font-bold tracking-eyebrow text-muted-foreground uppercase">
                                 Wijkt het meest af
                               </p>
@@ -283,7 +283,7 @@ export function CompareView({ people }: CompareViewProps) {
                     <tr key={row.key} className={isAgreed ? "bg-primary/10" : undefined}>
                       <th
                         scope="row"
-                        className={`sticky left-0 z-10 min-w-[9rem] border-t border-[color:var(--border)] p-stack-sm align-top text-caption font-bold tracking-eyebrow text-muted-foreground uppercase ${
+                        className={`sticky left-0 z-10 min-w-[6rem] border-t border-[color:var(--border)] p-stack-sm align-top text-caption font-bold tracking-eyebrow text-muted-foreground uppercase sm:min-w-[9rem] ${
                           isAgreed ? "bg-primary/10" : "bg-card"
                         }`}
                       >

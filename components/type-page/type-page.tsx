@@ -26,6 +26,7 @@ import {
   type ArchetypeId,
 } from "@/app/theme/type-themes";
 import type { ArchetypeGalleryEntry } from "@/components/archetypes";
+import { SkateScene } from "@/components/proof/skate-scene";
 
 export interface TypePageProps {
   /** The archetype resolved to its members + badge emoji, from the gallery. */
@@ -71,35 +72,57 @@ export function TypePage({ entry }: TypePageProps) {
         </Link>
       </nav>
 
-      {/* Hero — the image slot beside the type's name + description. */}
-      <header className="grid gap-stack-lg lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
-        <div className="order-2 lg:order-1">
-          <p className="text-caption font-bold uppercase tracking-eyebrow text-muted-foreground">
-            Borrel-type
-          </p>
-          <h1 className="mt-stack-sm text-display font-black leading-display tracking-display text-foreground text-balance">
-            {archetype.name}
-          </h1>
-          <p className="mt-stack-md max-w-[52ch] text-body-lg font-medium leading-body text-foreground text-pretty">
-            {archetype.description}
-          </p>
-
-          <p className="mt-stack-md inline-flex items-baseline gap-2">
-            <span className="text-display-sm font-black leading-none text-foreground">
-              {memberCount}
+      {/* Hero — a type-tinted graffiti wall with the name + the character slot. */}
+      <header
+        className="relative overflow-hidden rounded-3xl border-[5px] border-[#1a1120]"
+        style={{ boxShadow: "10px 10px 0 #1a1120" }}
+      >
+        <SkateScene
+          className="absolute inset-0 h-full w-full"
+          tint="var(--type-accent)"
+          hideCharacter
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1a1120]/85 via-[#1a1120]/45 to-[#1a1120]/10" />
+        <div className="relative grid gap-stack-lg p-stack-lg sm:p-stack-xl lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-center">
+          <div className="min-w-0">
+            <span
+              className="inline-block -rotate-2 rounded-md border-[3px] border-[#1a1120] bg-type px-3 py-1 text-caption font-black uppercase tracking-eyebrow text-type-ink"
+              style={{ boxShadow: "4px 4px 0 #1a1120" }}
+            >
+              Borrel-type
             </span>
-            <span className="text-caption font-bold uppercase tracking-eyebrow text-muted-foreground">
-              {memberLabel} met dit type
-            </span>
-          </p>
-        </div>
+            <h1
+              className="mt-stack-sm text-[#ffd45e]"
+              style={{
+                fontFamily: "var(--font-display), Impact, sans-serif",
+                fontSize: "clamp(2.25rem, 1.4rem + 4vw, 4rem)",
+                lineHeight: 0.95,
+                WebkitTextStroke: "2.5px #1a1120",
+                textShadow: "4px 4px 0 var(--type-accent), 8px 8px 0 #1a1120",
+                overflowWrap: "break-word",
+                hyphens: "auto",
+              }}
+            >
+              {archetype.name}
+            </h1>
+            <p className="mt-stack-md max-w-[48ch] text-body-lg font-semibold leading-body text-white/90 text-pretty">
+              {archetype.description}
+            </p>
+            <p className="mt-stack-md inline-flex items-baseline gap-2">
+              <span className="text-display-sm font-black leading-none text-[#ffd45e]">
+                {memberCount}
+              </span>
+              <span className="text-caption font-bold uppercase tracking-eyebrow text-white/80">
+                {memberLabel} met dit type
+              </span>
+            </p>
+          </div>
 
-        {/* Image slot — real art later; a themed placeholder box sized for it now. */}
-        <div className="order-1 lg:order-2">
-          <figure className="sticker relative overflow-hidden rounded-4xl">
+          {/* Character-art slot — real anime art later; framed placeholder now. */}
+          <figure className="relative mx-auto w-full max-w-xs overflow-hidden rounded-2xl border-[4px] border-[#faf3e6]/70">
             <div className="aspect-[4/5] w-full">
               {image ? (
-                // eslint-disable-next-line @next/next/no-img-element -- art assets are static, not from next/image pipeline (yet)
+                // eslint-disable-next-line @next/next/no-img-element -- static art asset (no next/image pipeline yet)
                 <img
                   src={image}
                   alt={`Illustratie van ${archetype.name}`}
@@ -108,11 +131,14 @@ export function TypePage({ entry }: TypePageProps) {
               ) : (
                 <div
                   aria-hidden
-                  className="cel-shade flex size-full flex-col items-center justify-center gap-stack-sm text-type-ink"
+                  className="flex size-full flex-col items-center justify-center gap-stack-sm bg-[#1a1120]/40 text-[#faf3e6]"
                 >
-                  <span className="text-colossus leading-none">{emoji}</span>
-                  <span className="text-caption font-black uppercase tracking-eyebrow">
-                    Illustratie volgt
+                  <span className="text-colossus leading-none opacity-90">{emoji}</span>
+                  <span
+                    className="text-caption font-black uppercase tracking-eyebrow opacity-80"
+                    style={{ fontFamily: "var(--font-display), Impact, sans-serif" }}
+                  >
+                    Anime-art volgt
                   </span>
                 </div>
               )}
@@ -162,16 +188,6 @@ export function TypePage({ entry }: TypePageProps) {
             />
             <span className="text-caption font-black uppercase tracking-eyebrow">
               Signatuurkleur
-            </span>
-          </div>
-          <div className="ink-outline flex min-h-tap items-center gap-stack-sm rounded-pill bg-card px-stack-md py-stack-sm text-card-foreground">
-            <span
-              aria-hidden
-              className="size-6 shrink-0 rounded-pill border-2 border-[var(--brand-cocoa-deep)]"
-              style={{ background: "var(--type-accent-strong)" }}
-            />
-            <span className="text-caption font-black uppercase tracking-eyebrow">
-              Dieper / hover
             </span>
           </div>
         </div>

@@ -12,23 +12,8 @@ export type NavItem = {
 export const NAV_ITEMS: readonly NavItem[] = [
   {
     href: "/",
-    label: "Home",
-    description: "Terug naar de start",
-  },
-  {
-    href: "/gemiddelde",
-    label: "Gemiddelde",
-    description: "Het gemiddelde Borrel 35-profiel",
-  },
-  {
-    href: "/vind-jezelf",
     label: "Vind jezelf",
-    description: "Vergelijk jezelf met de groep",
-  },
-  {
-    href: "/vergelijk",
-    label: "Vergelijk",
-    description: "Zet twee profielen naast elkaar",
+    description: "Zoek je naam en vind jezelf terug",
   },
   {
     href: "/typetjes",
@@ -36,8 +21,18 @@ export const NAV_ITEMS: readonly NavItem[] = [
     description: "De borrel-archetypes",
   },
   {
-    href: "/superlatieven",
-    label: "Superlatieven",
+    href: "/vergelijk",
+    label: "Vergelijk",
+    description: "Zet meerdere profielen naast elkaar",
+  },
+  {
+    href: "/gemiddelde",
+    label: "Gemiddelde",
+    description: "Het gemiddelde Borrel 35-profiel",
+  },
+  {
+    href: "/toppers",
+    label: "Toppers",
     description: "De uitschieters en records",
   },
 ];

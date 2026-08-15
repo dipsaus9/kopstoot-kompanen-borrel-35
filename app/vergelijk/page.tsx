@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { CompareView, getComparePeople } from "@/components/compare";
+import { GraffitiHero } from "@/components/proof/graffiti-hero";
 
 /**
  * The compare view (BORREL-4.8): the /vergelijk side-by-side lookup. A server
@@ -21,8 +22,11 @@ export default function VergelijkPage() {
   const people = getComparePeople();
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-stack-md py-stack-lg">
-      <CompareView people={people} />
-    </div>
+    <>
+      <GraffitiHero eyebrow="Vergelijk" title="Zet ze naast elkaar" />
+      <div className="mx-auto w-full max-w-6xl px-stack-md py-stack-lg">
+        <CompareView people={people} />
+      </div>
+    </>
   );
 }

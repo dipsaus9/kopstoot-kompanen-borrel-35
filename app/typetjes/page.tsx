@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { ArchetypeGallery, getArchetypeGallery } from "@/components/archetypes";
+import { GraffitiHero } from "@/components/proof/graffiti-hero";
 
 /**
  * The typetjes view (BORREL-4.5): a loud graffiti/anime INDEX of the six named
@@ -20,8 +21,11 @@ export default function TypetjesPage() {
   const entries = getArchetypeGallery();
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-stack-md py-stack-lg">
-      <ArchetypeGallery entries={entries} />
-    </div>
+    <>
+      <GraffitiHero eyebrow="De typetjes" title="Welk type ben jij?" />
+      <div className="mx-auto w-full max-w-6xl px-stack-md py-stack-lg">
+        <ArchetypeGallery entries={entries} />
+      </div>
+    </>
   );
 }

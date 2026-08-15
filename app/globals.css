@@ -135,7 +135,7 @@
   --chart-3: var(--brand-flamingo);
   --chart-4: var(--brand-night);
   --chart-5: var(--brand-wine);
-  --radius: 0.875rem;
+  --radius: 0.3rem; /* sharper, comic/poster corners across all cards */
   --sidebar: oklch(0.99 0.012 96);
   --sidebar-foreground: var(--brand-cocoa);
   --sidebar-primary: var(--brand-giraffe);

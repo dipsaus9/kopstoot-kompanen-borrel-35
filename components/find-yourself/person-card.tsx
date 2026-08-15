@@ -41,7 +41,7 @@ export function PersonCard({ person }: PersonCardProps) {
   return (
     <article
       style={hueStyle}
-      className="sticker flex flex-col gap-stack-lg rounded-4xl border-t-[6px] border-t-[color:var(--archetype-hue)] bg-card p-stack-lg"
+      className="sticker flex flex-col gap-stack-lg rounded-4xl border-t-[6px] border-t-[color:var(--archetype-hue)] bg-card p-stack-md sm:p-stack-lg"
     >
       <header className="flex flex-col gap-stack-xs">
         <p className="text-caption font-bold tracking-eyebrow text-muted-foreground uppercase">
@@ -57,7 +57,7 @@ export function PersonCard({ person }: PersonCardProps) {
         aria-labelledby="match-heading"
         className="ink-outline flex flex-col gap-stack-md rounded-3xl bg-secondary/40 p-stack-md"
       >
-        <div className="flex items-center gap-stack-md">
+        <div className="flex flex-col gap-stack-sm sm:flex-row sm:items-center sm:gap-stack-md">
           <p className="flex items-baseline gap-1">
             <span className="text-display font-black leading-display tracking-display text-primary">
               {match.score}
@@ -116,7 +116,7 @@ export function PersonCard({ person }: PersonCardProps) {
         aria-labelledby="deviation-heading"
         className="ink-outline flex flex-col gap-stack-md rounded-3xl bg-secondary/40 p-stack-md"
       >
-        <div className="flex items-center gap-stack-md">
+        <div className="flex flex-col gap-stack-sm sm:flex-row sm:items-center sm:gap-stack-md">
           <p className="flex items-baseline gap-1">
             <span className="text-display font-black leading-display tracking-display text-accent">
               {deviation.score}
@@ -150,9 +150,6 @@ export function PersonCard({ person }: PersonCardProps) {
                   key={trait.key}
                   className="text-body font-medium leading-body text-foreground"
                 >
-                  <p className="text-caption font-bold tracking-eyebrow text-muted-foreground uppercase">
-                    {trait.label}
-                  </p>
                   <p className="text-pretty">
                     <span className="font-bold text-foreground">
                       {trait.value}
@@ -186,7 +183,7 @@ export function PersonCard({ person }: PersonCardProps) {
         </h3>
         <Link
           href={archetype.href}
-          className="ink-outline group inline-flex min-h-tap items-center gap-stack-sm rounded-pill bg-card py-2 pl-2 pr-stack-md transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--archetype-hue)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="ink-outline group flex w-full max-w-full min-h-tap items-center gap-stack-sm rounded-2xl bg-card py-2 pl-2 pr-stack-md transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--archetype-hue)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           <span
             aria-hidden
@@ -194,8 +191,8 @@ export function PersonCard({ person }: PersonCardProps) {
           >
             {archetype.emoji}
           </span>
-          <span className="flex flex-col text-left">
-            <span className="text-lead font-black leading-heading text-foreground">
+          <span className="flex min-w-0 flex-col text-left">
+            <span className="hyphens-auto text-lead font-black leading-heading text-foreground break-words">
               {archetype.name}
             </span>
             <span className="text-caption font-bold tracking-eyebrow text-muted-foreground uppercase group-hover:text-foreground">

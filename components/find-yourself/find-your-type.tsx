@@ -62,19 +62,6 @@ export function FindYourType({ options }: FindYourTypeProps) {
 
   return (
     <div className="flex flex-col gap-stack-lg">
-      <header className="giraffe-spots sticker relative overflow-hidden rounded-4xl p-stack-lg text-cocoa">
-        <p className="text-caption font-bold tracking-eyebrow uppercase">
-          Vind jouw type Kompaan
-        </p>
-        <h1 className="mt-stack-sm text-display font-black leading-colossus tracking-display text-balance">
-          Welk type Kompaan ben jij?
-        </h1>
-        <p className="mt-stack-md max-w-[46ch] text-body-lg font-medium leading-body">
-          Zoek je eigen naam en ga meteen door naar jouw eigen borrel-type — met
-          de Kompanen die op de borrel precies zo tekenen als jij.
-        </p>
-      </header>
-
       <section aria-labelledby={headingId} className="flex flex-col gap-stack-md">
         <h2
           id={headingId}
@@ -111,10 +98,10 @@ export function FindYourType({ options }: FindYourTypeProps) {
                     type="button"
                     aria-pressed={isSelected}
                     onClick={() => setSelectedId(option.id)}
-                    className={`ink-outline min-h-tap rounded-pill px-stack-md py-2 text-body font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                    className={`min-h-tap rounded-md border-[3px] border-[#1a1120] px-4 py-1.5 text-sm font-bold uppercase tracking-wide transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
                       isSelected
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-card text-foreground hover:bg-secondary"
+                        ? "bg-[#ff3d6e] text-white shadow-[3px_3px_0_#1a1120]"
+                        : "bg-[#ffd45e] text-[#1a1120] shadow-[3px_3px_0_#1a1120] hover:shadow-[4px_4px_0_#1a1120]"
                     }`}
                   >
                     {option.name}

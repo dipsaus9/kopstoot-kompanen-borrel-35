@@ -40,11 +40,11 @@ export function SiteNav({ className }: { className?: string }) {
 
   function linkClass(active: boolean): string {
     return cn(
-      "inline-flex min-h-tap items-center rounded-pill px-4 py-2",
-      "text-body font-bold transition-colors focus-visible:outline-none",
+      "inline-flex min-h-tap items-center rounded-md px-3 py-1.5",
+      "text-sm font-bold uppercase tracking-wide transition-colors focus-visible:outline-none",
       active
-        ? "bg-primary text-primary-foreground shadow-[var(--sticker-shadow-sm)]"
-        : "text-foreground/80 hover:bg-accent hover:text-accent-foreground",
+        ? "border-[3px] border-[#1a1120] bg-[#ffd45e] text-[#1a1120] shadow-[3px_3px_0_#ff3d6e]"
+        : "text-[#faf3e6]/85 hover:text-[#ffd45e]",
     );
   }
 
@@ -77,9 +77,9 @@ export function SiteNav({ className }: { className?: string }) {
         aria-controls="site-nav-mobile"
         onClick={() => setOpen((value) => !value)}
         className={cn(
-          "inline-flex min-h-tap min-w-tap items-center justify-center rounded-pill md:hidden",
-          "border-[3px] border-[var(--brand-cocoa-deep)] bg-background text-foreground",
-          "shadow-[var(--sticker-shadow-sm)] transition-transform",
+          "inline-flex min-h-tap min-w-tap items-center justify-center rounded-md md:hidden",
+          "border-[3px] border-[#1a1120] bg-[#ffd45e] text-[#1a1120]",
+          "shadow-[3px_3px_0_#ff3d6e] transition-transform",
           "active:translate-y-0.5 active:shadow-none focus-visible:outline-none",
         )}
       >
@@ -90,9 +90,9 @@ export function SiteNav({ className }: { className?: string }) {
       <ul
         id="site-nav-mobile"
         className={cn(
-          "absolute right-0 top-[calc(100%+0.5rem)] z-50 w-56 flex-col gap-stack-xs md:hidden",
-          "rounded-2xl border-[3px] border-[var(--brand-cocoa-deep)] bg-card p-stack-sm",
-          "shadow-[var(--sticker-shadow)]",
+          "absolute right-0 top-[calc(100%+0.5rem)] z-50 w-56 flex-col gap-1 md:hidden",
+          "rounded-md border-[3px] border-[#ffd45e] bg-[#1a1120] p-2",
+          "shadow-[6px_6px_0_#ffd45e]",
           open ? "flex" : "hidden",
         )}
       >

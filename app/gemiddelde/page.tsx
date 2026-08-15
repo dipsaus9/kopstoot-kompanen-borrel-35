@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { AverageProfile, MostAverage } from "@/components/profile";
+import { GraffitiHero } from "@/components/proof/graffiti-hero";
 import { getAggregate, getAverageRanking } from "@/lib/aggregate";
 
 /**
@@ -22,9 +23,12 @@ export default function GemiddeldePage() {
   const ranking = getAverageRanking();
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-stack-xl px-stack-md py-stack-lg">
-      <AverageProfile aggregate={aggregate} />
-      <MostAverage ranking={ranking} />
-    </div>
+    <>
+      <GraffitiHero eyebrow="Het gemiddelde" title="Jan Kompaan Modaal" />
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-stack-xl px-stack-md py-stack-lg">
+        <AverageProfile aggregate={aggregate} />
+        <MostAverage ranking={ranking} />
+      </div>
+    </>
   );
 }
