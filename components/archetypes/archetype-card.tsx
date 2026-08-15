@@ -62,7 +62,7 @@ export function ArchetypeCard({ entry }: ArchetypeCardProps) {
           <p className="text-caption font-bold uppercase tracking-eyebrow opacity-90">
             Borrel-type
           </p>
-          <h2 className="text-title font-black leading-heading tracking-heading text-balance">
+          <h2 className="hyphens-auto text-title font-black leading-heading tracking-heading break-words text-balance">
             {archetype.name}
           </h2>
         </div>
