@@ -1,11 +1,13 @@
 /**
- * The personal find-yourself card (BORREL-3.5).
+ * The personal find-yourself card (BORREL-3.5, restyled + deviation in BORREL-4.7).
  *
  * Presentational only: renders one precomputed {@link Person} as their own
- * giraffe card — the "% gemiddelde Kompaan" hero with its matched-trait readout,
- * their headline stats and answers (reusing the profile tiles), their free-text
- * quotes, and the archetype badge deep-linking into the typetjes gallery. All
- * data is embedded at build time by the server page; nothing is fetched here.
+ * sticker card — the "% gemiddelde Kompaan" hero with its matched-trait readout,
+ * a deviation-from-average readout (their distance from the Average Kompaan plus
+ * the traits where they diverge most, BORREL-4.3), their headline stats and
+ * answers (reusing the profile tiles), their free-text quotes, and the archetype
+ * badge linked to its own per-type page (BORREL-4.6). All data is embedded at
+ * build time by the server page; nothing is fetched here.
  *
  * The archetype's mapped brand hue (BORREL-2.3) is bound to a local
  * `--archetype-hue` custom property used only as decoration (the badge disc, the
@@ -25,16 +27,21 @@ export interface PersonCardProps {
   readonly person: Person;
 }
 
+/** How many divergent traits the deviation readout lists. */
+const TOP_DIVERGENT = 3;
+
 export function PersonCard({ person }: PersonCardProps) {
-  const { name, match, archetype, stats, answers, quotes } = person;
+  const { name, match, deviation, archetype, stats, answers, quotes } = person;
   const hueStyle = {
     "--archetype-hue": `var(${archetype.hueVar})`,
   } as CSSProperties;
 
+  const topDivergent = deviation.divergent.slice(0, TOP_DIVERGENT);
+
   return (
     <article
       style={hueStyle}
-      className="flex flex-col gap-stack-lg rounded-4xl border border-t-4 border-border border-t-[color:var(--archetype-hue)] bg-card p-stack-lg shadow-sm"
+      className="sticker flex flex-col gap-stack-lg rounded-4xl border-t-[6px] border-t-[color:var(--archetype-hue)] bg-card p-stack-lg"
     >
       <header className="flex flex-col gap-stack-xs">
         <p className="text-caption font-bold tracking-eyebrow text-muted-foreground uppercase">
@@ -45,10 +52,10 @@ export function PersonCard({ person }: PersonCardProps) {
         </h2>
       </header>
 
-      {/* % gemiddelde Kompaan hero + matched-trait readout (AC #3) */}
+      {/* % gemiddelde Kompaan hero + matched-trait readout */}
       <section
         aria-labelledby="match-heading"
-        className="flex flex-col gap-stack-md rounded-3xl border border-border bg-secondary/40 p-stack-md"
+        className="ink-outline flex flex-col gap-stack-md rounded-3xl bg-secondary/40 p-stack-md"
       >
         <div className="flex items-center gap-stack-md">
           <p className="flex items-baseline gap-1">
@@ -104,17 +111,82 @@ export function PersonCard({ person }: PersonCardProps) {
         </div>
       </section>
 
-      {/* Archetype badge, deep-linked into the gallery (AC #4) */}
+      {/* Deviation-from-average readout (AC #2, BORREL-4.3) */}
+      <section
+        aria-labelledby="deviation-heading"
+        className="ink-outline flex flex-col gap-stack-md rounded-3xl bg-secondary/40 p-stack-md"
+      >
+        <div className="flex items-center gap-stack-md">
+          <p className="flex items-baseline gap-1">
+            <span className="text-display font-black leading-display tracking-display text-accent">
+              {deviation.score}
+            </span>
+            <span className="text-headline font-black leading-none text-accent">
+              %
+            </span>
+          </p>
+          <div className="min-w-0">
+            <h3
+              id="deviation-heading"
+              className="text-lead font-black leading-heading text-foreground text-balance"
+            >
+              afwijking van gemiddeld
+            </h3>
+            <p className="text-body font-medium leading-body text-muted-foreground">
+              Op {deviation.divergentCount} van de {deviation.total} antwoorden
+              wijk je af van de gemiddelde Kompaan.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <h4 className="mb-stack-sm text-caption font-bold tracking-eyebrow text-muted-foreground uppercase">
+            Waar je het meest afwijkt
+          </h4>
+          {topDivergent.length > 0 ? (
+            <ul className="flex flex-col gap-stack-sm">
+              {topDivergent.map((trait) => (
+                <li
+                  key={trait.key}
+                  className="text-body font-medium leading-body text-foreground"
+                >
+                  <p className="text-caption font-bold tracking-eyebrow text-muted-foreground uppercase">
+                    {trait.label}
+                  </p>
+                  <p className="text-pretty">
+                    <span className="font-bold text-foreground">
+                      {trait.value}
+                    </span>
+                    <span className="text-muted-foreground">
+                      {" "}
+                      — de groep koos meestal{" "}
+                    </span>
+                    <span className="font-bold text-foreground">
+                      {trait.modal}
+                    </span>
+                  </p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-body font-medium text-muted-foreground">
+              Je kiest overal hetzelfde als de gemiddelde Kompaan — nul afwijking.
+            </p>
+          )}
+        </div>
+      </section>
+
+      {/* Archetype badge, linked to its own per-type page (AC #2) */}
       <section aria-labelledby="archetype-heading">
         <h3
           id="archetype-heading"
           className="mb-stack-sm text-caption font-bold tracking-eyebrow text-muted-foreground uppercase"
         >
-          Jouw borrel-archetype
+          Jouw borrel-type
         </h3>
         <Link
           href={archetype.href}
-          className="group inline-flex items-center gap-stack-sm rounded-pill border border-border bg-card py-2 pl-2 pr-stack-md shadow-sm transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--archetype-hue)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="ink-outline group inline-flex min-h-tap items-center gap-stack-sm rounded-pill bg-card py-2 pl-2 pr-stack-md transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--archetype-hue)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           <span
             aria-hidden
@@ -127,13 +199,13 @@ export function PersonCard({ person }: PersonCardProps) {
               {archetype.name}
             </span>
             <span className="text-caption font-bold tracking-eyebrow text-muted-foreground uppercase group-hover:text-foreground">
-              Bekijk in de typetjes →
+              Bekijk jouw type →
             </span>
           </span>
         </Link>
       </section>
 
-      {/* The person's own answers (AC #2) */}
+      {/* The person's own answers */}
       <section aria-labelledby="stats-heading">
         <h3 id="stats-heading" className="sr-only">
           Jouw cijfers
@@ -182,7 +254,7 @@ export function PersonCard({ person }: PersonCardProps) {
             {quotes.map((quote) => (
               <li
                 key={quote.label}
-                className="rounded-2xl border border-border bg-card p-stack-md shadow-sm"
+                className="ink-outline rounded-2xl bg-card p-stack-md"
               >
                 <p className="mb-stack-xs text-caption font-bold tracking-eyebrow text-muted-foreground uppercase">
                   {quote.label}

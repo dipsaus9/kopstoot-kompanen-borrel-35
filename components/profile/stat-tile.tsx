@@ -19,7 +19,7 @@ export interface StatTileProps {
 
 export function StatTile({ emoji, value, unit, label }: StatTileProps) {
   return (
-    <div className="flex flex-col gap-stack-xs rounded-3xl border border-border bg-card p-stack-md shadow-sm">
+    <div className="ink-outline flex flex-col gap-stack-xs rounded-3xl bg-card p-stack-md">
       <span aria-hidden className="text-headline leading-none">
         {emoji}
       </span>

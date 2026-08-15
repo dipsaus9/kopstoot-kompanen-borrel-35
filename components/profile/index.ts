@@ -4,6 +4,7 @@
  */
 
 export { AverageProfile } from "./average-profile";
+export { MostAverage, type MostAverageProps } from "./most-average";
 export { ProfileHero, type ProfileHeroProps } from "./profile-hero";
 export { StatTile, type StatTileProps } from "./stat-tile";
 export { AnswerTile, type AnswerTileProps } from "./answer-tile";

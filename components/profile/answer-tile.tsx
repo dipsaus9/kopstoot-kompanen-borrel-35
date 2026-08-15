@@ -18,7 +18,7 @@ export interface AnswerTileProps {
 
 export function AnswerTile({ emoji, caption, answer }: AnswerTileProps) {
   return (
-    <div className="flex flex-col gap-stack-xs rounded-2xl border border-border bg-card p-stack-md shadow-sm">
+    <div className="ink-outline flex flex-col gap-stack-xs rounded-2xl bg-card p-stack-md">
       <p className="flex items-center gap-2 text-caption font-bold tracking-eyebrow text-muted-foreground uppercase">
         <span aria-hidden className="text-body-lg leading-none">
           {emoji}

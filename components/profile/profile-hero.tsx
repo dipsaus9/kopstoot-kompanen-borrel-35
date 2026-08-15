@@ -13,7 +13,7 @@ export interface ProfileHeroProps {
 
 export function ProfileHero({ responseCount }: ProfileHeroProps) {
   return (
-    <header className="giraffe-spots relative overflow-hidden rounded-4xl border border-border p-stack-lg text-cocoa shadow-sm">
+    <header className="giraffe-spots sticker relative overflow-hidden rounded-4xl p-stack-lg text-cocoa">
       <p className="text-caption font-bold tracking-eyebrow uppercase">
         Het gemiddelde Borrel 35-profiel
       </p>
