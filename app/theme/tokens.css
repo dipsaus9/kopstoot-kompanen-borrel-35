@@ -108,9 +108,9 @@
   --outline-3: 5px;
 
   /* Hard offset "sticker" shadows (no blur — a printed-sticker drop). */
-  --sticker-shadow-sm: 0.25rem 0.25rem 0 var(--brand-cocoa-deep);
-  --sticker-shadow: 0.4rem 0.4rem 0 var(--brand-cocoa-deep);
-  --sticker-shadow-pop: 0.55rem 0.55rem 0 var(--brand-cocoa-deep);
+  --sticker-shadow-sm: 0.35rem 0.35rem 0 var(--brand-cocoa-deep);
+  --sticker-shadow: 0.55rem 0.55rem 0 var(--brand-cocoa-deep);
+  --sticker-shadow-pop: 0.75rem 0.75rem 0 var(--brand-cocoa-deep);
 
   /* Speed-line motif geometry (used by the .speed-lines utility). */
   --speed-angle: -18deg;
