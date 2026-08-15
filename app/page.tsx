@@ -1,21 +1,13 @@
-import {
-  FindYourType,
-  getFindYourselfPeople,
-  type TypeFinderOption,
-} from "@/components/find-yourself";
+import { FindYourself, getFindYourselfPeople } from "@/components/find-yourself";
 import { SkateScene } from "@/components/proof/skate-scene";
 
 /**
- * PROOF (design/skate-graffiti-proof): landing restyled into the retro-anime /
- * skate graffiti direction — illustrative SVG sunset skatepark, spray-paint
- * display type, thick outlines, film grain. Not wired for production; a look proof.
+ * The start page: "vind jezelf terug". The old home funnel is gone — `/` now IS
+ * the find-yourself lookup, under the graffiti/anime hero. Build-time data (no
+ * runtime fetch); real names shown openly.
  */
 export default function Home() {
-  const options: TypeFinderOption[] = getFindYourselfPeople().map((person) => ({
-    id: person.id,
-    name: person.name,
-    archetype: person.archetype,
-  }));
+  const people = getFindYourselfPeople();
 
   return (
     <div className="min-h-screen bg-[#1a1120]">
@@ -43,8 +35,8 @@ export default function Home() {
             Welk type Kompaan ben jij?
           </h1>
           <p className="mt-6 max-w-xl text-lg font-semibold text-white/90">
-            Zoek je eigen naam, en scheur meteen door naar jouw eigen borrel-type —
-            met de Kompanen die op de borrel precies zo tekeer gaan als jij.
+            Zoek je eigen naam en vind jezelf terug — je % gemiddelde Kompaan, waar
+            je juist afwijkt, en welk borrel-type bij je hoort.
           </p>
         </div>
       </section>
@@ -56,7 +48,7 @@ export default function Home() {
             className="relative rounded-2xl border-[5px] border-[#1a1120] bg-white p-6 sm:p-10"
             style={{ boxShadow: "10px 10px 0 #1a1120" }}
           >
-            <FindYourType options={options} />
+            <FindYourself people={people} />
           </div>
         </div>
       </section>
