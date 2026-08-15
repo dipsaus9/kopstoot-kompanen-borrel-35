@@ -14,7 +14,7 @@
  */
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import type { CSSProperties } from "react";
 
 import type { PersonArchetype } from "./people";
@@ -44,6 +44,8 @@ function normalise(value: string): string {
 }
 
 export function FindYourType({ options }: FindYourTypeProps) {
+  const headingId = useId();
+  const searchId = useId();
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
@@ -73,12 +75,9 @@ export function FindYourType({ options }: FindYourTypeProps) {
         </p>
       </header>
 
-      <section
-        aria-labelledby="finder-heading"
-        className="flex flex-col gap-stack-md"
-      >
+      <section aria-labelledby={headingId} className="flex flex-col gap-stack-md">
         <h2
-          id="finder-heading"
+          id={headingId}
           className="text-title font-black tracking-heading text-foreground"
         >
           Zoek jezelf op
@@ -86,13 +85,13 @@ export function FindYourType({ options }: FindYourTypeProps) {
 
         <div className="flex flex-col gap-stack-xs">
           <label
-            htmlFor="find-your-type-search"
+            htmlFor={searchId}
             className="text-caption font-bold tracking-eyebrow text-muted-foreground uppercase"
           >
             Zoek op naam
           </label>
           <input
-            id="find-your-type-search"
+            id={searchId}
             type="search"
             autoComplete="off"
             value={query}
