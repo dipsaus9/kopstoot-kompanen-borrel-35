@@ -22,7 +22,7 @@ export function SiteHeader() {
             style={{ boxShadow: "3px 3px 0 #ffd45e" }}
           />
           <span
-            className="text-4xl uppercase leading-none text-[#ffd45e]"
+            className="text-2xl uppercase leading-none text-[#ffd45e] sm:text-4xl"
             style={{
               fontFamily: "var(--font-display), Impact, sans-serif",
               WebkitTextStroke: "1.5px #1a1120",

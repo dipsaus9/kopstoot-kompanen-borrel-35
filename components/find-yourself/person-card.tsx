@@ -183,7 +183,7 @@ export function PersonCard({ person }: PersonCardProps) {
         </h3>
         <Link
           href={archetype.href}
-          className="ink-outline group inline-flex min-h-tap items-center gap-stack-sm rounded-pill bg-card py-2 pl-2 pr-stack-md transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--archetype-hue)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          className="ink-outline group flex w-full max-w-full min-h-tap items-center gap-stack-sm rounded-2xl bg-card py-2 pl-2 pr-stack-md transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--archetype-hue)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           <span
             aria-hidden
@@ -191,8 +191,8 @@ export function PersonCard({ person }: PersonCardProps) {
           >
             {archetype.emoji}
           </span>
-          <span className="flex flex-col text-left">
-            <span className="text-lead font-black leading-heading text-foreground">
+          <span className="flex min-w-0 flex-col text-left">
+            <span className="hyphens-auto text-lead font-black leading-heading text-foreground break-words">
               {archetype.name}
             </span>
             <span className="text-caption font-bold tracking-eyebrow text-muted-foreground uppercase group-hover:text-foreground">

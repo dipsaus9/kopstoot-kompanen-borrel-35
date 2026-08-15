@@ -186,7 +186,7 @@ export function CompareView({ people }: CompareViewProps) {
                 <tr>
                   <th
                     scope="col"
-                    className="sticky left-0 z-20 min-w-[9rem] bg-secondary p-stack-sm align-bottom text-caption font-bold tracking-eyebrow text-muted-foreground uppercase"
+                    className="sticky left-0 z-20 min-w-[6rem] bg-secondary p-stack-sm align-bottom text-caption font-bold tracking-eyebrow text-muted-foreground uppercase sm:min-w-[9rem]"
                   >
                     Kompaan
                   </th>
@@ -199,7 +199,7 @@ export function CompareView({ people }: CompareViewProps) {
                         key={person.id}
                         scope="col"
                         style={hueStyle}
-                        className="min-w-[12rem] border-l border-[color:var(--border)] border-t-[6px] border-t-[color:var(--archetype-hue)] bg-secondary p-stack-sm align-top"
+                        className="min-w-[9.5rem] border-l border-[color:var(--border)] border-t-[6px] border-t-[color:var(--archetype-hue)] bg-secondary p-stack-sm align-top sm:min-w-[12rem]"
                       >
                         <div className="flex flex-col gap-stack-xs">
                           <div className="flex items-start justify-between gap-stack-xs">
@@ -248,7 +248,7 @@ export function CompareView({ people }: CompareViewProps) {
                           </div>
 
                           {person.deviation.keyDivergences.length > 0 && (
-                            <div className="mt-stack-xs">
+                            <div className="mt-stack-xs hidden sm:block">
                               <p className="text-caption font-bold tracking-eyebrow text-muted-foreground uppercase">
                                 Wijkt het meest af
                               </p>
@@ -283,7 +283,7 @@ export function CompareView({ people }: CompareViewProps) {
                     <tr key={row.key} className={isAgreed ? "bg-primary/10" : undefined}>
                       <th
                         scope="row"
-                        className={`sticky left-0 z-10 min-w-[9rem] border-t border-[color:var(--border)] p-stack-sm align-top text-caption font-bold tracking-eyebrow text-muted-foreground uppercase ${
+                        className={`sticky left-0 z-10 min-w-[6rem] border-t border-[color:var(--border)] p-stack-sm align-top text-caption font-bold tracking-eyebrow text-muted-foreground uppercase sm:min-w-[9rem] ${
                           isAgreed ? "bg-primary/10" : "bg-card"
                         }`}
                       >
