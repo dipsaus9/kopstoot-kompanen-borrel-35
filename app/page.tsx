@@ -27,12 +27,16 @@ export default function Home() {
             Vind jouw type Kompaan
           </span>
           <h1
-            className="max-w-4xl text-6xl leading-[0.95] text-[#ffd45e] sm:text-7xl md:text-8xl"
+            className="max-w-4xl text-[#ffd45e]"
             style={{
               fontFamily: "var(--font-display), Impact, sans-serif",
-              WebkitTextStroke: "3px #1a1120",
-              textShadow: "6px 6px 0 #ff3d6e, 10px 10px 0 #1a1120",
+              fontSize: "clamp(2.5rem, 9vw, 5.5rem)",
+              lineHeight: 0.95,
+              WebkitTextStroke: "2.5px #1a1120",
+              textShadow: "5px 5px 0 #ff3d6e, 8px 8px 0 #1a1120",
               letterSpacing: "0.02em",
+              overflowWrap: "break-word",
+              hyphens: "auto",
             }}
           >
             Welk type Kompaan ben jij?

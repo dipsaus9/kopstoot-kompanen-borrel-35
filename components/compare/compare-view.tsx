@@ -77,7 +77,7 @@ export function CompareView({ people }: CompareViewProps) {
   }, [selected]);
 
   return (
-    <div className="flex flex-col gap-stack-lg">
+    <div className="flex min-w-0 flex-col gap-stack-lg">
       <header className="sr-only">
         <p className="text-caption font-bold tracking-eyebrow uppercase">
           Zet Kompanen naast elkaar
@@ -167,7 +167,7 @@ export function CompareView({ people }: CompareViewProps) {
 
       {/* Side-by-side comparison */}
       {selected.length > 0 ? (
-        <section aria-labelledby="compare-heading" className="flex flex-col gap-stack-md">
+        <section aria-labelledby="compare-heading" className="flex min-w-0 flex-col gap-stack-md">
           <h2 id="compare-heading" className="sr-only">
             Vergelijking
           </h2>
@@ -175,7 +175,7 @@ export function CompareView({ people }: CompareViewProps) {
             role="region"
             aria-labelledby="compare-heading"
             tabIndex={0}
-            className="ink-outline overflow-x-auto rounded-3xl bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="ink-outline w-full min-w-0 max-w-full overflow-x-auto rounded-3xl bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             <table className="w-full border-separate border-spacing-0 text-left">
               <caption className="sr-only">
