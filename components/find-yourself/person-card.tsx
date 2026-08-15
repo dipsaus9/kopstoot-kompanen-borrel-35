@@ -41,7 +41,7 @@ export function PersonCard({ person }: PersonCardProps) {
   return (
     <article
       style={hueStyle}
-      className="sticker flex flex-col gap-stack-lg rounded-4xl border-t-[6px] border-t-[color:var(--archetype-hue)] bg-card p-stack-lg"
+      className="sticker flex flex-col gap-stack-lg rounded-4xl border-t-[6px] border-t-[color:var(--archetype-hue)] bg-card p-stack-md sm:p-stack-lg"
     >
       <header className="flex flex-col gap-stack-xs">
         <p className="text-caption font-bold tracking-eyebrow text-muted-foreground uppercase">
@@ -57,7 +57,7 @@ export function PersonCard({ person }: PersonCardProps) {
         aria-labelledby="match-heading"
         className="ink-outline flex flex-col gap-stack-md rounded-3xl bg-secondary/40 p-stack-md"
       >
-        <div className="flex items-center gap-stack-md">
+        <div className="flex flex-col gap-stack-sm sm:flex-row sm:items-center sm:gap-stack-md">
           <p className="flex items-baseline gap-1">
             <span className="text-display font-black leading-display tracking-display text-primary">
               {match.score}
@@ -116,7 +116,7 @@ export function PersonCard({ person }: PersonCardProps) {
         aria-labelledby="deviation-heading"
         className="ink-outline flex flex-col gap-stack-md rounded-3xl bg-secondary/40 p-stack-md"
       >
-        <div className="flex items-center gap-stack-md">
+        <div className="flex flex-col gap-stack-sm sm:flex-row sm:items-center sm:gap-stack-md">
           <p className="flex items-baseline gap-1">
             <span className="text-display font-black leading-display tracking-display text-accent">
               {deviation.score}

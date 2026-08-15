@@ -52,7 +52,7 @@ export default function Home() {
       <section className="bg-[#faf3e6] py-16">
         <div className="mx-auto w-full max-w-6xl px-6">
           <div
-            className="relative rounded-2xl border-[5px] border-[#1a1120] bg-white p-6 sm:p-10"
+            className="relative rounded-2xl border-[5px] border-[#1a1120] bg-white p-4 sm:p-10"
             style={{ boxShadow: "10px 10px 0 #1a1120" }}
           >
             <FindYourself people={people} />
