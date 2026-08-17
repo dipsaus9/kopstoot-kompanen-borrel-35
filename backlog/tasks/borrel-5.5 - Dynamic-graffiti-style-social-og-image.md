@@ -1,9 +1,10 @@
 ---
 id: BORREL-5.5
 title: Dynamic graffiti-style social (og) image
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-08-17 07:37'
+updated_date: '2026-08-17 08:37'
 labels:
   - story
 dependencies: []
@@ -25,13 +26,13 @@ Branch: BORREL-5.5/og-social-image
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 app/opengraph-image.tsx uses next/og (ImageResponse) to render a 1200x630 image in the graffiti style: dark ink background, yellow display title 'Welk type Kompaan ben jij?', type-colour paint splashes
-- [ ] #2 app/twitter-image.tsx renders the same (or re-exports it) so the WhatsApp/Twitter preview matches
-- [ ] #3 The generated image is reachable and correctly referenced by the metadata; bun run lint, typecheck and build pass
+- [x] #1 app/opengraph-image.tsx uses next/og (ImageResponse) to render a 1200x630 image in the graffiti style: dark ink background, yellow display title 'Welk type Kompaan ben jij?', type-colour paint splashes
+- [x] #2 app/twitter-image.tsx renders the same (or re-exports it) so the WhatsApp/Twitter preview matches
+- [x] #3 The generated image is reachable and correctly referenced by the metadata; bun run lint, typecheck and build pass
 <!-- AC:END -->
 
 ## Implementation Notes
 
 <!-- SECTION:NOTES:BEGIN -->
-next/og runs on the edge; embed the display font if needed (fetch the Bangers woff at build) or fall back to a bold system font. Keep it text + shapes (no raster character art) so it renders fast and deterministically. Verify: bun run lint && bun run typecheck && bun run build.
+Delivered: app/opengraph-image.tsx renders the 1200x630 social card with next/og ImageResponse (dark ink #1a1120 ground, type-colour paint splashes, hot-pink BORREL 35 wordmark sticker, gold Bangers display title 'Welk type Kompaan ben jij?'). app/twitter-image.tsx re-exports it so the WhatsApp/Twitter summary_large_image preview matches. Both routes auto-wired by Next.js file convention (layout metadataBase already set). Bangers ttf fetched at build with system-font fallback. lint + typecheck + build all green; build registers /opengraph-image and /twitter-image as static. Reviewer: PASS (1 advisory: could vendor the font for full determinism).
 <!-- SECTION:NOTES:END -->

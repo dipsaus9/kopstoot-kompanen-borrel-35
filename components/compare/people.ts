@@ -110,9 +110,10 @@ function buildPerson(
  * Reads `getResponses()` and the frozen archetype assignments at build/server
  * time only — no runtime fetch, no browser access, fully deterministic.
  */
-export function getComparePeople(): readonly ComparePerson[] {
-  const aggregate = getAggregate();
-  return getResponses().map((response, index) =>
+export async function getComparePeople(): Promise<readonly ComparePerson[]> {
+  const responses = await getResponses();
+  const aggregate = await getAggregate();
+  return responses.map((response, index) =>
     buildPerson(response, index, aggregate),
   );
 }

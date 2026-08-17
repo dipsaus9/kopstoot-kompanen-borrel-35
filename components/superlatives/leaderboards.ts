@@ -270,8 +270,8 @@ function buildQuotes(
  * computed over the whole dataset at build/server time only (no runtime fetch,
  * no browser access).
  */
-export function getSuperlatives(): Superlatives {
-  const responses = getResponses();
+export async function getSuperlatives(): Promise<Superlatives> {
+  const responses = await getResponses();
   return {
     count: responses.length,
     leaderboards: CATEGORIES.map((category) =>

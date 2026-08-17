@@ -13,8 +13,8 @@
  * part of the categorical match.
  */
 
-import { getAggregate, type Aggregate } from "./aggregate";
-import { QUESTIONS } from "../data";
+import { aggregateResponses, type Aggregate } from "./aggregate";
+import { getLoadedResponses, QUESTIONS } from "../data";
 import type { SurveyResponse } from "../data";
 import type { QuestionField } from "../data/schema";
 
@@ -86,5 +86,5 @@ export function matchAgainst(
  * dataset's Average Kompaan aggregate. Build/server-time only.
  */
 export function computeMatch(response: SurveyResponse): MatchResult {
-  return matchAgainst(response, getAggregate());
+  return matchAgainst(response, aggregateResponses(getLoadedResponses()));
 }

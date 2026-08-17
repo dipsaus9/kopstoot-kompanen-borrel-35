@@ -128,6 +128,6 @@ export function aggregateResponses(
  * the modal answer per closed question. Reads `getResponses()` at build/server
  * time.
  */
-export function getAggregate(): Aggregate {
-  return aggregateResponses(getResponses());
+export async function getAggregate(): Promise<Aggregate> {
+  return aggregateResponses(await getResponses());
 }

@@ -1,9 +1,10 @@
 ---
 id: BORREL-5
 title: 'Epic: Live data & WhatsApp-ready meta'
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-08-17 07:35'
+updated_date: '2026-08-17 08:40'
 labels:
   - epic
 dependencies: []
@@ -25,3 +26,9 @@ Chosen approach: the loader fetches the published Google-Sheet CSV export at req
 - [ ] #3 Live respondents resolve to one of the six fixed typetjes (nearest-centroid); the named archetypes + character art stay intact
 - [ ] #4 Sharing on WhatsApp shows a correct title, description and a graffiti-style social image; favicon and meta tags are branded and complete
 <!-- AC:END -->
+
+## Final Summary
+
+<!-- SECTION:FINAL_SUMMARY:BEGIN -->
+Live data + WhatsApp-ready meta delivered: site config + real survey URL (5.1); live Google-Form CSV loader via ISR with mock fallback (5.2); async live data through all views + nearest-centroid archetype assignment so live respondents map to the six fixed typetjes (5.3); WhatsApp meta + branded favicon (5.4); dynamic graffiti-style og image (5.5). Verified: /gemiddelde shows the real average (27/186/22), og-image renders on-brand. Build 20/20, 44 tests green.
+<!-- SECTION:FINAL_SUMMARY:END -->

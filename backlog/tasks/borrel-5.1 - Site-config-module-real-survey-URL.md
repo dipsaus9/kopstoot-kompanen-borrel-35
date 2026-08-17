@@ -1,9 +1,10 @@
 ---
 id: BORREL-5.1
 title: Site config module + real survey URL
-status: To Do
+status: Done
 assignee: []
 created_date: '2026-08-17 07:36'
+updated_date: '2026-08-17 07:47'
 labels:
   - story
 dependencies: []
@@ -25,13 +26,13 @@ Branch: BORREL-5.1/site-config-survey-url
 
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
-- [ ] #1 lib/config.ts exports SURVEY_URL (the real Google Form), SHEET_CSV_URL (the published CSV export), and SITE_URL (production base, from VERCEL_PROJECT_PRODUCTION_URL with a localhost fallback)
-- [ ] #2 The survey CTA on the start page links to SURVEY_URL from config (no hardcoded # placeholder)
-- [ ] #3 bun run lint and typecheck pass
+- [x] #1 lib/config.ts exports SURVEY_URL (the real Google Form), SHEET_CSV_URL (the published CSV export), and SITE_URL (production base, from VERCEL_PROJECT_PRODUCTION_URL with a localhost fallback)
+- [x] #2 The survey CTA on the start page links to SURVEY_URL from config (no hardcoded # placeholder)
+- [x] #3 bun run lint and typecheck pass
 <!-- AC:END -->
 
 ## Implementation Notes
 
 <!-- SECTION:NOTES:BEGIN -->
-SURVEY_URL = https://docs.google.com/forms/d/e/1FAIpQLSeQGd8Si8eW3M7GYQAOUiEP4VoYmEFTxk9L4PLzPXDquMuRCg/viewform . SHEET_CSV_URL = https://docs.google.com/spreadsheets/d/1YYezJMAoCWaM_YQ8wbvhXLTvHnbvHu36D0PYoCGkEdU/export?format=csv&gid=890280148 . app/page.tsx already has a FORM_URL const — replace it with the config import. Verify: bun run lint && bun run typecheck.
+Added lib/config.ts as the single source of truth for external URLs (SURVEY_URL Google Form, SHEET_CSV_URL published CSV, SITE_URL from VERCEL_PROJECT_PRODUCTION_URL with localhost:3000 fallback). Survey CTA in app/page.tsx now links to SURVEY_URL from @/lib/config (removed the '#' FORM_URL placeholder). lint + typecheck green; story-reviewer verdict pass.
 <!-- SECTION:NOTES:END -->

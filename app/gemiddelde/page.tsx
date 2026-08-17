@@ -18,9 +18,9 @@ export const metadata: Metadata = {
     "Het gemiddelde Borrel 35-profiel — Jan Kompaan Modaal: gemiddelde leeftijd, lengte en borrelteller, de meest gekozen antwoorden, en wie van alle Kompanen het meest gemiddeld is.",
 };
 
-export default function GemiddeldePage() {
-  const aggregate = getAggregate();
-  const ranking = getAverageRanking();
+export default async function GemiddeldePage() {
+  const aggregate = await getAggregate();
+  const ranking = await getAverageRanking();
 
   return (
     <>

@@ -8,6 +8,7 @@ import {
   getAggregate,
   matchAgainst,
   MATCH_FIELDS,
+  type Aggregate,
 } from "@/lib/aggregate";
 import { getResponses, QUESTIONS } from "@/lib/data";
 import type { SurveyResponse } from "@/lib/data";
@@ -25,7 +26,7 @@ function makeResponse(overrides: Partial<SurveyResponse> = {}): SurveyResponse {
 }
 
 /** A response whose every tracked answer equals the modal answer (100% match). */
-function makeTwin(aggregate = getAggregate()): SurveyResponse {
+function makeTwin(aggregate: Aggregate): SurveyResponse {
   const overrides: Partial<SurveyResponse> = {};
   for (const field of MATCH_FIELDS) {
     (overrides as Record<string, unknown>)[field.key] =
@@ -35,7 +36,7 @@ function makeTwin(aggregate = getAggregate()): SurveyResponse {
 }
 
 /** A response that diverges from the modal answer on every tracked field. */
-function makeOpposite(aggregate = getAggregate()): SurveyResponse {
+function makeOpposite(aggregate: Aggregate): SurveyResponse {
   const overrides: Partial<SurveyResponse> = {};
   for (const field of MATCH_FIELDS) {
     const modal = aggregate.modes[field.key]!.option;
@@ -46,8 +47,8 @@ function makeOpposite(aggregate = getAggregate()): SurveyResponse {
 }
 
 describe("computeDeviation", () => {
-  it("scores 0 with no divergent traits when the response equals the aggregate", () => {
-    const aggregate = getAggregate();
+  it("scores 0 with no divergent traits when the response equals the aggregate", async () => {
+    const aggregate = await getAggregate();
     const result = deviationAgainst(makeTwin(aggregate), aggregate);
 
     expect(result.match).toBe(100);
@@ -57,8 +58,8 @@ describe("computeDeviation", () => {
     expect(result.total).toBe(MATCH_FIELDS.length);
   });
 
-  it("scores 100 and diverges on every tracked field for the opposite response", () => {
-    const aggregate = getAggregate();
+  it("scores 100 and diverges on every tracked field for the opposite response", async () => {
+    const aggregate = await getAggregate();
     const result = deviationAgainst(makeOpposite(aggregate), aggregate);
 
     expect(result.match).toBe(0);
@@ -67,18 +68,19 @@ describe("computeDeviation", () => {
     expect(result.divergent).toHaveLength(MATCH_FIELDS.length);
   });
 
-  it("is exactly the mirror of the match score (score = 100 - match)", () => {
-    for (const response of getResponses()) {
+  it("is exactly the mirror of the match score (score = 100 - match)", async () => {
+    const aggregate = await getAggregate();
+    for (const response of await getResponses()) {
       const deviation = computeDeviation(response);
-      const match = matchAgainst(response, getAggregate());
+      const match = matchAgainst(response, aggregate);
       expect(deviation.match).toBe(match.score);
       expect(deviation.score).toBe(100 - match.score);
       expect(deviation.divergentCount).toBe(match.total - match.matchedCount);
     }
   });
 
-  it("lists only modal answers the person does not share, with their own value", () => {
-    const aggregate = getAggregate();
+  it("lists only modal answers the person does not share, with their own value", async () => {
+    const aggregate = await getAggregate();
     // Take a twin (all modal) and flip exactly one tracked field off-modal.
     const field = MATCH_FIELDS[0];
     const modal = aggregate.modes[field.key]!.option;
@@ -97,8 +99,9 @@ describe("computeDeviation", () => {
     expect(trait.modalShare).toBe(aggregate.modes[field.key]!.share);
   });
 
-  it("orders divergent traits most-different first (by modal share desc)", () => {
-    const result = computeDeviation(makeOpposite());
+  it("orders divergent traits most-different first (by modal share desc)", async () => {
+    const aggregate = await getAggregate();
+    const result = computeDeviation(makeOpposite(aggregate));
     for (let i = 1; i < result.divergent.length; i++) {
       expect(result.divergent[i - 1].modalShare).toBeGreaterThanOrEqual(
         result.divergent[i].modalShare,
@@ -106,8 +109,8 @@ describe("computeDeviation", () => {
     }
   });
 
-  it("returns 0-100 integer scores for every real response", () => {
-    for (const response of getResponses()) {
+  it("returns 0-100 integer scores for every real response", async () => {
+    for (const response of await getResponses()) {
       const { score } = computeDeviation(response);
       expect(Number.isInteger(score)).toBe(true);
       expect(score).toBeGreaterThanOrEqual(0);
@@ -117,9 +120,9 @@ describe("computeDeviation", () => {
 });
 
 describe("getAverageRanking", () => {
-  it("ranks one person per response, most average first", () => {
-    const ranking = getAverageRanking();
-    const responses = getResponses();
+  it("ranks one person per response, most average first", async () => {
+    const ranking = await getAverageRanking();
+    const responses = await getResponses();
 
     expect(ranking.people).toHaveLength(responses.length);
     for (let i = 1; i < ranking.people.length; i++) {
@@ -133,8 +136,8 @@ describe("getAverageRanking", () => {
     }
   });
 
-  it("assigns dense 1-based ranks and exposes the most-average person", () => {
-    const ranking = getAverageRanking();
+  it("assigns dense 1-based ranks and exposes the most-average person", async () => {
+    const ranking = await getAverageRanking();
 
     ranking.people.forEach((person, position) => {
       expect(person.rank).toBe(position + 1);
@@ -147,8 +150,8 @@ describe("getAverageRanking", () => {
     expect(ranking.mostAverage?.match).toBe(maxMatch);
   });
 
-  it("puts a perfect twin at the top and the opposite at the bottom", () => {
-    const aggregate = getAggregate();
+  it("puts a perfect twin at the top and the opposite at the bottom", async () => {
+    const aggregate = await getAggregate();
     const responses = [
       makeOpposite(aggregate),
       makeResponse(), // partial
@@ -162,8 +165,8 @@ describe("getAverageRanking", () => {
     expect(ranking.people[ranking.people.length - 1].match).toBe(0); // opposite
   });
 
-  it("breaks ties deterministically on dataset index", () => {
-    const aggregate = getAggregate();
+  it("breaks ties deterministically on dataset index", async () => {
+    const aggregate = await getAggregate();
     // Three identical twins → equal match; order must follow original index.
     const responses = [makeTwin(aggregate), makeTwin(aggregate), makeTwin(aggregate)];
 
@@ -173,13 +176,13 @@ describe("getAverageRanking", () => {
     expect(ranking.people.map((p) => p.rank)).toEqual([1, 2, 3]);
   });
 
-  it("handles an empty dataset with a null most-average", () => {
-    const ranking = rankByAverage([], getAggregate());
+  it("handles an empty dataset with a null most-average", async () => {
+    const ranking = rankByAverage([], await getAggregate());
     expect(ranking.people).toHaveLength(0);
     expect(ranking.mostAverage).toBeNull();
   });
 
-  it("is deterministic across repeated calls", () => {
-    expect(getAverageRanking()).toEqual(getAverageRanking());
+  it("is deterministic across repeated calls", async () => {
+    expect(await getAverageRanking()).toEqual(await getAverageRanking());
   });
 });

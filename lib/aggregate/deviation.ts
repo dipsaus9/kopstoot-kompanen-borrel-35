@@ -18,9 +18,9 @@
  * the result never depends on row ordering beyond the dataset itself.
  */
 
-import { getAggregate, type Aggregate } from "./aggregate";
+import { aggregateResponses, getAggregate, type Aggregate } from "./aggregate";
 import { matchAgainst, MATCH_FIELDS, type MatchResult } from "./match";
-import { getResponses } from "../data";
+import { getLoadedResponses, getResponses } from "../data";
 import type { SurveyResponse } from "../data";
 
 /** One tracked question on which a person diverges from the Average Kompaan. */
@@ -122,7 +122,7 @@ export function deviationAgainst(
  * Build/server-time only.
  */
 export function computeDeviation(response: SurveyResponse): DeviationResult {
-  return deviationAgainst(response, getAggregate());
+  return deviationAgainst(response, aggregateResponses(getLoadedResponses()));
 }
 
 /**
@@ -155,6 +155,6 @@ export function rankByAverage(
  * The whole dataset ranked from most to least average against its own Average
  * Kompaan aggregate. Build/server-time only.
  */
-export function getAverageRanking(): AverageRanking {
-  return rankByAverage(getResponses(), getAggregate());
+export async function getAverageRanking(): Promise<AverageRanking> {
+  return rankByAverage(await getResponses(), await getAggregate());
 }
