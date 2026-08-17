@@ -1,5 +1,6 @@
 import { FindYourself, getFindYourselfPeople } from "@/components/find-yourself";
 import { SkateScene } from "@/components/proof/skate-scene";
+import { TypeCarousel } from "@/components/types-carousel/type-carousel";
 
 /** TODO: vul de echte enquête-URL in wanneer die er is. */
 const FORM_URL = "#";
@@ -45,6 +46,13 @@ export default function Home() {
             Zoek je eigen naam en vind jezelf terug — je % gemiddelde Kompaan, waar
             je juist afwijkt, en welk borrel-type bij je hoort.
           </p>
+        </div>
+      </section>
+
+      {/* TYPES CAROUSEL — the six types, one at a time */}
+      <section className="bg-[#faf3e6] pt-16">
+        <div className="mx-auto w-full max-w-6xl px-6">
+          <TypeCarousel />
         </div>
       </section>
 
