@@ -203,7 +203,11 @@ function buildLeaderboard(
   };
 }
 
-/** The three free-text showcase questions, in reading order. */
+/**
+ * The free-text showcase questions, in reading order. `ultimateKompaanTrait` is
+ * intentionally omitted: the published form has no such question, so surfacing it
+ * would only echo unrelated remarks. Add it back here if the form gains it.
+ */
 const QUOTE_CONFIG: readonly {
   key: SurveyResponseKey;
   emoji: string;
@@ -213,11 +217,6 @@ const QUOTE_CONFIG: readonly {
     key: "kompaanIfSentence",
     emoji: "🦒",
     label: "Je weet dat je een Kompaan bent als…",
-  },
-  {
-    key: "ultimateKompaanTrait",
-    emoji: "✨",
-    label: "De ultieme Kompaan-eigenschap",
   },
   {
     key: "heightRemark",
