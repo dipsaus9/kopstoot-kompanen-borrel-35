@@ -70,12 +70,10 @@ describe("getSuperlatives", () => {
       expect(names.has(quote.author)).toBe(true);
     }
 
-    // Every showcase question that has any non-empty answer is represented.
-    const showcaseKeys = [
-      "kompaanIfSentence",
-      "ultimateKompaanTrait",
-      "heightRemark",
-    ] as const;
+    // Every surfaced showcase question that has any non-empty answer is
+    // represented. `ultimateKompaanTrait` is intentionally NOT surfaced (the form
+    // has no such question), so it is excluded here.
+    const showcaseKeys = ["kompaanIfSentence", "heightRemark"] as const;
     for (const key of showcaseKeys) {
       const hasAnswer = responses.some((r) => String(r[key]).trim() !== "");
       if (hasAnswer) {
