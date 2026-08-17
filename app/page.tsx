@@ -69,9 +69,15 @@ export default async function Home() {
             className="mt-8 flex flex-col items-start gap-4 rounded-2xl border-[5px] border-[#1a1120] bg-[#ffd45e] p-6 sm:flex-row sm:items-center sm:justify-between"
             style={{ boxShadow: "8px 8px 0 #1a1120" }}
           >
-            <p className="text-lg font-black text-[#1a1120]">
-              Staat jouw naam er niet tussen? Vul de enquête in en doe mee!
-            </p>
+            <div>
+              <p className="text-lg font-black text-[#1a1120]">
+                Staat jouw naam er niet tussen? Vul de enquête in en doe mee!
+              </p>
+              <p className="mt-1 text-sm font-semibold text-[#1a1120]/70">
+                Let op: nieuwe antwoorden kunnen tot ~1 uur duren voordat ze
+                online staan.
+              </p>
+            </div>
             <a
               href={SURVEY_URL}
               className="inline-flex min-h-tap shrink-0 items-center gap-2 rounded-md border-[3px] border-[#1a1120] bg-[#ff3d6e] px-5 py-2 text-sm font-black uppercase tracking-wide text-white shadow-[4px_4px_0_#1a1120] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1a1120]"
