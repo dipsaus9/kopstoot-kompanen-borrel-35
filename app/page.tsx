@@ -17,7 +17,7 @@ export default function Home() {
     <div className="min-h-screen bg-[#1a1120]">
       {/* HERO */}
       <section className="relative overflow-hidden border-b-[6px] border-[#1a1120]">
-        <SkateScene className="absolute inset-0 h-full w-full" />
+        <SkateScene className="absolute inset-0 h-full w-full" hideCharacter />
         {/* legibility scrim: dark on the text side, clear on the character side */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#1a1120]/80 via-[#1a1120]/25 to-transparent" />
         <div className="relative mx-auto flex min-h-[70vh] w-full max-w-6xl flex-col justify-center px-6 py-24">
