@@ -1,5 +1,6 @@
 import { FindYourself, getFindYourselfPeople } from "@/components/find-yourself";
 import { SkateScene } from "@/components/proof/skate-scene";
+import { TypeCarousel } from "@/components/types-carousel/type-carousel";
 
 /** TODO: vul de echte enquête-URL in wanneer die er is. */
 const FORM_URL = "#";
@@ -16,7 +17,7 @@ export default function Home() {
     <div className="min-h-screen bg-[#1a1120]">
       {/* HERO */}
       <section className="relative overflow-hidden border-b-[6px] border-[#1a1120]">
-        <SkateScene className="absolute inset-0 h-full w-full" />
+        <SkateScene className="absolute inset-0 h-full w-full" hideCharacter />
         {/* legibility scrim: dark on the text side, clear on the character side */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#1a1120]/80 via-[#1a1120]/25 to-transparent" />
         <div className="relative mx-auto flex min-h-[70vh] w-full max-w-6xl flex-col justify-center px-6 py-24">
@@ -45,6 +46,13 @@ export default function Home() {
             Zoek je eigen naam en vind jezelf terug — je % gemiddelde Kompaan, waar
             je juist afwijkt, en welk borrel-type bij je hoort.
           </p>
+        </div>
+      </section>
+
+      {/* TYPES CAROUSEL — the six types, one at a time */}
+      <section className="bg-[#faf3e6] pt-16">
+        <div className="mx-auto w-full max-w-6xl px-6">
+          <TypeCarousel />
         </div>
       </section>
 

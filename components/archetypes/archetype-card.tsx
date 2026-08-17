@@ -50,6 +50,16 @@ export function ArchetypeCard({ entry }: ArchetypeCardProps) {
       aria-label={`Bekijk het type ${archetype.name}`}
       className="group sticker flex h-full w-full scroll-mt-32 flex-col overflow-hidden rounded-3xl bg-card text-left transition-all duration-150 target:ring-2 target:ring-[color:var(--type-accent)] target:ring-offset-2 target:ring-offset-background hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[var(--sticker-shadow-pop)] focus-visible:-translate-x-0.5 focus-visible:-translate-y-0.5 focus-visible:shadow-[var(--sticker-shadow-pop)] active:translate-x-0 active:translate-y-0 active:shadow-none"
     >
+      {/* Character illustration banner. */}
+      <div className="aspect-[16/11] w-full overflow-hidden border-b-[3px] border-[var(--brand-cocoa-deep)] bg-[#1a1120]">
+        {/* eslint-disable-next-line @next/next/no-img-element -- static art asset (no next/image pipeline yet) */}
+        <img
+          src={archetype.image}
+          alt={`Illustratie van ${archetype.name}`}
+          className="size-full object-cover object-top transition-transform duration-200 group-hover:scale-105"
+        />
+      </div>
+
       {/* Accent band — solid type colour with AA-tuned ink on top. */}
       <div className="flex items-center gap-stack-sm border-b-[3px] border-[var(--brand-cocoa-deep)] bg-type px-stack-md py-stack-sm text-type-ink">
         <span
