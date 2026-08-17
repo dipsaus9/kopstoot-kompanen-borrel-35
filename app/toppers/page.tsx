@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     "De uitschieters en records van Borrel 35: de langste, de vroegste, de fanatiekste hoofdstoter en de mooiste antwoorden — met echte namen.",
 };
 
-export default function ToppersPage() {
-  const superlatives = getSuperlatives();
+export default async function ToppersPage() {
+  const superlatives = await getSuperlatives();
 
   return (
     <>

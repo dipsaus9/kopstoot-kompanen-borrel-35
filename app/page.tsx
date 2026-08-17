@@ -8,8 +8,8 @@ import { SURVEY_URL } from "@/lib/config";
  * the find-yourself lookup, under the graffiti/anime hero. Build-time data (no
  * runtime fetch); real names shown openly.
  */
-export default function Home() {
-  const people = getFindYourselfPeople();
+export default async function Home() {
+  const people = await getFindYourselfPeople();
 
   return (
     <div className="min-h-screen bg-[#1a1120]">

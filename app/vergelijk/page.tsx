@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     "Zet meerdere Kompanen naast elkaar: hun borrel-type, hun afwijking van de gemiddelde Kompaan en al hun antwoorden per vraag vergeleken.",
 };
 
-export default function VergelijkPage() {
-  const people = getComparePeople();
+export default async function VergelijkPage() {
+  const people = await getComparePeople();
 
   return (
     <>

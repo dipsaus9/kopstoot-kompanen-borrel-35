@@ -86,8 +86,8 @@ function dominantAnswer(
   return { option, share: members.length === 0 ? 0 : top / members.length };
 }
 
-function main(): void {
-  const responses = getResponses();
+async function main(): Promise<void> {
+  const responses = await getResponses();
   const { matrix, dimensions, featureLabels } = encodeResponses(responses);
 
   // Sweep candidate k and select the highest mean silhouette (tie → smallest k).
@@ -163,4 +163,7 @@ function main(): void {
   console.log(`Wrote ${OUTPUT_PATH}`);
 }
 
-main();
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});

@@ -4,12 +4,27 @@ title: Live Google-Form CSV loader via ISR
 status: To Do
 assignee: []
 created_date: '2026-08-17 07:36'
+updated_date: '2026-08-17 08:09'
 labels:
   - story
 dependencies:
   - BORREL-5.1
 references:
   - lib/data/
+  - lib/aggregate/
+  - components/find-yourself/people.ts
+  - components/compare/people.ts
+  - components/superlatives/leaderboards.ts
+  - app/page.tsx
+  - app/toppers/page.tsx
+  - app/gemiddelde/page.tsx
+  - app/vergelijk/page.tsx
+  - scripts/archetypes/cluster.ts
+  - test/aggregate.test.ts
+  - test/deviation.test.ts
+  - test/find-yourself.test.ts
+  - test/superlatives.test.ts
+  - test/live-loader.test.ts
 parent_task_id: BORREL-5
 type: feature
 ordinal: 35000

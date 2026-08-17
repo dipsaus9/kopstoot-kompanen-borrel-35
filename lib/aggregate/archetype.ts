@@ -17,7 +17,7 @@
  * dataset has no stored assignment and raises a clear error.
  */
 
-import { getResponses } from "../data";
+import { getLoadedResponses } from "../data";
 import type { SurveyResponse } from "../data";
 import { ARCHETYPES, type Archetype } from "../../content/archetypes";
 import archetypeData from "../../scripts/archetypes/archetypes.json";
@@ -45,7 +45,7 @@ let responseCluster: WeakMap<SurveyResponse, number> | null = null;
 
 function clusterMap(): WeakMap<SurveyResponse, number> {
   if (responseCluster === null) {
-    const responses = getResponses();
+    const responses = getLoadedResponses();
     if (responses.length !== ASSIGNMENTS.length) {
       throw new Error(
         `Archetype assignments are stale: ${ASSIGNMENTS.length} assignments ` +
