@@ -1,8 +1,9 @@
 import { Analytics } from "@vercel/analytics/next";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Bangers, Outfit, Geist_Mono } from "next/font/google";
 
 import { SiteHeader } from "@/components/site";
+import { SITE_URL } from "@/lib/config";
 import "./globals.css";
 
 // PROOF (design/skate-graffiti-proof): retro-anime / street typography.
@@ -23,14 +24,36 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_TITLE = "Borrel 35 — Welk type Kompaan ben jij?";
+const SITE_DESCRIPTION =
+  "Ontdek het gemiddelde Borrel 35-profiel, vergelijk jezelf met de groep, vind je borrel-archetype en bewonder de toppers — de giraffe-enquête van Kompanen.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Borrel 35 — Jan Modaal van de borrel",
     template: "%s · Borrel 35",
   },
-  description:
-    "Ontdek het gemiddelde Borrel 35-profiel, vergelijk jezelf met de groep, vind je borrel-archetype en bewonder de toppers — de giraffe-enquête van Kompanen.",
+  description: SITE_DESCRIPTION,
   applicationName: "Borrel 35",
+  openGraph: {
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    type: "website",
+    locale: "nl_NL",
+    siteName: "Borrel 35",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#1a1120",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
