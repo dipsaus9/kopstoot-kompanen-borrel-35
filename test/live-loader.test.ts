@@ -108,7 +108,12 @@ describe("parseLiveResponses", () => {
   it("keeps open answers verbatim", () => {
     expect(rows[0].kompaanIfSentence).toBe("je altijd je kop stoot");
     expect(rows[0].heightRemark).toBe("Hoe is het weer daarboven?");
-    expect(rows[0].ultimateKompaanTrait).toBe("een leuke tip");
+  });
+
+  it("does not borrow the tips/tops feedback column for the ultimate-trait question", () => {
+    // The form has no "ultieme Kompaan-eigenschap" question, so it must NOT be
+    // filled from the open feedback column — it takes the neutral default.
+    expect(rows[0].ultimateKompaanTrait).toBe("—");
   });
 
   it("fills schema fields with no form column from documented defaults", () => {

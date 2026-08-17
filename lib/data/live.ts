@@ -214,8 +214,10 @@ const MAPPINGS: readonly FieldMapping[] = [
   { key: "cuisine", header: "lievelingskeuken", normalise: optionMatcher(CUISINE, { ALLES: "Anders" }) },
   { key: "kompaanIfSentence", header: "je weet dat je een kompaan bent als", normalise: identity },
   { key: "heightRemark", header: "met pensioen", normalise: identity },
-  // The open "tips/tops/mededelingen" column stands in for the showcase quote.
-  { key: "ultimateKompaanTrait", header: "tips, tops", normalise: identity },
+  // NOTE: the published form has no "ultieme Kompaan-eigenschap" question, so
+  // `ultimateKompaanTrait` is intentionally NOT mapped — it must NOT borrow the
+  // open "tips/tops/mededelingen" feedback column (those are loose remarks, not a
+  // trait). It defaults to empty below, which the showcase strip then omits.
 ];
 
 /**
@@ -229,6 +231,10 @@ const FIELD_DEFAULTS: Readonly<Partial<Record<SurveyResponseKey, string>>> = {
   weatherReaction: "Lach maar mee",
   appGroupRole: "De planner",
   danceSideline: "Dansvloer",
+  // No form column for this showcase question; it is no longer surfaced anywhere
+  // (dropped from the Toppers quote strip), so this neutral value is never shown —
+  // it only keeps the row valid (every schema field must be non-empty).
+  ultimateKompaanTrait: "—",
 };
 
 /**
