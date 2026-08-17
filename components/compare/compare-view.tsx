@@ -171,11 +171,113 @@ export function CompareView({ people }: CompareViewProps) {
           <h2 id="compare-heading" className="sr-only">
             Vergelijking
           </h2>
+
+          {/* Mobile: stacked per-question compare — no horizontal scroll. */}
+          <div className="flex flex-col gap-stack-md md:hidden">
+            <ul className="flex flex-wrap gap-stack-xs">
+              {selected.map((person) => {
+                const hueStyle = {
+                  "--archetype-hue": `var(${person.archetype.hueVar})`,
+                } as CSSProperties;
+                return (
+                  <li key={person.id}>
+                    <span
+                      style={hueStyle}
+                      className="ink-outline inline-flex items-center gap-2 rounded-pill bg-card py-1 pl-1 pr-2 text-caption font-bold"
+                    >
+                      <span
+                        aria-hidden
+                        className="flex size-7 items-center justify-center rounded-pill bg-[color:var(--archetype-hue)] text-body leading-none"
+                      >
+                        {person.archetype.emoji}
+                      </span>
+                      <span className="font-black text-foreground">
+                        {person.name}
+                      </span>
+                      <span className="text-muted-foreground normal-case">
+                        {person.deviation.score}% afw.
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => toggle(person.id)}
+                        aria-label={`${person.name} uit de vergelijking halen`}
+                        className="ml-0.5 flex size-6 items-center justify-center rounded-pill text-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      >
+                        <span aria-hidden>×</span>
+                      </button>
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <ul className="flex flex-col gap-stack-sm">
+              {COMPARE_ROWS.map((row, rowIndex) => {
+                const isAgreed = agreed[rowIndex];
+                return (
+                  <li
+                    key={row.key}
+                    className={`sticker-sm rounded-2xl bg-card p-stack-md ${
+                      isAgreed ? "ring-2 ring-primary" : ""
+                    }`}
+                  >
+                    <div className="mb-stack-xs flex items-center gap-2">
+                      <span aria-hidden className="text-body-lg leading-none">
+                        {row.emoji}
+                      </span>
+                      <span className="text-caption font-bold tracking-eyebrow text-muted-foreground uppercase">
+                        {row.label}
+                      </span>
+                      {isAgreed && (
+                        <span className="ml-auto shrink-0 rounded-pill bg-primary px-2 py-0.5 text-caption font-black text-primary-foreground">
+                          🤝 eensgezind
+                        </span>
+                      )}
+                    </div>
+                    <dl className="flex flex-col gap-1">
+                      {selected.map((person) => {
+                        const cell = person.cells[rowIndex];
+                        return (
+                          <div
+                            key={person.id}
+                            className="flex items-baseline justify-between gap-3 border-t border-border pt-1 first:border-0 first:pt-0"
+                          >
+                            <dt className="text-body font-bold text-foreground">
+                              {person.name}
+                            </dt>
+                            <dd className="flex items-center gap-1.5 text-right text-body font-medium text-foreground">
+                              {cell.isAverage && (
+                                <span
+                                  aria-hidden
+                                  title="Zelfde als de gemiddelde Kompaan"
+                                  className="size-2 shrink-0 rounded-pill bg-primary"
+                                />
+                              )}
+                              <span className="text-pretty">
+                                {cell.value}
+                                {row.numeric && row.unit ? (
+                                  <span className="font-medium text-muted-foreground">
+                                    {" "}
+                                    {row.unit}
+                                  </span>
+                                ) : null}
+                              </span>
+                            </dd>
+                          </div>
+                        );
+                      })}
+                    </dl>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
           <div
             role="region"
             aria-labelledby="compare-heading"
             tabIndex={0}
-            className="ink-outline w-full min-w-0 max-w-full overflow-x-auto rounded-3xl bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="ink-outline hidden w-full min-w-0 max-w-full overflow-x-auto rounded-3xl bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background md:block"
           >
             <table className="w-full border-separate border-spacing-0 text-left">
               <caption className="sr-only">
@@ -345,7 +447,6 @@ export function CompareView({ people }: CompareViewProps) {
           <p className="text-caption font-medium text-muted-foreground">
             <span aria-hidden className="mr-1 inline-block size-2 rounded-pill bg-primary align-middle" />
             Een stip betekent: dit antwoord is gelijk aan de gemiddelde Kompaan.
-            Op een smal scherm scrol je de tabel horizontaal.
           </p>
         </section>
       ) : (
