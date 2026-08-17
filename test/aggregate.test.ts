@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 
 import {
   aggregateResponses,
@@ -25,6 +25,12 @@ function makeResponse(overrides: Partial<SurveyResponse> = {}): SurveyResponse {
   }
   return { ...(base as unknown as SurveyResponse), ...overrides };
 }
+
+// Warm the async dataset cache once so the synchronous accessors used below
+// (getResponses cache peek via resolveArchetype) have data to read.
+beforeAll(async () => {
+  await getResponses();
+});
 
 describe("getAggregate", () => {
   it("returns the arithmetic mean for age, heightCm and borrelCount", () => {
@@ -58,8 +64,8 @@ describe("getAggregate", () => {
     expect(role?.share).toBeCloseTo(2 / 3);
   });
 
-  it("covers every closed stat/cluster question and no open/number one", () => {
-    const { modes } = getAggregate();
+  it("covers every closed stat/cluster question and no open/number one", async () => {
+    const { modes } = await getAggregate();
 
     for (const field of MODAL_FIELDS) {
       expect(modes[field.key]).toBeDefined();
@@ -70,9 +76,9 @@ describe("getAggregate", () => {
     expect(modes.age).toBeUndefined();
   });
 
-  it("modal option is the true most-frequent option on the real dataset", () => {
-    const responses = getResponses();
-    const { modes } = getAggregate();
+  it("modal option is the true most-frequent option on the real dataset", async () => {
+    const responses = await getResponses();
+    const { modes } = await getAggregate();
 
     for (const field of MODAL_FIELDS) {
       const counts = new Map<string, number>();
@@ -91,8 +97,8 @@ describe("getAggregate", () => {
 });
 
 describe("computeMatch", () => {
-  it("scores 100 with every trait when the response equals the aggregate", () => {
-    const aggregate = getAggregate();
+  it("scores 100 with every trait when the response equals the aggregate", async () => {
+    const aggregate = await getAggregate();
 
     // Build a response whose every tracked answer is the modal answer.
     const overrides: Partial<SurveyResponse> = {};
@@ -114,8 +120,8 @@ describe("computeMatch", () => {
     });
   });
 
-  it("scores 0 when the response matches none of the modal answers", () => {
-    const aggregate = getAggregate();
+  it("scores 0 when the response matches none of the modal answers", async () => {
+    const aggregate = await getAggregate();
 
     // Pick, per tracked field, an option that is NOT the modal one.
     const overrides: Partial<SurveyResponse> = {};
@@ -139,8 +145,8 @@ describe("computeMatch", () => {
     expect(MATCH_FIELDS.some((f) => f.key === "rsvp")).toBe(false);
   });
 
-  it("returns a 0-100 integer score for a real response", () => {
-    const [first] = getResponses();
+  it("returns a 0-100 integer score for a real response", async () => {
+    const [first] = await getResponses();
     const result = computeMatch(first);
 
     expect(result.score).toBeGreaterThanOrEqual(0);
@@ -151,8 +157,8 @@ describe("computeMatch", () => {
 });
 
 describe("resolveArchetype", () => {
-  it("resolves a response to its cluster's named archetype", () => {
-    const responses = getResponses();
+  it("resolves a response to its cluster's named archetype", async () => {
+    const responses = await getResponses();
     const assignments = archetypeData.assignments as ReadonlyArray<{
       readonly cluster: number;
     }>;
@@ -168,14 +174,16 @@ describe("resolveArchetype", () => {
     });
   });
 
-  it("resolves the first respondent (Gijs, cluster 0) to the park professional", () => {
-    const [gijs] = getResponses();
+  it("resolves the first respondent (Gijs, cluster 0) to the park professional", async () => {
+    const [gijs] = await getResponses();
     expect(resolveArchetype(gijs).id).toBe("parkborrelprofessional");
   });
 
-  it("throws for a response that is not part of getResponses()", () => {
-    expect(() => resolveArchetype(makeResponse())).toThrow(
-      /not part of getResponses/,
-    );
+  it("assigns any response never in the baked clustering to a fixed type", () => {
+    // A freshly built response (a stand-in for a live respondent) has no baked
+    // assignment, yet nearest-centroid still maps it onto one of the six fixed
+    // archetypes instead of throwing.
+    const archetype = resolveArchetype(makeResponse());
+    expect(ARCHETYPES).toContainEqual(archetype);
   });
 });

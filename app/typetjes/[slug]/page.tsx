@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { getArchetypeGallery } from "@/components/archetypes";
+import {
+  getArchetypeGallery,
+  type ArchetypeGalleryEntry,
+} from "@/components/archetypes";
+import { ARCHETYPES } from "@/content/archetypes";
 import { TypePage } from "@/components/type-page";
 
 /**
@@ -20,14 +24,17 @@ type TypePageRouteParams = {
   readonly slug: string;
 };
 
-/** The six resolved type entries, keyed by slug — built once at module load. */
-const ENTRIES_BY_SLUG = new Map(
-  getArchetypeGallery().map((entry) => [entry.archetype.id, entry]),
-);
+/** Look up one type's live gallery entry by slug (nearest-centroid members). */
+async function entryForSlug(
+  slug: string,
+): Promise<ArchetypeGalleryEntry | undefined> {
+  const entries = await getArchetypeGallery();
+  return entries.find((entry) => entry.archetype.id === slug);
+}
 
 /** Statically generate every known type slug (unknown slugs 404 at request). */
 export function generateStaticParams(): TypePageRouteParams[] {
-  return Array.from(ENTRIES_BY_SLUG.keys(), (slug) => ({ slug }));
+  return ARCHETYPES.map((archetype) => ({ slug: archetype.id }));
 }
 
 export async function generateMetadata({
@@ -36,7 +43,7 @@ export async function generateMetadata({
   params: Promise<TypePageRouteParams>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const entry = ENTRIES_BY_SLUG.get(slug);
+  const entry = await entryForSlug(slug);
 
   if (!entry) {
     return { title: "Type niet gevonden" };
@@ -55,7 +62,7 @@ export default async function TypeSlugPage({
   params: Promise<TypePageRouteParams>;
 }) {
   const { slug } = await params;
-  const entry = ENTRIES_BY_SLUG.get(slug);
+  const entry = await entryForSlug(slug);
 
   if (!entry) {
     notFound();

@@ -1,11 +1,16 @@
-import { describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 
 import { getSuperlatives } from "@/components/superlatives";
 import { getResponses } from "@/lib/data";
 
 describe("getSuperlatives", () => {
-  const superlatives = getSuperlatives();
-  const responses = getResponses();
+  let superlatives: Awaited<ReturnType<typeof getSuperlatives>>;
+  let responses: Awaited<ReturnType<typeof getResponses>>;
+
+  beforeAll(async () => {
+    superlatives = await getSuperlatives();
+    responses = await getResponses();
+  });
 
   it("reports the response count it is drawn from", () => {
     expect(superlatives.count).toBe(responses.length);

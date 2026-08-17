@@ -15,10 +15,11 @@
  * raw material a human uses to name the archetype — see docs/archetype-approach.md.
  */
 
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
-import { getResponses, type SurveyResponse } from "../../lib/data";
+import type { SurveyResponse } from "../../lib/data";
+import { parseResponses } from "../../lib/data/parse";
 import { CLUSTER_FIELDS, encodeResponses } from "./encode";
 import { kmeans } from "./kmeans";
 
@@ -35,6 +36,7 @@ const OUTPUT_PATH = path.join(
   "archetypes.json",
 );
 const SOURCE = "data/responses.csv";
+const SOURCE_PATH = path.join(process.cwd(), "data", "responses.csv");
 
 interface KEvaluation {
   readonly k: number;
@@ -53,6 +55,13 @@ interface ClusterSummary {
   readonly size: number;
   /** Human-friendly archetype name — filled in by a human (see the doc). */
   readonly name: null;
+  /**
+   * The cluster's centroid in encoded feature space, row-aligned with
+   * `featureLabels`. Consumed by `lib/aggregate/archetype.ts` to assign ANY
+   * response (including live respondents never in this baked clustering) to its
+   * nearest fixed type by Euclidean distance.
+   */
+  readonly centroid: readonly number[];
   /** Dominant answer per cluster question — the naming raw material. */
   readonly signature: Record<string, ClusterSignatureEntry>;
 }
@@ -86,8 +95,12 @@ function dominantAnswer(
   return { option, share: members.length === 0 ? 0 : top / members.length };
 }
 
-function main(): void {
-  const responses = getResponses();
+async function main(): Promise<void> {
+  // The baked clustering DEFINES the six fixed types (their names + art live in
+  // `content/archetypes`), so it must stay deterministic — cluster the committed
+  // mock CSV, never the live sheet. Live respondents are assigned to the nearest
+  // of these frozen centroids at render time (`lib/aggregate/archetype.ts`).
+  const responses = parseResponses(readFileSync(SOURCE_PATH, "utf8"));
   const { matrix, dimensions, featureLabels } = encodeResponses(responses);
 
   // Sweep candidate k and select the highest mean silhouette (tie → smallest k).
@@ -122,7 +135,13 @@ function main(): void {
         field.key,
       );
     }
-    return { id, size: memberIndices.length, name: null, signature };
+    return {
+      id,
+      size: memberIndices.length,
+      name: null,
+      centroid: final.centroids[id],
+      signature,
+    };
   });
 
   const assignments: Assignment[] = responses.map((response, index) => ({
@@ -163,4 +182,7 @@ function main(): void {
   console.log(`Wrote ${OUTPUT_PATH}`);
 }
 
-main();
+main().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});

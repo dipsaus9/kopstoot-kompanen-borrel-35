@@ -1,12 +1,17 @@
-import { describe, expect, it } from "vitest";
+import { beforeAll, describe, expect, it } from "vitest";
 
 import { getFindYourselfPeople } from "@/components/find-yourself";
 import { computeMatch, resolveArchetype } from "@/lib/aggregate";
 import { getResponses } from "@/lib/data";
 
 describe("getFindYourselfPeople", () => {
-  const people = getFindYourselfPeople();
-  const responses = getResponses();
+  let people: Awaited<ReturnType<typeof getFindYourselfPeople>>;
+  let responses: Awaited<ReturnType<typeof getResponses>>;
+
+  beforeAll(async () => {
+    responses = await getResponses();
+    people = await getFindYourselfPeople();
+  });
 
   it("builds one person per committed response, in dataset order", () => {
     expect(people).toHaveLength(responses.length);

@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     "De zes borrel-archetypes van Borrel 35 als giraffe-typetjes: naam, kenmerken en de Kompanen die erbij horen.",
 };
 
-export default function TypetjesPage() {
-  const entries = getArchetypeGallery();
+export default async function TypetjesPage() {
+  const entries = await getArchetypeGallery();
 
   return (
     <>

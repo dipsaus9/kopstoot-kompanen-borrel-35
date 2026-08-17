@@ -21,7 +21,7 @@ export class SurveyDataError extends Error {
   }
 }
 
-function validateCell(
+export function validateCell(
   field: QuestionField,
   raw: string,
   rowNumber: number,

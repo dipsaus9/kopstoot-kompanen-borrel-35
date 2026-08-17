@@ -154,7 +154,7 @@ function formatStat(value: number): string {
 function buildPerson(
   response: SurveyResponse,
   index: number,
-  aggregate: ReturnType<typeof getAggregate>,
+  aggregate: Awaited<ReturnType<typeof getAggregate>>,
 ): Person {
   const archetype = resolveArchetype(response);
   const presentation =
@@ -198,9 +198,10 @@ function buildPerson(
  * `getResponses()` and the frozen archetype assignments at build/server time
  * only — no runtime fetch, no browser access.
  */
-export function getFindYourselfPeople(): readonly Person[] {
-  const aggregate = getAggregate();
-  return getResponses().map((response, index) =>
+export async function getFindYourselfPeople(): Promise<readonly Person[]> {
+  const responses = await getResponses();
+  const aggregate = await getAggregate();
+  return responses.map((response, index) =>
     buildPerson(response, index, aggregate),
   );
 }
