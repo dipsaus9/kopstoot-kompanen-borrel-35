@@ -20,6 +20,7 @@ references:
   - app/vergelijk/
   - app/toppers/
   - scripts/archetypes/
+  - test/aggregate.test.ts
 parent_task_id: BORREL-5
 type: feature
 ordinal: 36000

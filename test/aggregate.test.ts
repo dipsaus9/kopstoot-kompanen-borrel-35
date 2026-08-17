@@ -179,9 +179,11 @@ describe("resolveArchetype", () => {
     expect(resolveArchetype(gijs).id).toBe("parkborrelprofessional");
   });
 
-  it("throws for a response that is not part of getResponses()", () => {
-    expect(() => resolveArchetype(makeResponse())).toThrow(
-      /not part of getResponses/,
-    );
+  it("assigns any response never in the baked clustering to a fixed type", () => {
+    // A freshly built response (a stand-in for a live respondent) has no baked
+    // assignment, yet nearest-centroid still maps it onto one of the six fixed
+    // archetypes instead of throwing.
+    const archetype = resolveArchetype(makeResponse());
+    expect(ARCHETYPES).toContainEqual(archetype);
   });
 });
