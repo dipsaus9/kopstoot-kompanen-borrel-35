@@ -175,7 +175,7 @@ export function CompareView({ people }: CompareViewProps) {
             role="region"
             aria-labelledby="compare-heading"
             tabIndex={0}
-            className="ink-outline w-full min-w-0 max-w-full overflow-x-auto rounded-3xl bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background max-md:-mx-stack-md max-md:rounded-none max-md:border-x-0"
+            className="ink-outline relative w-full min-w-0 max-w-full overflow-x-auto rounded-3xl bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background max-md:-mx-stack-md max-md:rounded-none max-md:border-x-0"
           >
             <table className="w-full border-separate border-spacing-0 text-left">
               <caption className="sr-only">
