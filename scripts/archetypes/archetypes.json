@@ -5,69 +5,91 @@
   "seed": 539363369,
   "restarts": 10,
   "respondents": 40,
-  "featureDimensions": 61,
+  "featureDimensions": 83,
   "featureLabels": [
     "tallStruggle=Te weinig beenruimte",
-    "tallStruggle=Kleding die nooit lang genoeg is",
-    "tallStruggle=Douchekoppen op borsthoogte",
-    "tallStruggle=Bedden waar mijn voeten uitsteken",
-    "tallStruggle=Altijd \"hoe lang ben jij?\" horen",
-    "tallStruggle=Mensen die vragen of ik basketbal",
-    "planeSeat=Nooduitgang",
+    "tallStruggle=Spiegels waarin je alleen je torso ziet",
+    "tallStruggle=Concertbezoekers achter mij die mijn bestaan persoonlijk opvatten",
+    "tallStruggle=Bedden waar m'n voeten uitsteken",
+    "tallStruggle='Jeetje, wat ben jij lang!', bedankt, was me nog niet opgevallen",
+    "tallStruggle=Mensen die vragen of ik basketbal speel",
+    "tallStruggle=Broeken: hoogwater of een circustent",
+    "tallStruggle=Auto instappen en eerst de stoel van een kabouter moeten verbouwen",
+    "tallStruggle=Foto's: hurken of onthoofd worden op de uiteindelijke foto",
+    "tallStruggle=Douchekoppen op tepelhoogte",
+    "tallStruggle=Deurposten die onverwacht geweld gebruiken",
+    "planeSeat=Nooduitgang, take my money",
     "planeSeat=Gangpad",
-    "planeSeat=Raam",
     "planeSeat=In het midden",
-    "planeSeat=Maakt niet uit, ik lijd toch",
+    "planeSeat=Raam",
+    "planeSeat=Maakt niet uit, ik lijd toch wel",
+    "planeSeat=Dichtbij het toilet",
     "heightQuestionFreq",
     "tallAdvantage=Overal bij kunnen",
-    "tallAdvantage=Altijd goed zicht",
-    "tallAdvantage=Mensen terugvinden op festivals",
-    "tallAdvantage=Indrukwekkend zijn zonder iets te doen",
-    "tallAdvantage=Welk voordeel?",
+    "tallAdvantage=Nooit iemand vóór je bij een concert",
+    "tallAdvantage=Gratis menselijke herkenningspaal op festivals",
+    "tallAdvantage=Mensen zijn automatisch onder de indruk",
+    "tallAdvantage=Groepsfoto? Ik weet waar ik moet staan",
+    "tallAdvantage=Voordeel? Ik betaal extra voor beenruimte... >:(",
+    "tallAdvantage=Mijn vrienden vinden mij altijd terug in de menigte",
+    "tallAdvantage=De bovenste plank is gewoon een normale plank",
     "borrelArrival",
-    "borrelEnding=Verantwoord naar huis",
-    "borrelEnding=Nog even één drankje",
+    "borrelEnding=Keurig en verantwoord naar huis",
+    "borrelEnding=Nog even één drankje (en dat zes keer)",
     "borrelEnding=SHOTJESS",
-    "borrelEnding=Met eten",
-    "borrelEnding=Geen idee meer",
+    "borrelEnding=Bij de snackbar of El Greco",
+    "borrelEnding=Ik heb gaten in mijn brein...",
+    "borrelEnding=Op een after waarvan ik het bestaan twee uur geleden nog niet kende",
+    "borrelEnding=Niet in mijn eigen bed (oops overkomt de beste)",
     "idealBorrel=Parkborrel",
     "idealBorrel=Kroegborrel",
     "idealBorrel=Themaborrel",
     "idealBorrel=Gala",
     "idealBorrel=Feestborrel",
-    "borrelRole=De sociale butterfly",
-    "borrelRole=De vaste-kliek-hanger",
-    "borrelRole=De organisator",
-    "borrelRole=De verdwijntruc",
-    "borrelRole=Degene die iedereen drank geeft",
-    "borrelRole=Degene die ineens een diep gesprek heeft",
-    "planSpontaneous",
-    "cityNature",
-    "festivalTerrace",
-    "earlyBedLate",
-    "cuisine=Italiaanse",
-    "cuisine=Aziatische",
-    "cuisine=Nederlandse",
-    "cuisine=Mexicaanse",
-    "cuisine=Anders",
-    "morningEvening",
-    "weatherReaction=Lach maar mee",
-    "weatherReaction=Negeren",
-    "weatherReaction=Gevat terugkaatsen",
-    "weatherReaction=Elke keer verzin ik wat nieuws",
-    "weatherReaction=Ik glimlach en sterf vanbinnen",
+    "borrelRole=De social butterfly: praat met iedereen",
+    "borrelRole=De vaste-kliek-hanger: eenmaal geland verschuif ik geen meter",
+    "borrelRole=De regelaar: heeft pleisters, een powerbank en weet waar iedereen is",
+    "borrelRole=De verdwijntruc: ineens drie uur spoorloos",
+    "borrelRole=De slechte invloed: \"Shotje???\"",
+    "borrelRole=De filosoof: om 21:00 ineens gesprekken over de zin van het leven",
+    "borrelRole=De adoptieouder: ziet een nieuweling en neemt die meteen mee",
+    "borrelRole=De wandelende podcast: stopt simpelweg niet met praten",
+    "borrelRole=De zwerver: begon bij groep A en is inmiddels door zes vriendengroepen geadopteerd",
     "drink=Bier",
     "drink=Wijn",
-    "drink=Shot(s)",
-    "drink=Fris/0.0",
-    "drink=Cocktail",
-    "drink=Wat er maar is",
-    "appGroupRole=De planner",
-    "appGroupRole=De ghost",
-    "appGroupRole=De meme-spammer",
-    "appGroupRole=Het \"ik-kom-eraan\"-liegbeest",
-    "appGroupRole=De sfeermaker",
-    "danceSideline"
+    "drink=Mijn geheime homemade mix",
+    "drink=Shotjes",
+    "drink=Fris, ik heb geen alcohol nodig voor mijn persoonlijkheid",
+    "drink=Salmari. Geen verdere vragen.",
+    "drink=Water, hydratatiekoning(in) that I am",
+    "drink=Alles wat iedereen mij in mijn handen duwt",
+    "earlyBedLate=Lekker vroeg onder de wol en morgen fris en fruitig",
+    "earlyBedLate=Maximaal een paar drankjes",
+    "earlyBedLate=Dat zei ik vorige keer ook...",
+    "earlyBedLate=Tot iemand met shotjes aankomt",
+    "earlyBedLate=Helemaal niets. In mijn woordenboek is dit een betekenisloze zin.",
+    "earlyBedLate=Dat meen ik daadwerkelijk en iedereen lacht me uit",
+    "borrelSuperpower=Nooit meer een kater",
+    "borrelSuperpower=Altijd gratis drankjes",
+    "borrelSuperpower=Iedereen zijn naam onthouden",
+    "borrelSuperpower=Nooit mijn borrel-besties kwijtraken",
+    "borrelSuperpower=Teleporteren naar huis",
+    "borrelSuperpower=Altijd zichtbaar op de groepsfoto",
+    "borrelSuperpower=Mijn jas, telefoon én waardigheid nooit meer kwijtraken",
+    "cityNature=Stad",
+    "cityNature=Natuur",
+    "cityNature=Mijn bank",
+    "planSpontaneous",
+    "festivalTerrace",
+    "cuisine=Italiaans",
+    "cuisine=Japans",
+    "cuisine=Thais",
+    "cuisine=Chinees",
+    "cuisine=Nederlands",
+    "cuisine=Grieks",
+    "cuisine=Mexicaans",
+    "cuisine=Alles",
+    "cuisine=Anders"
   ],
   "clusterQuestions": [
     "tallStruggle",
@@ -78,607 +100,644 @@
     "borrelEnding",
     "idealBorrel",
     "borrelRole",
-    "planSpontaneous",
-    "cityNature",
-    "festivalTerrace",
-    "earlyBedLate",
-    "cuisine",
-    "morningEvening",
-    "weatherReaction",
     "drink",
-    "appGroupRole",
-    "danceSideline"
+    "earlyBedLate",
+    "borrelSuperpower",
+    "cityNature",
+    "planSpontaneous",
+    "festivalTerrace",
+    "cuisine"
   ],
   "kSweep": [
     {
       "k": 3,
-      "silhouette": 0.048590989240551385,
-      "inertia": 196.40965909090903
+      "silhouette": 0.028989916774539687,
+      "inertia": 188.4898333333334
     },
     {
       "k": 4,
-      "silhouette": 0.03559579456343408,
-      "inertia": 188.52206196581193
+      "silhouette": 0.03301945781145513,
+      "inertia": 178.66995959595954
     },
     {
       "k": 5,
-      "silhouette": 0.03742603675292234,
-      "inertia": 180.426204004329
+      "silhouette": 0.028168325591301613,
+      "inertia": 171.40841071428568
     },
     {
       "k": 6,
-      "silhouette": 0.032388209118729874,
-      "inertia": 171.66852678571428
+      "silhouette": 0.03297692811667574,
+      "inertia": 162.57228571428567
     }
   ],
   "selectedK": 6,
-  "selectedSilhouette": 0.032388209118729874,
+  "selectedSilhouette": 0.03297692811667574,
   "clusters": [
     {
       "id": 0,
-      "size": 7,
+      "size": 10,
       "name": null,
       "centroid": [
-        0.20203050891044214,
+        0.07071067811865475,
+        0,
+        0.07071067811865475,
+        0.07071067811865475,
+        0.07071067811865475,
+        0.1414213562373095,
         0,
         0,
-        0.40406101782088427,
         0,
-        0.10101525445522107,
-        0.20203050891044214,
-        0.20203050891044214,
+        0.1414213562373095,
+        0.1414213562373095,
+        0.1414213562373095,
+        0.1414213562373095,
+        0.1414213562373095,
+        0.21213203435596423,
+        0.07071067811865475,
         0,
-        0.10101525445522107,
-        0.20203050891044214,
-        0.4642857142857143,
-        0.10101525445522107,
-        0.20203050891044214,
-        0.10101525445522107,
-        0,
-        0.3030457633656632,
-        0.32142857142857145,
-        0.40406101782088427,
-        0.20203050891044214,
+        0.48,
+        0.21213203435596423,
+        0.07071067811865475,
+        0.1414213562373095,
         0,
         0,
-        0.10101525445522107,
+        0.1414213562373095,
+        0.07071067811865475,
+        0.07071067811865475,
+        0.075,
         0,
-        0.20203050891044214,
-        0.10101525445522107,
-        0.3030457633656632,
-        0.10101525445522107,
-        0.10101525445522107,
+        0.07071067811865475,
+        0.1414213562373095,
+        0.07071067811865475,
+        0.1414213562373095,
+        0.282842712474619,
         0,
-        0.40406101782088427,
-        0.10101525445522107,
+        0.07071067811865475,
+        0.21213203435596423,
+        0.07071067811865475,
+        0.1414213562373095,
+        0.21213203435596423,
         0,
-        0.10101525445522107,
-        0.2857142857142857,
+        0.1414213562373095,
+        0.282842712474619,
+        0,
+        0,
+        0.1414213562373095,
+        0.07071067811865475,
+        0,
+        0.07071067811865475,
+        0,
+        0.07071067811865475,
+        0.07071067811865475,
+        0,
+        0.21213203435596423,
+        0,
+        0.1414213562373095,
+        0.21213203435596423,
+        0,
+        0,
+        0,
+        0.21213203435596423,
+        0.1414213562373095,
+        0.35355339059327373,
+        0.1414213562373095,
+        0,
+        0.07071067811865475,
+        0.1414213562373095,
+        0.282842712474619,
+        0,
+        0.07071067811865475,
+        0.1414213562373095,
+        0.07071067811865475,
+        0.4949747468305832,
+        0.7,
         1,
-        0.7142857142857143,
-        0.8571428571428571,
-        0.10101525445522107,
-        0.20203050891044214,
-        0.10101525445522107,
         0,
-        0.3030457633656632,
-        0.42857142857142855,
-        0.5050762722761053,
+        0.282842712474619,
+        0.07071067811865475,
         0,
         0,
-        0.20203050891044214,
+        0.1414213562373095,
         0,
-        0.10101525445522107,
-        0.10101525445522107,
-        0,
-        0.20203050891044214,
-        0,
-        0.3030457633656632,
-        0,
-        0.3030457633656632,
-        0,
-        0.10101525445522107,
-        0.3030457633656632,
-        0.5714285714285714
+        0.1414213562373095,
+        0.07071067811865475
       ],
       "signature": {
         "tallStruggle": {
-          "option": "Bedden waar mijn voeten uitsteken",
-          "share": 0.5714285714285714
+          "option": "Mensen die vragen of ik basketbal speel",
+          "share": 0.2
+        },
+        "planeSeat": {
+          "option": "Raam",
+          "share": 0.3
+        },
+        "heightQuestionFreq": {
+          "option": "Wekelijks",
+          "share": 0.3
+        },
+        "tallAdvantage": {
+          "option": "Overal bij kunnen",
+          "share": 0.3
+        },
+        "borrelArrival": {
+          "option": "Als één van de eersten",
+          "share": 0.7
+        },
+        "borrelEnding": {
+          "option": "Op een after waarvan ik het bestaan twee uur geleden nog niet kende",
+          "share": 0.4
+        },
+        "idealBorrel": {
+          "option": "Kroegborrel",
+          "share": 0.3
+        },
+        "borrelRole": {
+          "option": "De regelaar: heeft pleisters, een powerbank en weet waar iedereen is",
+          "share": 0.4
+        },
+        "drink": {
+          "option": "Alles wat iedereen mij in mijn handen duwt",
+          "share": 0.3
+        },
+        "earlyBedLate": {
+          "option": "Dat meen ik daadwerkelijk en iedereen lacht me uit",
+          "share": 0.5
+        },
+        "borrelSuperpower": {
+          "option": "Teleporteren naar huis",
+          "share": 0.4
+        },
+        "cityNature": {
+          "option": "Mijn bank",
+          "share": 0.7
+        },
+        "planSpontaneous": {
+          "option": "Spontaan",
+          "share": 0.7
+        },
+        "festivalTerrace": {
+          "option": "Terras",
+          "share": 1
+        },
+        "cuisine": {
+          "option": "Japans",
+          "share": 0.4
+        }
+      }
+    },
+    {
+      "id": 1,
+      "size": 7,
+      "name": null,
+      "centroid": [
+        0,
+        0,
+        0,
+        0.10101525445522107,
+        0,
+        0,
+        0.10101525445522107,
+        0,
+        0.3030457633656632,
+        0,
+        0.20203050891044214,
+        0,
+        0.20203050891044214,
+        0.20203050891044214,
+        0.20203050891044214,
+        0.10101525445522107,
+        0,
+        0.6,
+        0.10101525445522107,
+        0,
+        0.10101525445522107,
+        0.40406101782088427,
+        0.10101525445522107,
+        0,
+        0,
+        0,
+        0.75,
+        0.10101525445522107,
+        0.10101525445522107,
+        0.10101525445522107,
+        0,
+        0.20203050891044214,
+        0,
+        0.20203050891044214,
+        0.20203050891044214,
+        0.40406101782088427,
+        0,
+        0.10101525445522107,
+        0,
+        0.10101525445522107,
+        0,
+        0,
+        0.3030457633656632,
+        0.10101525445522107,
+        0,
+        0.10101525445522107,
+        0.10101525445522107,
+        0,
+        0.10101525445522107,
+        0,
+        0.20203050891044214,
+        0.10101525445522107,
+        0.20203050891044214,
+        0,
+        0.10101525445522107,
+        0,
+        0.10101525445522107,
+        0.20203050891044214,
+        0.10101525445522107,
+        0.10101525445522107,
+        0.20203050891044214,
+        0,
+        0.10101525445522107,
+        0,
+        0.10101525445522107,
+        0,
+        0.3030457633656632,
+        0,
+        0.20203050891044214,
+        0,
+        0.6060915267313264,
+        0.10101525445522107,
+        0,
+        0.8571428571428571,
+        0.20203050891044214,
+        0,
+        0.20203050891044214,
+        0.10101525445522107,
+        0,
+        0.10101525445522107,
+        0,
+        0,
+        0.10101525445522107
+      ],
+      "signature": {
+        "tallStruggle": {
+          "option": "Foto's: hurken of onthoofd worden op de uiteindelijke foto",
+          "share": 0.42857142857142855
         },
         "planeSeat": {
           "option": "Gangpad",
           "share": 0.2857142857142857
         },
         "heightQuestionFreq": {
-          "option": "Wekelijks",
-          "share": 0.5714285714285714
+          "option": "Bijna nooit",
+          "share": 0.2857142857142857
         },
         "tallAdvantage": {
-          "option": "Welk voordeel?",
-          "share": 0.42857142857142855
+          "option": "Mensen zijn automatisch onder de indruk",
+          "share": 0.5714285714285714
         },
         "borrelArrival": {
-          "option": "Als één van de eersten",
-          "share": 0.42857142857142855
+          "option": "Als allerlaatste",
+          "share": 0.5714285714285714
         },
         "borrelEnding": {
-          "option": "Verantwoord naar huis",
-          "share": 0.5714285714285714
+          "option": "Ik heb gaten in mijn brein...",
+          "share": 0.2857142857142857
         },
         "idealBorrel": {
-          "option": "Gala",
-          "share": 0.42857142857142855
-        },
-        "borrelRole": {
-          "option": "De organisator",
+          "option": "Kroegborrel",
           "share": 0.5714285714285714
         },
-        "planSpontaneous": {
-          "option": "Plannen",
-          "share": 0.7142857142857143
+        "borrelRole": {
+          "option": "De verdwijntruc: ineens drie uur spoorloos",
+          "share": 0.42857142857142855
+        },
+        "drink": {
+          "option": "Mijn geheime homemade mix",
+          "share": 0.2857142857142857
+        },
+        "earlyBedLate": {
+          "option": "Helemaal niets. In mijn woordenboek is dit een betekenisloze zin.",
+          "share": 0.2857142857142857
+        },
+        "borrelSuperpower": {
+          "option": "Teleporteren naar huis",
+          "share": 0.42857142857142855
         },
         "cityNature": {
           "option": "Natuur",
+          "share": 0.8571428571428571
+        },
+        "planSpontaneous": {
+          "option": "Plannen",
           "share": 1
         },
         "festivalTerrace": {
           "option": "Terras",
-          "share": 0.7142857142857143
-        },
-        "earlyBedLate": {
-          "option": "We zien wel waar dit eindigt",
           "share": 0.8571428571428571
         },
         "cuisine": {
-          "option": "Anders",
-          "share": 0.42857142857142855
-        },
-        "morningEvening": {
-          "option": "Ochtendmens",
-          "share": 0.5714285714285714
-        },
-        "weatherReaction": {
-          "option": "Lach maar mee",
-          "share": 0.7142857142857143
-        },
-        "drink": {
-          "option": "Wat er maar is",
-          "share": 0.42857142857142855
-        },
-        "appGroupRole": {
-          "option": "De sfeermaker",
-          "share": 0.42857142857142855
-        },
-        "danceSideline": {
-          "option": "Zijlijn",
-          "share": 0.5714285714285714
-        }
-      }
-    },
-    {
-      "id": 1,
-      "size": 6,
-      "name": null,
-      "centroid": [
-        0.2357022603955158,
-        0,
-        0,
-        0.1178511301977579,
-        0,
-        0.35355339059327373,
-        0.4714045207910316,
-        0,
-        0.2357022603955158,
-        0,
-        0,
-        0.5833333333333334,
-        0,
-        0.2357022603955158,
-        0.1178511301977579,
-        0.1178511301977579,
-        0.2357022603955158,
-        0.75,
-        0,
-        0,
-        0.1178511301977579,
-        0.4714045207910316,
-        0.1178511301977579,
-        0.1178511301977579,
-        0,
-        0.4714045207910316,
-        0,
-        0.1178511301977579,
-        0.1178511301977579,
-        0.1178511301977579,
-        0.1178511301977579,
-        0.2357022603955158,
-        0,
-        0.1178511301977579,
-        0.6666666666666666,
-        0.3333333333333333,
-        0,
-        0.8333333333333334,
-        0.1178511301977579,
-        0.35355339059327373,
-        0,
-        0,
-        0.2357022603955158,
-        0.16666666666666666,
-        0,
-        0.2357022603955158,
-        0.1178511301977579,
-        0.1178511301977579,
-        0.2357022603955158,
-        0.1178511301977579,
-        0.1178511301977579,
-        0,
-        0.35355339059327373,
-        0,
-        0.1178511301977579,
-        0.2357022603955158,
-        0,
-        0.1178511301977579,
-        0.35355339059327373,
-        0,
-        0.16666666666666666
-      ],
-      "signature": {
-        "tallStruggle": {
-          "option": "Mensen die vragen of ik basketbal",
-          "share": 0.5
-        },
-        "planeSeat": {
-          "option": "Nooduitgang",
-          "share": 0.6666666666666666
-        },
-        "heightQuestionFreq": {
-          "option": "Bijna nooit meer",
-          "share": 0.3333333333333333
-        },
-        "tallAdvantage": {
-          "option": "Welk voordeel?",
-          "share": 0.3333333333333333
-        },
-        "borrelArrival": {
-          "option": "Als allerlaatste",
-          "share": 0.5
-        },
-        "borrelEnding": {
-          "option": "Met eten",
-          "share": 0.6666666666666666
-        },
-        "idealBorrel": {
-          "option": "Themaborrel",
-          "share": 0.6666666666666666
-        },
-        "borrelRole": {
-          "option": "De verdwijntruc",
-          "share": 0.3333333333333333
-        },
-        "planSpontaneous": {
-          "option": "Spontaan",
-          "share": 0.6666666666666666
-        },
-        "cityNature": {
-          "option": "Stad",
-          "share": 0.6666666666666666
-        },
-        "festivalTerrace": {
-          "option": "Festival",
-          "share": 1
-        },
-        "earlyBedLate": {
-          "option": "We zien wel waar dit eindigt",
-          "share": 0.8333333333333334
-        },
-        "cuisine": {
-          "option": "Aziatische",
-          "share": 0.5
-        },
-        "morningEvening": {
-          "option": "Ochtendmens",
-          "share": 0.8333333333333334
-        },
-        "weatherReaction": {
-          "option": "Ik glimlach en sterf vanbinnen",
-          "share": 0.3333333333333333
-        },
-        "drink": {
-          "option": "Fris/0.0",
-          "share": 0.5
-        },
-        "appGroupRole": {
-          "option": "Het \"ik-kom-eraan\"-liegbeest",
-          "share": 0.5
-        },
-        "danceSideline": {
-          "option": "Dansvloer",
-          "share": 0.8333333333333334
+          "option": "Italiaans",
+          "share": 0.2857142857142857
         }
       }
     },
     {
       "id": 2,
-      "size": 4,
+      "size": 5,
       "name": null,
       "centroid": [
         0,
-        0.35355339059327373,
-        0.17677669529663687,
-        0.17677669529663687,
         0,
+        0.282842712474619,
         0,
-        0,
-        0.5303300858899106,
-        0,
-        0.17677669529663687,
-        0,
-        0.625,
-        0.17677669529663687,
-        0,
-        0,
-        0.5303300858899106,
-        0,
-        0.6875,
-        0,
-        0.35355339059327373,
-        0.17677669529663687,
-        0,
-        0.17677669529663687,
-        0,
-        0.17677669529663687,
-        0.35355339059327373,
-        0.17677669529663687,
-        0,
-        0.17677669529663687,
-        0,
-        0,
-        0.5303300858899106,
-        0,
-        0,
-        0.75,
-        0,
-        1,
-        0.75,
-        0.17677669529663687,
-        0.17677669529663687,
-        0,
-        0.35355339059327373,
-        0,
-        0,
-        0.17677669529663687,
-        0.17677669529663687,
-        0.35355339059327373,
+        0.1414213562373095,
+        0.282842712474619,
         0,
         0,
         0,
         0,
-        0.35355339059327373,
-        0.17677669529663687,
-        0,
-        0.17677669529663687,
-        0.17677669529663687,
-        0.35355339059327373,
         0,
         0,
-        0.17677669529663687,
+        0.42426406871192845,
+        0.1414213562373095,
+        0,
+        0,
+        0.1414213562373095,
+        0.56,
+        0,
+        0.282842712474619,
+        0,
+        0,
+        0.1414213562373095,
+        0,
+        0.1414213562373095,
+        0.1414213562373095,
+        0.8,
+        0,
+        0,
+        0.282842712474619,
+        0.1414213562373095,
+        0.1414213562373095,
+        0.1414213562373095,
+        0,
+        0.1414213562373095,
+        0,
+        0.282842712474619,
+        0.1414213562373095,
+        0.1414213562373095,
+        0.565685424949238,
+        0,
+        0,
+        0,
+        0.1414213562373095,
+        0,
+        0,
+        0,
+        0,
+        0.282842712474619,
+        0.1414213562373095,
+        0,
+        0.1414213562373095,
+        0,
+        0.1414213562373095,
+        0,
+        0,
+        0,
+        0.1414213562373095,
+        0.1414213562373095,
+        0,
+        0,
+        0.42426406871192845,
+        0,
+        0,
+        0,
+        0.1414213562373095,
+        0,
+        0.282842712474619,
+        0.282842712474619,
+        0.1414213562373095,
+        0,
+        0.565685424949238,
+        0.2,
+        0.6,
+        0,
+        0,
+        0,
+        0.282842712474619,
+        0.1414213562373095,
+        0,
+        0.282842712474619,
+        0,
         0
       ],
       "signature": {
         "tallStruggle": {
-          "option": "Kleding die nooit lang genoeg is",
-          "share": 0.5
+          "option": "Mensen die vragen of ik basketbal speel",
+          "share": 0.4
         },
         "planeSeat": {
           "option": "Gangpad",
-          "share": 0.75
+          "share": 0.6
         },
         "heightQuestionFreq": {
-          "option": "Bijna nooit meer",
-          "share": 0.5
+          "option": "Alleen wanneer ik nieuwe mensen ontmoet",
+          "share": 0.6
         },
         "tallAdvantage": {
-          "option": "Indrukwekkend zijn zonder iets te doen",
-          "share": 0.75
+          "option": "Nooit iemand vóór je bij een concert",
+          "share": 0.4
         },
         "borrelArrival": {
           "option": "Als allerlaatste",
-          "share": 0.5
+          "share": 0.4
         },
         "borrelEnding": {
-          "option": "Nog even één drankje",
-          "share": 0.5
+          "option": "SHOTJESS",
+          "share": 0.4
         },
         "idealBorrel": {
           "option": "Themaborrel",
-          "share": 0.5
+          "share": 0.4
         },
         "borrelRole": {
-          "option": "De verdwijntruc",
-          "share": 0.75
+          "option": "De social butterfly: praat met iedereen",
+          "share": 0.8
         },
-        "planSpontaneous": {
-          "option": "Spontaan",
-          "share": 0.75
+        "drink": {
+          "option": "Bier",
+          "share": 0.4
+        },
+        "earlyBedLate": {
+          "option": "Dat meen ik daadwerkelijk en iedereen lacht me uit",
+          "share": 0.6
+        },
+        "borrelSuperpower": {
+          "option": "Mijn jas, telefoon én waardigheid nooit meer kwijtraken",
+          "share": 0.4
         },
         "cityNature": {
-          "option": "Stad",
-          "share": 1
+          "option": "Mijn bank",
+          "share": 0.8
+        },
+        "planSpontaneous": {
+          "option": "Plannen",
+          "share": 0.8
         },
         "festivalTerrace": {
           "option": "Terras",
-          "share": 1
-        },
-        "earlyBedLate": {
-          "option": "We zien wel waar dit eindigt",
-          "share": 0.75
+          "share": 0.6
         },
         "cuisine": {
-          "option": "Mexicaanse",
-          "share": 0.5
-        },
-        "morningEvening": {
-          "option": "Ochtendmens",
-          "share": 1
-        },
-        "weatherReaction": {
-          "option": "Gevat terugkaatsen",
-          "share": 0.5
-        },
-        "drink": {
-          "option": "Shot(s)",
-          "share": 0.5
-        },
-        "appGroupRole": {
-          "option": "De ghost",
-          "share": 0.5
-        },
-        "danceSideline": {
-          "option": "Dansvloer",
-          "share": 1
+          "option": "Chinees",
+          "share": 0.4
         }
       }
     },
     {
       "id": 3,
-      "size": 9,
+      "size": 6,
       "name": null,
       "centroid": [
+        0,
+        0.1178511301977579,
+        0,
+        0.1178511301977579,
         0.2357022603955158,
-        0.07856742013183861,
-        0.07856742013183861,
-        0.07856742013183861,
-        0.15713484026367722,
-        0.07856742013183861,
-        0,
-        0.6285393610547089,
-        0.07856742013183861,
+        0.1178511301977579,
         0,
         0,
-        0.8055555555555556,
         0,
-        0.15713484026367722,
-        0.31426968052735443,
-        0.15713484026367722,
-        0.07856742013183861,
+        0.1178511301977579,
+        0,
+        0.35355339059327373,
+        0.1178511301977579,
+        0.2357022603955158,
+        0,
+        0,
+        0,
+        0.43333333333333335,
+        0.1178511301977579,
+        0.2357022603955158,
+        0.1178511301977579,
+        0.1178511301977579,
+        0,
+        0.1178511301977579,
+        0,
+        0,
         0.3333333333333333,
-        0,
-        0.5499719409228702,
-        0.07856742013183861,
-        0,
-        0.07856742013183861,
-        0.07856742013183861,
-        0.07856742013183861,
+        0.1178511301977579,
         0.2357022603955158,
-        0.07856742013183861,
-        0.2357022603955158,
-        0.15713484026367722,
-        0.15713484026367722,
-        0.07856742013183861,
-        0.07856742013183861,
-        0.15713484026367722,
-        0.07856742013183861,
-        0.2222222222222222,
-        0.4444444444444444,
-        0.3333333333333333,
-        0.7777777777777778,
+        0.1178511301977579,
+        0.1178511301977579,
         0,
-        0,
-        0.31426968052735443,
-        0.15713484026367722,
-        0.2357022603955158,
-        0.8888888888888888,
-        0.31426968052735443,
-        0.15713484026367722,
-        0.15713484026367722,
-        0.07856742013183861,
-        0,
-        0.15713484026367722,
-        0,
+        0.1178511301977579,
         0,
         0.2357022603955158,
+        0,
+        0,
+        0,
+        0.4714045207910316,
+        0,
+        0,
+        0.35355339059327373,
+        0,
+        0.1178511301977579,
+        0,
+        0.1178511301977579,
+        0.1178511301977579,
+        0,
+        0.1178511301977579,
+        0.35355339059327373,
+        0,
+        0,
+        0,
+        0.1178511301977579,
+        0,
+        0.1178511301977579,
+        0,
+        0.35355339059327373,
         0.2357022603955158,
-        0.07856742013183861,
-        0.07856742013183861,
-        0.31426968052735443,
-        0.07856742013183861,
-        0.07856742013183861,
-        0.15713484026367722,
-        0.7777777777777778
+        0,
+        0.1178511301977579,
+        0,
+        0,
+        0.1178511301977579,
+        0,
+        0.5892556509887895,
+        0,
+        0,
+        0,
+        0,
+        0.35355339059327373,
+        0.35355339059327373,
+        0.8333333333333334,
+        0.16666666666666666,
+        0.2357022603955158,
+        0,
+        0.1178511301977579,
+        0.1178511301977579,
+        0,
+        0,
+        0,
+        0.1178511301977579,
+        0.1178511301977579
       ],
       "signature": {
         "tallStruggle": {
-          "option": "Te weinig beenruimte",
+          "option": "'Jeetje, wat ben jij lang!', bedankt, was me nog niet opgevallen",
           "share": 0.3333333333333333
         },
         "planeSeat": {
-          "option": "Gangpad",
-          "share": 0.8888888888888888
+          "option": "Nooduitgang, take my money",
+          "share": 0.5
         },
         "heightQuestionFreq": {
-          "option": "Nooit",
-          "share": 0.6666666666666666
+          "option": "Meerdere keren per week",
+          "share": 0.3333333333333333
         },
         "tallAdvantage": {
-          "option": "Mensen terugvinden op festivals",
-          "share": 0.4444444444444444
+          "option": "Nooit iemand vóór je bij een concert",
+          "share": 0.3333333333333333
         },
         "borrelArrival": {
-          "option": "Als één van de eersten",
-          "share": 0.3333333333333333
+          "option": "Fashionably late (okay diva)",
+          "share": 0.5
         },
         "borrelEnding": {
-          "option": "Nog even één drankje",
-          "share": 0.7777777777777778
-        },
-        "idealBorrel": {
-          "option": "Themaborrel",
+          "option": "Nog even één drankje (en dat zes keer)",
           "share": 0.3333333333333333
         },
-        "borrelRole": {
-          "option": "De vaste-kliek-hanger",
-          "share": 0.2222222222222222
+        "idealBorrel": {
+          "option": "Feestborrel",
+          "share": 0.6666666666666666
         },
-        "planSpontaneous": {
-          "option": "Plannen",
-          "share": 0.7777777777777778
+        "borrelRole": {
+          "option": "De regelaar: heeft pleisters, een powerbank en weet waar iedereen is",
+          "share": 0.5
+        },
+        "drink": {
+          "option": "Wijn",
+          "share": 0.5
+        },
+        "earlyBedLate": {
+          "option": "Maximaal een paar drankjes",
+          "share": 0.5
+        },
+        "borrelSuperpower": {
+          "option": "Nooit mijn borrel-besties kwijtraken",
+          "share": 0.8333333333333334
         },
         "cityNature": {
-          "option": "Stad",
-          "share": 0.5555555555555556
+          "option": "Natuur",
+          "share": 0.5
+        },
+        "planSpontaneous": {
+          "option": "Spontaan",
+          "share": 0.8333333333333334
         },
         "festivalTerrace": {
           "option": "Festival",
-          "share": 0.6666666666666666
-        },
-        "earlyBedLate": {
-          "option": "We zien wel waar dit eindigt",
-          "share": 0.7777777777777778
+          "share": 0.8333333333333334
         },
         "cuisine": {
-          "option": "Nederlandse",
-          "share": 0.4444444444444444
-        },
-        "morningEvening": {
-          "option": "Avondmens",
-          "share": 0.8888888888888888
-        },
-        "weatherReaction": {
-          "option": "Lach maar mee",
-          "share": 0.4444444444444444
-        },
-        "drink": {
-          "option": "Fris/0.0",
+          "option": "Italiaans",
           "share": 0.3333333333333333
-        },
-        "appGroupRole": {
-          "option": "De ghost",
-          "share": 0.4444444444444444
-        },
-        "danceSideline": {
-          "option": "Zijlijn",
-          "share": 0.7777777777777778
         }
       }
     },
@@ -687,282 +746,302 @@
       "size": 6,
       "name": null,
       "centroid": [
-        0.1178511301977579,
-        0.2357022603955158,
         0,
         0.1178511301977579,
+        0,
+        0,
         0.1178511301977579,
-        0.1178511301977579,
+        0,
+        0.2357022603955158,
+        0,
+        0,
+        0,
+        0.2357022603955158,
+        0.2357022603955158,
+        0,
         0.35355339059327373,
-        0.2357022603955158,
         0,
         0,
         0.1178511301977579,
-        0.625,
+        0.7666666666666666,
+        0.1178511301977579,
         0,
+        0.2357022603955158,
+        0,
+        0.1178511301977579,
+        0,
+        0.2357022603955158,
+        0,
+        0.5833333333333334,
+        0.1178511301977579,
+        0.1178511301977579,
+        0,
+        0.1178511301977579,
+        0.1178511301977579,
+        0,
+        0.2357022603955158,
+        0,
+        0.2357022603955158,
+        0.2357022603955158,
+        0.2357022603955158,
+        0,
+        0.1178511301977579,
+        0.1178511301977579,
+        0.1178511301977579,
+        0,
+        0,
+        0,
+        0,
+        0.1178511301977579,
+        0.2357022603955158,
+        0,
+        0.2357022603955158,
+        0,
+        0.1178511301977579,
+        0,
+        0.1178511301977579,
+        0,
+        0.2357022603955158,
+        0,
+        0.2357022603955158,
+        0,
+        0.35355339059327373,
+        0.1178511301977579,
+        0,
+        0,
+        0.1178511301977579,
+        0,
+        0,
+        0.4714045207910316,
+        0.1178511301977579,
         0,
         0.5892556509887895,
         0,
         0.1178511301977579,
-        0.5833333333333334,
-        0.4714045207910316,
-        0,
-        0,
-        0.1178511301977579,
-        0.1178511301977579,
-        0.1178511301977579,
-        0.1178511301977579,
-        0,
-        0,
-        0.4714045207910316,
-        0.2357022603955158,
-        0.35355339059327373,
-        0,
-        0,
-        0.1178511301977579,
-        0,
         0.3333333333333333,
-        0.8333333333333334,
-        0.5,
-        0.16666666666666666,
+        0.3333333333333333,
         0.1178511301977579,
+        0,
+        0,
+        0,
         0,
         0.35355339059327373,
-        0,
-        0.2357022603955158,
-        0.8333333333333334,
         0.1178511301977579,
         0.1178511301977579,
-        0,
-        0,
-        0.4714045207910316,
-        0.2357022603955158,
-        0.2357022603955158,
-        0.1178511301977579,
-        0.1178511301977579,
-        0,
-        0,
-        0,
-        0.4714045207910316,
-        0.2357022603955158,
-        0,
-        0,
-        0.5
+        0
       ],
       "signature": {
         "tallStruggle": {
-          "option": "Kleding die nooit lang genoeg is",
+          "option": "Broeken: hoogwater of een circustent",
           "share": 0.3333333333333333
         },
         "planeSeat": {
-          "option": "Nooduitgang",
+          "option": "In het midden",
           "share": 0.5
         },
         "heightQuestionFreq": {
-          "option": "Bijna nooit meer",
-          "share": 0.3333333333333333
+          "option": "Ik hoor het niet eens meer; mijn brein filtert het automatisch weg",
+          "share": 0.6666666666666666
         },
         "tallAdvantage": {
-          "option": "Mensen terugvinden op festivals",
-          "share": 0.8333333333333334
-        },
-        "borrelArrival": {
-          "option": "Als allerlaatste",
+          "option": "Mijn vrienden vinden mij altijd terug in de menigte",
           "share": 0.3333333333333333
         },
+        "borrelArrival": {
+          "option": "'Ik kom eraan!' terwijl ik nog thuis ben",
+          "share": 0.5
+        },
         "borrelEnding": {
-          "option": "Verantwoord naar huis",
-          "share": 0.6666666666666666
+          "option": "Niet in mijn eigen bed (oops overkomt de beste)",
+          "share": 0.3333333333333333
         },
         "idealBorrel": {
-          "option": "Feestborrel",
-          "share": 0.6666666666666666
+          "option": "Themaborrel",
+          "share": 0.3333333333333333
         },
         "borrelRole": {
-          "option": "De vaste-kliek-hanger",
+          "option": "De zwerver: begon bij groep A en is inmiddels door zes vriendengroepen geadopteerd",
+          "share": 0.3333333333333333
+        },
+        "drink": {
+          "option": "Alles wat iedereen mij in mijn handen duwt",
+          "share": 0.3333333333333333
+        },
+        "earlyBedLate": {
+          "option": "Tot iemand met shotjes aankomt",
           "share": 0.5
+        },
+        "borrelSuperpower": {
+          "option": "Teleporteren naar huis",
+          "share": 0.6666666666666666
+        },
+        "cityNature": {
+          "option": "Stad",
+          "share": 0.8333333333333334
         },
         "planSpontaneous": {
           "option": "Plannen",
           "share": 0.6666666666666666
         },
-        "cityNature": {
-          "option": "Natuur",
-          "share": 0.8333333333333334
-        },
         "festivalTerrace": {
-          "option": "Terras",
-          "share": 0.5
-        },
-        "earlyBedLate": {
-          "option": "Vroeg naar bed",
-          "share": 0.8333333333333334
+          "option": "Festival",
+          "share": 0.6666666666666666
         },
         "cuisine": {
-          "option": "Nederlandse",
-          "share": 0.5
-        },
-        "morningEvening": {
-          "option": "Avondmens",
-          "share": 0.8333333333333334
-        },
-        "weatherReaction": {
-          "option": "Ik glimlach en sterf vanbinnen",
-          "share": 0.6666666666666666
-        },
-        "drink": {
-          "option": "Bier",
-          "share": 0.3333333333333333
-        },
-        "appGroupRole": {
-          "option": "De ghost",
-          "share": 0.6666666666666666
-        },
-        "danceSideline": {
-          "option": "Zijlijn",
+          "option": "Grieks",
           "share": 0.5
         }
       }
     },
     {
       "id": 5,
-      "size": 8,
+      "size": 6,
       "name": null,
       "centroid": [
+        0.2357022603955158,
         0,
         0,
-        0.17677669529663687,
-        0.08838834764831843,
+        0,
+        0.1178511301977579,
+        0,
+        0,
+        0,
+        0.1178511301977579,
+        0,
+        0.2357022603955158,
+        0,
+        0,
+        0,
+        0.2357022603955158,
+        0.1178511301977579,
         0.35355339059327373,
-        0.08838834764831843,
-        0.44194173824159216,
+        0.46666666666666673,
         0,
-        0.08838834764831843,
+        0.1178511301977579,
         0,
-        0.17677669529663687,
+        0,
+        0,
+        0.1178511301977579,
+        0,
+        0.4714045207910316,
         0.375,
         0,
-        0.44194173824159216,
-        0,
-        0.08838834764831843,
-        0.17677669529663687,
-        0.46875,
-        0.08838834764831843,
-        0.08838834764831843,
-        0.08838834764831843,
-        0.2651650429449553,
-        0.17677669529663687,
-        0.17677669529663687,
-        0.2651650429449553,
-        0,
-        0.08838834764831843,
-        0.17677669529663687,
-        0.08838834764831843,
-        0.17677669529663687,
-        0.08838834764831843,
-        0.08838834764831843,
-        0.08838834764831843,
-        0.17677669529663687,
-        0.375,
-        0.25,
-        0.375,
-        0,
-        0.08838834764831843,
-        0.2651650429449553,
         0,
         0.35355339059327373,
         0,
-        0.375,
+        0,
         0,
         0.35355339059327373,
-        0.08838834764831843,
-        0.08838834764831843,
-        0.17677669529663687,
-        0.08838834764831843,
-        0.2651650429449553,
-        0.08838834764831843,
-        0.17677669529663687,
-        0.08838834764831843,
         0,
-        0.08838834764831843,
+        0.1178511301977579,
+        0.2357022603955158,
         0,
-        0.17677669529663687,
-        0.17677669529663687,
-        0.2651650429449553,
-        0.625
+        0.35355339059327373,
+        0,
+        0,
+        0.1178511301977579,
+        0,
+        0,
+        0,
+        0.35355339059327373,
+        0.1178511301977579,
+        0.1178511301977579,
+        0.1178511301977579,
+        0,
+        0.35355339059327373,
+        0.1178511301977579,
+        0,
+        0.1178511301977579,
+        0,
+        0,
+        0.2357022603955158,
+        0.1178511301977579,
+        0.1178511301977579,
+        0,
+        0,
+        0.2357022603955158,
+        0.1178511301977579,
+        0.2357022603955158,
+        0,
+        0,
+        0,
+        0.2357022603955158,
+        0.1178511301977579,
+        0.2357022603955158,
+        0.4714045207910316,
+        0,
+        0.6666666666666666,
+        0.16666666666666666,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.1178511301977579,
+        0.1178511301977579,
+        0.35355339059327373,
+        0.1178511301977579
       ],
       "signature": {
         "tallStruggle": {
-          "option": "Altijd \"hoe lang ben jij?\" horen",
-          "share": 0.5
+          "option": "Deurposten die onverwacht geweld gebruiken",
+          "share": 0.3333333333333333
         },
         "planeSeat": {
-          "option": "Nooduitgang",
-          "share": 0.625
-        },
-        "heightQuestionFreq": {
-          "option": "Wekelijks",
-          "share": 0.375
-        },
-        "tallAdvantage": {
-          "option": "Altijd goed zicht",
-          "share": 0.625
-        },
-        "borrelArrival": {
-          "option": "Modieus te laat",
-          "share": 0.25
-        },
-        "borrelEnding": {
-          "option": "Met eten",
-          "share": 0.375
-        },
-        "idealBorrel": {
-          "option": "Kroegborrel",
-          "share": 0.375
-        },
-        "borrelRole": {
-          "option": "De vaste-kliek-hanger",
-          "share": 0.25
-        },
-        "planSpontaneous": {
-          "option": "Plannen",
-          "share": 0.625
-        },
-        "cityNature": {
-          "option": "Stad",
-          "share": 0.75
-        },
-        "festivalTerrace": {
-          "option": "Festival",
-          "share": 0.625
-        },
-        "earlyBedLate": {
-          "option": "Vroeg naar bed",
-          "share": 1
-        },
-        "cuisine": {
-          "option": "Mexicaanse",
+          "option": "Dichtbij het toilet",
           "share": 0.5
         },
-        "morningEvening": {
-          "option": "Ochtendmens",
-          "share": 0.625
+        "heightQuestionFreq": {
+          "option": "Alleen wanneer ik nieuwe mensen ontmoet",
+          "share": 0.3333333333333333
         },
-        "weatherReaction": {
-          "option": "Negeren",
+        "tallAdvantage": {
+          "option": "De bovenste plank is gewoon een normale plank",
+          "share": 0.6666666666666666
+        },
+        "borrelArrival": {
+          "option": "Fashionably late (okay diva)",
+          "share": 0.3333333333333333
+        },
+        "borrelEnding": {
+          "option": "SHOTJESS",
+          "share": 0.5
+        },
+        "idealBorrel": {
+          "option": "Feestborrel",
+          "share": 0.5
+        },
+        "borrelRole": {
+          "option": "De adoptieouder: ziet een nieuweling en neemt die meteen mee",
           "share": 0.5
         },
         "drink": {
-          "option": "Wijn",
-          "share": 0.375
+          "option": "Mijn geheime homemade mix",
+          "share": 0.5
         },
-        "appGroupRole": {
-          "option": "De sfeermaker",
-          "share": 0.375
+        "earlyBedLate": {
+          "option": "Lekker vroeg onder de wol en morgen fris en fruitig",
+          "share": 0.3333333333333333
         },
-        "danceSideline": {
-          "option": "Zijlijn",
-          "share": 0.625
+        "borrelSuperpower": {
+          "option": "Altijd gratis drankjes",
+          "share": 0.3333333333333333
+        },
+        "cityNature": {
+          "option": "Natuur",
+          "share": 0.6666666666666666
+        },
+        "planSpontaneous": {
+          "option": "Spontaan",
+          "share": 0.6666666666666666
+        },
+        "festivalTerrace": {
+          "option": "Festival",
+          "share": 0.8333333333333334
+        },
+        "cuisine": {
+          "option": "Alles",
+          "share": 0.5
         }
       }
     }
@@ -971,202 +1050,202 @@
     {
       "index": 0,
       "name": "Gijs",
-      "cluster": 0
+      "cluster": 1
     },
     {
       "index": 1,
-      "name": "Emma",
-      "cluster": 3
-    },
-    {
-      "index": 2,
-      "name": "Anouk",
-      "cluster": 3
-    },
-    {
-      "index": 3,
-      "name": "Elin",
-      "cluster": 3
-    },
-    {
-      "index": 4,
-      "name": "Fleur",
-      "cluster": 4
-    },
-    {
-      "index": 5,
-      "name": "Elin",
-      "cluster": 0
-    },
-    {
-      "index": 6,
-      "name": "Ruben",
-      "cluster": 3
-    },
-    {
-      "index": 7,
-      "name": "Lars",
-      "cluster": 3
-    },
-    {
-      "index": 8,
-      "name": "Maud",
-      "cluster": 4
-    },
-    {
-      "index": 9,
-      "name": "Isa",
-      "cluster": 0
-    },
-    {
-      "index": 10,
-      "name": "Cait",
-      "cluster": 5
-    },
-    {
-      "index": 11,
-      "name": "Bram",
-      "cluster": 5
-    },
-    {
-      "index": 12,
-      "name": "Elin",
-      "cluster": 0
-    },
-    {
-      "index": 13,
-      "name": "Puck",
-      "cluster": 2
-    },
-    {
-      "index": 14,
-      "name": "Fleur",
-      "cluster": 0
-    },
-    {
-      "index": 15,
-      "name": "Fenna",
-      "cluster": 1
-    },
-    {
-      "index": 16,
-      "name": "Boaz",
-      "cluster": 1
-    },
-    {
-      "index": 17,
-      "name": "Hanna",
-      "cluster": 5
-    },
-    {
-      "index": 18,
-      "name": "Nora",
-      "cluster": 5
-    },
-    {
-      "index": 19,
-      "name": "Fleur",
-      "cluster": 2
-    },
-    {
-      "index": 20,
-      "name": "Ruben",
-      "cluster": 2
-    },
-    {
-      "index": 21,
-      "name": "Koen",
-      "cluster": 4
-    },
-    {
-      "index": 22,
-      "name": "Fleur",
-      "cluster": 5
-    },
-    {
-      "index": 23,
       "name": "Daan",
       "cluster": 5
     },
     {
-      "index": 24,
-      "name": "Jolie",
+      "index": 2,
+      "name": "Bas",
       "cluster": 1
     },
     {
-      "index": 25,
-      "name": "Tijn",
+      "index": 3,
+      "name": "Fleur",
       "cluster": 0
     },
     {
-      "index": 26,
-      "name": "Stijn",
+      "index": 4,
+      "name": "Thijs",
       "cluster": 4
     },
     {
-      "index": 27,
-      "name": "Gijs",
+      "index": 5,
+      "name": "Isa",
+      "cluster": 5
+    },
+    {
+      "index": 6,
+      "name": "Sam",
       "cluster": 3
     },
     {
-      "index": 28,
-      "name": "Sven",
+      "index": 7,
+      "name": "Thijs",
+      "cluster": 2
+    },
+    {
+      "index": 8,
+      "name": "Gijs",
+      "cluster": 5
+    },
+    {
+      "index": 9,
+      "name": "Tijn",
       "cluster": 1
     },
     {
+      "index": 10,
+      "name": "Ruben",
+      "cluster": 4
+    },
+    {
+      "index": 11,
+      "name": "Elin",
+      "cluster": 0
+    },
+    {
+      "index": 12,
+      "name": "Hanna",
+      "cluster": 1
+    },
+    {
+      "index": 13,
+      "name": "Sanne",
+      "cluster": 0
+    },
+    {
+      "index": 14,
+      "name": "Boaz",
+      "cluster": 0
+    },
+    {
+      "index": 15,
+      "name": "Tijn",
+      "cluster": 5
+    },
+    {
+      "index": 16,
+      "name": "Marit",
+      "cluster": 3
+    },
+    {
+      "index": 17,
+      "name": "Ravi",
+      "cluster": 3
+    },
+    {
+      "index": 18,
+      "name": "Ruben",
+      "cluster": 2
+    },
+    {
+      "index": 19,
+      "name": "Thijs",
+      "cluster": 0
+    },
+    {
+      "index": 20,
+      "name": "Mees",
+      "cluster": 2
+    },
+    {
+      "index": 21,
+      "name": "Cait",
+      "cluster": 0
+    },
+    {
+      "index": 22,
+      "name": "Lars",
+      "cluster": 1
+    },
+    {
+      "index": 23,
+      "name": "Lars",
+      "cluster": 4
+    },
+    {
+      "index": 24,
+      "name": "Loes",
+      "cluster": 4
+    },
+    {
+      "index": 25,
+      "name": "Emma",
+      "cluster": 1
+    },
+    {
+      "index": 26,
+      "name": "Bas",
+      "cluster": 3
+    },
+    {
+      "index": 27,
+      "name": "Sam",
+      "cluster": 0
+    },
+    {
+      "index": 28,
+      "name": "Daan",
+      "cluster": 5
+    },
+    {
       "index": 29,
-      "name": "Nora",
+      "name": "Hanna",
       "cluster": 3
     },
     {
       "index": 30,
-      "name": "Cait",
-      "cluster": 4
-    },
-    {
-      "index": 31,
-      "name": "Marit",
-      "cluster": 1
-    },
-    {
-      "index": 32,
-      "name": "Fleur",
-      "cluster": 2
-    },
-    {
-      "index": 33,
-      "name": "Marit",
-      "cluster": 1
-    },
-    {
-      "index": 34,
       "name": "Nora",
-      "cluster": 4
-    },
-    {
-      "index": 35,
-      "name": "Noor",
-      "cluster": 3
-    },
-    {
-      "index": 36,
-      "name": "Noor",
-      "cluster": 5
-    },
-    {
-      "index": 37,
-      "name": "Puck",
       "cluster": 0
     },
     {
-      "index": 38,
-      "name": "Roos",
+      "index": 31,
+      "name": "Femke",
+      "cluster": 4
+    },
+    {
+      "index": 32,
+      "name": "Julia",
       "cluster": 5
     },
     {
-      "index": 39,
-      "name": "Nora",
+      "index": 33,
+      "name": "Stijn",
+      "cluster": 0
+    },
+    {
+      "index": 34,
+      "name": "Fenna",
+      "cluster": 1
+    },
+    {
+      "index": 35,
+      "name": "Teun",
+      "cluster": 2
+    },
+    {
+      "index": 36,
+      "name": "Sven",
+      "cluster": 2
+    },
+    {
+      "index": 37,
+      "name": "Cait",
       "cluster": 3
+    },
+    {
+      "index": 38,
+      "name": "Bas",
+      "cluster": 0
+    },
+    {
+      "index": 39,
+      "name": "Emma",
+      "cluster": 4
     }
   ]
 }

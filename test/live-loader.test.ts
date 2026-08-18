@@ -4,9 +4,9 @@ import { toCsv } from "@/lib/data/csv";
 import { loadLiveResponses, parseLiveResponses } from "@/lib/data/live";
 
 // Header row mirrors the real Google-Form export: Dutch question texts (with
-// their trailing spaces, colons and emoji-free wording), in an arbitrary order
-// and interleaved with columns that have no schema field (timestamp, real name,
-// consent) which must be dropped.
+// their trailing spaces, colons and emoji-free wording), interleaved with
+// columns that have no schema field (timestamp, real name, consent, tips) which
+// must be dropped.
 const HEADER = [
   "Tijdstempel",
   "Hoe heet je?",
@@ -26,6 +26,7 @@ const HEADER = [
   "Op een borrel ben ik meestal...",
   "Wat is jouw vaste borreldrankje?",
   "Je zegt: 'ik doe deze borrel rustig aan'. Wat betekent dat? ",
+  "Kies je borrel-superkracht",
   "Kies je habitat:",
   "Afspraken plannen of spontaan afspreken?",
   "Waar vinden we jou op een vrije zomerdag? ",
@@ -47,19 +48,20 @@ const VALID_ROW = [
   "Acht-en-twintigste", // Dutch ordinal → 28
   "Uiteraard. Mijn kleedje ligt al klaar!",
   "Iets wat niet mapt, Te weinig beenruimte", // multi-select: first mappable token wins
-  "Nooduitgang, take my money", // prefix + trailing flavour text → "Nooduitgang"
-  "Een paar keer per maand", // alias → "Regelmatig"
-  "De bovenste plank is gewoon een normale plank", // alias → "Overal bij kunnen"
+  "Nooduitgang, take my money 🤑", // emoji stripped → "Nooduitgang, take my money"
+  "Een paar keer per maand",
+  "De bovenste plank is gewoon een normale plank",
   "Als één van de eersten",
-  "Keurig en verantwoord naar huis", // alias → "Verantwoord naar huis"
+  "Keurig en verantwoord naar huis",
   "Parkborrel 🌳", // emoji stripped → "Parkborrel"
-  "De regelaar: heeft pleisters, een powerbank en weet waar iedereen is", // alias → "De organisator"
-  "Mijn geheime homemade mix", // alias → "Cocktail"
-  "Dat meen ik daadwerkelijk en iedereen lacht me uit", // alias → "Vroeg naar bed"
+  "De regelaar: heeft pleisters, een powerbank en weet waar iedereen is",
+  "Mijn geheime homemade mix",
+  "Dat meen ik daadwerkelijk en iedereen lacht me uit",
+  "Teleporteren naar huis",
   "🏙️ Stad", // emoji stripped → "Stad"
   "Spontaan",
   "Festival: €8,50 voor een lauw biertje", // prefix → "Festival"
-  "Italiaans", // prefix → "Italiaanse"
+  "ALLES", // uppercase alias → "Alles"
   "je altijd je kop stoot",
   "Hoe is het weer daarboven?",
   "Ja baas",
@@ -92,36 +94,29 @@ describe("parseLiveResponses", () => {
   it("normalises closed answers onto the schema option sets", () => {
     expect(rows[0].province).toBe("Utrecht");
     expect(rows[0].tallStruggle).toBe("Te weinig beenruimte");
-    expect(rows[0].planeSeat).toBe("Nooduitgang");
-    expect(rows[0].heightQuestionFreq).toBe("Regelmatig");
-    expect(rows[0].tallAdvantage).toBe("Overal bij kunnen");
-    expect(rows[0].borrelEnding).toBe("Verantwoord naar huis");
+    expect(rows[0].planeSeat).toBe("Nooduitgang, take my money");
+    expect(rows[0].heightQuestionFreq).toBe("Een paar keer per maand");
+    expect(rows[0].tallAdvantage).toBe(
+      "De bovenste plank is gewoon een normale plank",
+    );
+    expect(rows[0].borrelEnding).toBe("Keurig en verantwoord naar huis");
     expect(rows[0].idealBorrel).toBe("Parkborrel");
-    expect(rows[0].borrelRole).toBe("De organisator");
-    expect(rows[0].drink).toBe("Cocktail");
-    expect(rows[0].earlyBedLate).toBe("Vroeg naar bed");
+    expect(rows[0].borrelRole).toBe(
+      "De regelaar: heeft pleisters, een powerbank en weet waar iedereen is",
+    );
+    expect(rows[0].drink).toBe("Mijn geheime homemade mix");
+    expect(rows[0].earlyBedLate).toBe(
+      "Dat meen ik daadwerkelijk en iedereen lacht me uit",
+    );
+    expect(rows[0].borrelSuperpower).toBe("Teleporteren naar huis");
     expect(rows[0].cityNature).toBe("Stad");
     expect(rows[0].festivalTerrace).toBe("Festival");
-    expect(rows[0].cuisine).toBe("Italiaanse");
+    expect(rows[0].cuisine).toBe("Alles"); // "ALLES" alias → canonical "Alles"
   });
 
   it("keeps open answers verbatim", () => {
     expect(rows[0].kompaanIfSentence).toBe("je altijd je kop stoot");
     expect(rows[0].heightRemark).toBe("Hoe is het weer daarboven?");
-  });
-
-  it("does not borrow the tips/tops feedback column for the ultimate-trait question", () => {
-    // The form has no "ultieme Kompaan-eigenschap" question, so it must NOT be
-    // filled from the open feedback column — it takes the neutral default.
-    expect(rows[0].ultimateKompaanTrait).toBe("—");
-  });
-
-  it("fills schema fields with no form column from documented defaults", () => {
-    expect(rows[0].morningEvening).toBe("Ochtendmens");
-    expect(rows[0].headBump).toBe("Dagelijks");
-    expect(rows[0].weatherReaction).toBe("Lach maar mee");
-    expect(rows[0].appGroupRole).toBe("De planner");
-    expect(rows[0].danceSideline).toBe("Dansvloer");
   });
 
   it("returns an empty array for a header-only or empty CSV", () => {

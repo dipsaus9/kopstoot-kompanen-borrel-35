@@ -95,9 +95,9 @@ export const COMPARE_ROWS: readonly CompareRow[] = [
   { key: "borrelEnding", emoji: "🌙", label: "Zo eindigt de borrel", numeric: false },
   { key: "borrelArrival", emoji: "⏰", label: "Hoe laat op een borrel", numeric: false },
   { key: "tallStruggle", emoji: "📏", label: "Grootste lange-mensen-struggle", numeric: false },
-  { key: "appGroupRole", emoji: "📱", label: "Rol in de app-groep", numeric: false },
+  { key: "borrelSuperpower", emoji: "⚡", label: "Gekozen borrel-superkracht", numeric: false },
   { key: "planSpontaneous", emoji: "🗓️", label: "Plannen of spontaan", numeric: false },
-  { key: "cityNature", emoji: "🌳", label: "Stad of natuur", numeric: false },
-  { key: "morningEvening", emoji: "🌅", label: "Ochtend- of avondmens", numeric: false },
-  { key: "danceSideline", emoji: "🕺", label: "Dansvloer of zijlijn", numeric: false },
+  { key: "cityNature", emoji: "🌳", label: "Kies je habitat", numeric: false },
+  { key: "festivalTerrace", emoji: "🎪", label: "Festival of terras", numeric: false },
+  { key: "earlyBedLate", emoji: "😴", label: "'Rustig aan' betekent", numeric: false },
 ];

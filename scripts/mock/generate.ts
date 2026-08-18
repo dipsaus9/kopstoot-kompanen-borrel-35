@@ -63,17 +63,6 @@ const KOMPAAN_IF = [
   "…je nog rekt terwijl de deur al te laag is.",
 ];
 
-const ULTIMATE_TRAIT = [
-  "Zelfspot over de lengte.",
-  "Altijd in voor nog één drankje.",
-  "Loyaliteit aan de kliek.",
-  "Een verpletterende dansmove.",
-  "Onverstoorbaar goede vibes.",
-  "De gave om iedereen te vinden op een festival.",
-  "Spontaniteit met een plan-B.",
-  "Een onuitputtelijke voorraad giraffe-grappen.",
-];
-
 const HEIGHT_REMARK = [
   "Hoe is het weer daarboven?",
   "Speel je basketbal?",
@@ -87,7 +76,6 @@ const HEIGHT_REMARK = [
 
 const OPEN_POOLS: Record<string, readonly string[]> = {
   kompaanIfSentence: KOMPAAN_IF,
-  ultimateKompaanTrait: ULTIMATE_TRAIT,
   heightRemark: HEIGHT_REMARK,
 };
 

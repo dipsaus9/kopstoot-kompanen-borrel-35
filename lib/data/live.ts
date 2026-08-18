@@ -3,9 +3,10 @@
  *
  * The published survey lives in a Google Form whose responses sheet is exported
  * as a public CSV ({@link SHEET_CSV_URL}). Its columns are the Dutch *question
- * texts* and its answers are the verbatim *form* option texts — neither of which
- * line up 1:1 with the frozen {@link SurveyResponse} schema. This module bridges
- * the two:
+ * texts* and its answers are the verbatim *form* option texts. Since the schema
+ * was realigned to the real form, every schema option tuple now equals the form
+ * text (emoji / trailing ellipsis stripped), so the mapping is close to 1:1.
+ * This module bridges the two:
  *
  *   1. `parseLiveResponses(csv)` — pure. Parse the export with the RFC-4180
  *      reader, map each form column onto a schema key, normalise every answer to
@@ -17,11 +18,10 @@
  *      non-200 / parse failure resolves to `null` so the caller can fall back to
  *      the committed mock — a live outage must never break the build or render.
  *
- * Some schema fields have no matching form column (the form diverged from the
- * frozen questionnaire): those are filled with a documented neutral default in
- * {@link FIELD_DEFAULTS} so the row still satisfies the type. Some form columns
- * (timestamp, consent checkboxes, the "echte naam" field, the open "grootste
- * zonde") have no schema field and are simply dropped.
+ * Every schema field maps to a real form column, so there are no synthetic
+ * defaults. Some form columns (timestamp, the real-name field, consent
+ * checkboxes, the open "grootste zonde" and "tips/tops" remarks) have no schema
+ * field and are simply dropped.
  */
 
 import { SHEET_CSV_URL } from "@/lib/config";
@@ -32,6 +32,7 @@ import {
   BORREL_ARRIVAL,
   BORREL_ENDING,
   BORREL_ROLE,
+  BORREL_SUPERPOWER,
   CITY_NATURE,
   CUISINE,
   DRINK,
@@ -97,7 +98,15 @@ function firstOf(options: readonly string[], aliases = {}): Normaliser {
 }
 
 const identity: Normaliser = (raw) => raw.trim();
-const numeric: Normaliser = (raw) => raw.trim();
+
+/** Pull the first (optionally negative) integer run out of a free-text answer,
+ *  or `""` if there is none. Form number fields are open text, so respondents
+ *  add flourish ("35!!!!", "200cm", "ongeveer 31") that a bare `Number()` would
+ *  reject — dropping the whole row. Bounds stay enforced later by validateCell. */
+const numeric: Normaliser = (raw) => {
+  const match = raw.match(/-?\d+/);
+  return match ? match[0] : "";
+};
 
 // --- Dutch ordinal borrel-count ("Acht-en-twintigste" → 28) -----------------
 
@@ -129,8 +138,7 @@ const dutchOrdinal: Normaliser = (raw) => {
       return String(tens + UNITS[unit]);
     }
   }
-  const n = Number(raw.trim());
-  return Number.isFinite(n) ? String(n) : "";
+  return numeric(raw);
 };
 
 // --- Form column → schema key mapping ---------------------------------------
@@ -155,87 +163,23 @@ const MAPPINGS: readonly FieldMapping[] = [
   { key: "rsvp", header: "kom je borrelen", normalise: optionMatcher(RSVP) },
   { key: "tallStruggle", header: "lange-mensen-struggle", normalise: firstOf(TALL_STRUGGLE) },
   { key: "planeSeat", header: "vliegtuig", normalise: optionMatcher(PLANE_SEAT) },
-  {
-    key: "heightQuestionFreq",
-    header: "hoe vaak krijg jij de vraag",
-    normalise: optionMatcher(HEIGHT_QUESTION_FREQ, {
-      "Alleen wanneer ik nieuwe mensen ontmoet": "Bijna nooit meer",
-      "Een paar keer per maand": "Regelmatig",
-      "Bijna nooit": "Bijna nooit meer",
-    }),
-  },
-  {
-    key: "tallAdvantage",
-    header: "grootste voordeel van lang",
-    normalise: optionMatcher(TALL_ADVANTAGE, {
-      "De bovenste plank is gewoon een normale plank": "Overal bij kunnen",
-      "Nooit iemand vóór je bij een concert": "Altijd goed zicht",
-    }),
-  },
+  { key: "heightQuestionFreq", header: "hoe vaak krijg jij de vraag", normalise: optionMatcher(HEIGHT_QUESTION_FREQ) },
+  { key: "tallAdvantage", header: "grootste voordeel van lang", normalise: optionMatcher(TALL_ADVANTAGE) },
   { key: "borrelArrival", header: "wanneer maak jij meestal je entree", normalise: optionMatcher(BORREL_ARRIVAL) },
-  {
-    key: "borrelEnding",
-    header: "hoe eindigt jouw gemiddelde",
-    normalise: optionMatcher(BORREL_ENDING, {
-      "Keurig en verantwoord naar huis": "Verantwoord naar huis",
-    }),
-  },
+  { key: "borrelEnding", header: "hoe eindigt jouw gemiddelde", normalise: optionMatcher(BORREL_ENDING) },
   { key: "idealBorrel", header: "ideale borrel", normalise: optionMatcher(IDEAL_BORREL) },
-  {
-    key: "borrelRole",
-    header: "op een borrel ben ik meestal",
-    normalise: optionMatcher(BORREL_ROLE, {
-      "De regelaar: heeft pleisters, een powerbank en weet waar iedereen is": "De organisator",
-      "De adoptieouder: ziet een nieuweling en neemt die meteen mee": "De sociale butterfly",
-    }),
-  },
-  {
-    key: "drink",
-    header: "vaste borreldrankje",
-    normalise: optionMatcher(DRINK, {
-      "Mijn geheime homemade mix": "Cocktail",
-      "Alles wat iedereen mij in mijn handen duwt": "Wat er maar is",
-    }),
-  },
-  {
-    // No literal "vroeg naar bed of doorgaan" column; the "ik doe rustig aan"
-    // question captures the same take-it-easy / go-all-out signal.
-    key: "earlyBedLate",
-    header: "rustig aan",
-    normalise: optionMatcher(EARLY_BED_LATE, {
-      "Dat meen ik daadwerkelijk en iedereen lacht me uit": "Vroeg naar bed",
-      "Helemaal niets. In mijn woordenboek is dit een betekenisloze zin.": "We zien wel waar dit eindigt",
-      "Dat zei ik vorige keer ook...": "We zien wel waar dit eindigt",
-    }),
-  },
+  { key: "borrelRole", header: "op een borrel ben ik meestal", normalise: optionMatcher(BORREL_ROLE) },
+  { key: "drink", header: "vaste borreldrankje", normalise: optionMatcher(DRINK) },
+  { key: "earlyBedLate", header: "rustig aan", normalise: optionMatcher(EARLY_BED_LATE) },
+  { key: "borrelSuperpower", header: "borrel-superkracht", normalise: optionMatcher(BORREL_SUPERPOWER) },
   { key: "cityNature", header: "kies je habitat", normalise: optionMatcher(CITY_NATURE) },
   { key: "planSpontaneous", header: "plannen of spontaan afspreken", normalise: optionMatcher(PLAN_SPONTANEOUS) },
   { key: "festivalTerrace", header: "vrije zomerdag", normalise: optionMatcher(FESTIVAL_TERRACE) },
-  { key: "cuisine", header: "lievelingskeuken", normalise: optionMatcher(CUISINE, { ALLES: "Anders" }) },
-  { key: "kompaanIfSentence", header: "je weet dat je een kompaan bent als", normalise: identity },
+  // The form spells this option "ALLES" (uppercase); the schema canonical is "Alles".
+  { key: "cuisine", header: "lievelingskeuken", normalise: optionMatcher(CUISINE, { ALLES: "Alles" }) },
+  { key: "kompaanIfSentence", header: "je weet dat je een kompaan bent", normalise: identity },
   { key: "heightRemark", header: "met pensioen", normalise: identity },
-  // NOTE: the published form has no "ultieme Kompaan-eigenschap" question, so
-  // `ultimateKompaanTrait` is intentionally NOT mapped — it must NOT borrow the
-  // open "tips/tops/mededelingen" feedback column (those are loose remarks, not a
-  // trait). It defaults to empty below, which the showcase strip then omits.
 ];
-
-/**
- * Schema fields with no corresponding form column. The published form diverged
- * from the frozen questionnaire, so these get a documented neutral default to
- * keep the row valid until the form is realigned (or the schema trimmed).
- */
-const FIELD_DEFAULTS: Readonly<Partial<Record<SurveyResponseKey, string>>> = {
-  morningEvening: "Ochtendmens",
-  headBump: "Dagelijks",
-  weatherReaction: "Lach maar mee",
-  appGroupRole: "De planner",
-  danceSideline: "Dansvloer",
-  // No form column for this showcase question; it is no longer surfaced anywhere
-  // (dropped from the Toppers quote strip), so this neutral value is never shown —
-  // it only keeps the row valid (every schema field must be non-empty).
-  ultimateKompaanTrait: "—",
-};
 
 /**
  * Parse the raw Google-Form CSV export into validated `SurveyResponse` rows.
@@ -261,9 +205,6 @@ export function parseLiveResponses(csvText: string): SurveyResponse[] {
     for (const mapping of MAPPINGS) {
       const index = columnByKey.get(mapping.key);
       raw[mapping.key] = index === undefined ? "" : mapping.normalise(cells[index] ?? "");
-    }
-    for (const [key, value] of Object.entries(FIELD_DEFAULTS)) {
-      raw[key] = value as string;
     }
 
     try {

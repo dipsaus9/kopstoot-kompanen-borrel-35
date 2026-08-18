@@ -1,14 +1,18 @@
 /**
  * Survey response schema — the single source of truth for the Borrel 35 dataset.
  *
- * Every field here is derived directly from `docs/survey-final-questions.md`
- * (BORREL-2.1, the frozen question contract). The 28 questions map to 28 CSV
- * columns in question order (Q1..Q28); the parser (`parse.ts`) and the mock
- * generator (`scripts/mock/generate.ts`) both read this registry so the schema,
- * the data and the types can never drift apart.
+ * Every option tuple and question here mirrors the ACTUAL published Google Form
+ * (verbatim Dutch option text, emoji and trailing ellipsis stripped so the live
+ * loader can match exactly). The registry drives the parser (`parse.ts`), the
+ * mock generator (`scripts/mock/generate.ts`) and the live loader (`live.ts`),
+ * so the schema, the data and the types can never drift apart.
  *
- * When the real Google-Form CSV lands, revisit ONLY the option tuples and the
- * `QUESTIONS` registry — the parser, loader and types follow automatically.
+ * NOTE: this file was realigned to the real form after launch. The form has no
+ * ochtend/avond, hoofdstoten, weer-reactie, app-groep-rol, dansvloer or
+ * "ultieme eigenschap" question, so those fields were removed; the form's
+ * "borrel-superkracht" question was added as {@link BORREL_SUPERPOWER}. When the
+ * form changes again, revisit ONLY the option tuples and `QUESTIONS` — the
+ * parser, loader, types, aggregate and clustering all follow automatically.
  */
 
 // --- Analytic roles (see docs/survey-final-questions.md §Legend) -------------
@@ -40,61 +44,74 @@ export const PROVINCES = [
 
 export const RSVP = [
   "Uiteraard. Mijn kleedje ligt al klaar!",
-  "Ik ben nog in onderhandeling met mijn verantwoordelijkheden…",
+  "Ik ben nog in onderhandeling met mijn verantwoordelijkheden",
   "Ik wil graag, maar durf nog niet (app Biko, Jolie, Iris, Cait of Emma)",
-  "Ik moet de haren op mijn hoofd tellen",
-  "Ik ben verhinderd door een ernstig geval van slechte prioriteiten",
+  "Mijn agenda zegt misschien, mijn hart zegt Salmari",
+  "Helaas niet",
 ] as const;
 
+// Multi-select on the form; the loader keeps the first chosen option.
 export const TALL_STRUGGLE = [
   "Te weinig beenruimte",
-  "Kleding die nooit lang genoeg is",
-  "Douchekoppen op borsthoogte",
-  "Bedden waar mijn voeten uitsteken",
-  'Altijd "hoe lang ben jij?" horen',
-  "Mensen die vragen of ik basketbal",
+  "Spiegels waarin je alleen je torso ziet",
+  "Concertbezoekers achter mij die mijn bestaan persoonlijk opvatten",
+  "Bedden waar m'n voeten uitsteken",
+  "'Jeetje, wat ben jij lang!', bedankt, was me nog niet opgevallen",
+  "Mensen die vragen of ik basketbal speel",
+  "Broeken: hoogwater of een circustent",
+  "Auto instappen en eerst de stoel van een kabouter moeten verbouwen",
+  "Foto's: hurken of onthoofd worden op de uiteindelijke foto",
+  "Douchekoppen op tepelhoogte",
+  "Deurposten die onverwacht geweld gebruiken",
 ] as const;
 
 export const PLANE_SEAT = [
-  "Nooduitgang",
+  "Nooduitgang, take my money",
   "Gangpad",
-  "Raam",
   "In het midden",
-  "Maakt niet uit, ik lijd toch",
+  "Raam",
+  "Maakt niet uit, ik lijd toch wel",
+  "Dichtbij het toilet",
 ] as const;
 
-// Ordinal: Dagelijks → Nooit
+// Ordinal: meest → minst vaak gevraagd
 export const HEIGHT_QUESTION_FREQ = [
-  "Dagelijks",
+  "Meerdere keren per week",
   "Wekelijks",
-  "Regelmatig",
-  "Bijna nooit meer",
-  "Nooit",
+  "Een paar keer per maand",
+  "Alleen wanneer ik nieuwe mensen ontmoet",
+  "Bijna nooit",
+  "Ik hoor het niet eens meer; mijn brein filtert het automatisch weg",
 ] as const;
 
 export const TALL_ADVANTAGE = [
   "Overal bij kunnen",
-  "Altijd goed zicht",
-  "Mensen terugvinden op festivals",
-  "Indrukwekkend zijn zonder iets te doen",
-  "Welk voordeel?",
+  "Nooit iemand vóór je bij een concert",
+  "Gratis menselijke herkenningspaal op festivals",
+  "Mensen zijn automatisch onder de indruk",
+  "Groepsfoto? Ik weet waar ik moet staan",
+  "Voordeel? Ik betaal extra voor beenruimte... >:(",
+  "Mijn vrienden vinden mij altijd terug in de menigte",
+  "De bovenste plank is gewoon een normale plank",
 ] as const;
 
 // Ordinal: eersten → allerlaatste
 export const BORREL_ARRIVAL = [
   "Als één van de eersten",
   "Keurig op tijd",
-  "Modieus te laat",
-  '"Ik kom eraan!" terwijl ik nog thuis ben',
+  "Fashionably late (okay diva)",
+  "'Ik kom eraan!' terwijl ik nog thuis ben",
   "Als allerlaatste",
 ] as const;
 
 export const BORREL_ENDING = [
-  "Verantwoord naar huis",
-  "Nog even één drankje",
+  "Keurig en verantwoord naar huis",
+  "Nog even één drankje (en dat zes keer)",
   "SHOTJESS",
-  "Met eten",
-  "Geen idee meer",
+  "Bij de snackbar of El Greco",
+  "Ik heb gaten in mijn brein...",
+  "Op een after waarvan ik het bestaan twee uur geleden nog niet kende",
+  "Niet in mijn eigen bed (oops overkomt de beste)",
 ] as const;
 
 export const IDEAL_BORREL = [
@@ -106,129 +123,117 @@ export const IDEAL_BORREL = [
 ] as const;
 
 export const BORREL_ROLE = [
-  "De sociale butterfly",
-  "De vaste-kliek-hanger",
-  "De organisator",
-  "De verdwijntruc",
-  "Degene die iedereen drank geeft",
-  "Degene die ineens een diep gesprek heeft",
-] as const;
-
-export const PLAN_SPONTANEOUS = ["Plannen", "Spontaan"] as const;
-export const CITY_NATURE = ["Stad", "Natuur"] as const;
-export const FESTIVAL_TERRACE = ["Festival", "Terras"] as const;
-export const EARLY_BED_LATE = [
-  "Vroeg naar bed",
-  "We zien wel waar dit eindigt",
-] as const;
-export const CUISINE = [
-  "Italiaanse",
-  "Aziatische",
-  "Nederlandse",
-  "Mexicaanse",
-  "Anders",
-] as const;
-export const MORNING_EVENING = ["Ochtendmens", "Avondmens"] as const;
-
-// Ordinal: Dagelijks → Nooit (head-bumping)
-export const HEAD_BUMP = [
-  "Dagelijks",
-  "Wekelijks",
-  "Alleen bij lage deuren",
-  "Nooit, ik duik automatisch",
-] as const;
-
-export const WEATHER_REACTION = [
-  "Lach maar mee",
-  "Negeren",
-  "Gevat terugkaatsen",
-  "Elke keer verzin ik wat nieuws",
-  "Ik glimlach en sterf vanbinnen",
+  "De social butterfly: praat met iedereen",
+  "De vaste-kliek-hanger: eenmaal geland verschuif ik geen meter",
+  "De regelaar: heeft pleisters, een powerbank en weet waar iedereen is",
+  "De verdwijntruc: ineens drie uur spoorloos",
+  'De slechte invloed: "Shotje???"',
+  "De filosoof: om 21:00 ineens gesprekken over de zin van het leven",
+  "De adoptieouder: ziet een nieuweling en neemt die meteen mee",
+  "De wandelende podcast: stopt simpelweg niet met praten",
+  "De zwerver: begon bij groep A en is inmiddels door zes vriendengroepen geadopteerd",
 ] as const;
 
 export const DRINK = [
   "Bier",
   "Wijn",
-  "Shot(s)",
-  "Fris/0.0",
-  "Cocktail",
-  "Wat er maar is",
+  "Mijn geheime homemade mix",
+  "Shotjes",
+  "Fris, ik heb geen alcohol nodig voor mijn persoonlijkheid",
+  "Salmari. Geen verdere vragen.",
+  "Water, hydratatiekoning(in) that I am",
+  "Alles wat iedereen mij in mijn handen duwt",
 ] as const;
 
-export const APP_GROUP_ROLE = [
-  "De planner",
-  "De ghost",
-  "De meme-spammer",
-  'Het "ik-kom-eraan"-liegbeest',
-  "De sfeermaker",
+export const EARLY_BED_LATE = [
+  "Lekker vroeg onder de wol en morgen fris en fruitig",
+  "Maximaal een paar drankjes",
+  "Dat zei ik vorige keer ook...",
+  "Tot iemand met shotjes aankomt",
+  "Helemaal niets. In mijn woordenboek is dit een betekenisloze zin.",
+  "Dat meen ik daadwerkelijk en iedereen lacht me uit",
 ] as const;
 
-export const DANCE_SIDELINE = ["Dansvloer", "Zijlijn"] as const;
+export const BORREL_SUPERPOWER = [
+  "Nooit meer een kater",
+  "Altijd gratis drankjes",
+  "Iedereen zijn naam onthouden",
+  "Nooit mijn borrel-besties kwijtraken",
+  "Teleporteren naar huis",
+  "Altijd zichtbaar op de groepsfoto",
+  "Mijn jas, telefoon én waardigheid nooit meer kwijtraken",
+] as const;
+
+export const CITY_NATURE = ["Stad", "Natuur", "Mijn bank"] as const;
+export const PLAN_SPONTANEOUS = ["Plannen", "Spontaan"] as const;
+export const FESTIVAL_TERRACE = ["Festival", "Terras"] as const;
+
+export const CUISINE = [
+  "Italiaans",
+  "Japans",
+  "Thais",
+  "Chinees",
+  "Nederlands",
+  "Grieks",
+  "Mexicaans",
+  "Alles",
+  "Anders",
+] as const;
 
 // --- The typed survey response (one CSV row) --------------------------------
 
 /**
- * A single validated survey response. Field order mirrors Q1..Q28 and the CSV
+ * A single validated survey response. Field order mirrors the form and the CSV
  * column order (see `CSV_COLUMNS`). Closed answers are string-literal unions
  * derived from the option tuples above; numeric stats are `number`; open
  * showcase answers are free `string`.
  */
 export interface SurveyResponse {
-  /** Q1 · identity · open */
+  /** identity · open — bijnaam */
   name: string;
-  /** Q2 · stat · number — leeftijd in hele jaren */
+  /** stat · number — leeftijd in hele jaren */
   age: number;
-  /** Q3 · stat · number — lichaamslengte in cm (~100–230) */
+  /** stat · number — lichaamslengte in cm (~100–230) */
   heightCm: number;
-  /** Q4 · stat · single */
+  /** stat · single */
   province: (typeof PROVINCES)[number];
-  /** Q5 · stat · number — aantal borrels */
+  /** stat · number — aantal borrels */
   borrelCount: number;
-  /** Q6 · stat (RSVP) · single — excluded from clustering + % match */
+  /** stat (RSVP) · single — excluded from clustering + % match */
   rsvp: (typeof RSVP)[number];
-  /** Q7 · cluster · nominal */
+  /** cluster · nominal */
   tallStruggle: (typeof TALL_STRUGGLE)[number];
-  /** Q8 · cluster · nominal */
+  /** cluster · nominal */
   planeSeat: (typeof PLANE_SEAT)[number];
-  /** Q9 · cluster · ordinal */
+  /** cluster · ordinal */
   heightQuestionFreq: (typeof HEIGHT_QUESTION_FREQ)[number];
-  /** Q10 · cluster · nominal */
+  /** cluster · nominal */
   tallAdvantage: (typeof TALL_ADVANTAGE)[number];
-  /** Q11 · cluster · ordinal */
+  /** cluster · ordinal */
   borrelArrival: (typeof BORREL_ARRIVAL)[number];
-  /** Q12 · cluster · nominal */
+  /** cluster · nominal */
   borrelEnding: (typeof BORREL_ENDING)[number];
-  /** Q13 · cluster · nominal */
+  /** cluster · nominal */
   idealBorrel: (typeof IDEAL_BORREL)[number];
-  /** Q14 · cluster · nominal (strong archetype signal) */
+  /** cluster · nominal (strong archetype signal) */
   borrelRole: (typeof BORREL_ROLE)[number];
-  /** Q15 · cluster · binary */
-  planSpontaneous: (typeof PLAN_SPONTANEOUS)[number];
-  /** Q16 · cluster · binary */
-  cityNature: (typeof CITY_NATURE)[number];
-  /** Q17 · cluster · binary */
-  festivalTerrace: (typeof FESTIVAL_TERRACE)[number];
-  /** Q18 · cluster · binary */
-  earlyBedLate: (typeof EARLY_BED_LATE)[number];
-  /** Q19 · cluster · nominal (low weight / droppable) */
-  cuisine: (typeof CUISINE)[number];
-  /** Q20 · cluster · binary */
-  morningEvening: (typeof MORNING_EVENING)[number];
-  /** Q21 · showcase · open — never clustered */
-  kompaanIfSentence: string;
-  /** Q22 · showcase · open — never clustered */
-  ultimateKompaanTrait: string;
-  /** Q23 · stat (superlatief) · ordinal */
-  headBump: (typeof HEAD_BUMP)[number];
-  /** Q24 · cluster · nominal */
-  weatherReaction: (typeof WEATHER_REACTION)[number];
-  /** Q25 · cluster · nominal (+ superlatief) */
+  /** cluster · nominal (+ superlatief) */
   drink: (typeof DRINK)[number];
-  /** Q26 · cluster · nominal (strong archetype signal) */
-  appGroupRole: (typeof APP_GROUP_ROLE)[number];
-  /** Q27 · cluster · binary */
-  danceSideline: (typeof DANCE_SIDELINE)[number];
-  /** Q28 · showcase · open — never clustered */
+  /** cluster · nominal */
+  earlyBedLate: (typeof EARLY_BED_LATE)[number];
+  /** cluster · nominal (strong archetype signal) */
+  borrelSuperpower: (typeof BORREL_SUPERPOWER)[number];
+  /** cluster · nominal */
+  cityNature: (typeof CITY_NATURE)[number];
+  /** cluster · binary */
+  planSpontaneous: (typeof PLAN_SPONTANEOUS)[number];
+  /** cluster · binary */
+  festivalTerrace: (typeof FESTIVAL_TERRACE)[number];
+  /** cluster · nominal (low weight / droppable) */
+  cuisine: (typeof CUISINE)[number];
+  /** showcase · open — never clustered */
+  kompaanIfSentence: string;
+  /** showcase · open — never clustered */
   heightRemark: string;
 }
 
@@ -269,39 +274,34 @@ type SingleField = {
 export type QuestionField = OpenField | NumberField | SingleField;
 
 /**
- * The 28 questions in form order. `key` is the CSV header and the
- * `SurveyResponse` property; `options` drives closed-value validation.
+ * The questions in form order. `key` is the CSV header and the `SurveyResponse`
+ * property; `options` drives closed-value validation.
  */
 export const QUESTIONS: readonly QuestionField[] = [
-  { key: "name", number: 1, label: "Hoe mogen we je noemen?", role: "identity", type: "open" },
+  { key: "name", number: 1, label: "Wat is je bijnaam of hoe mogen we je noemen?", role: "identity", type: "open" },
   { key: "age", number: 2, label: "Hoe jong ben je?", role: "stat", type: "number", min: 16, max: 120 },
   { key: "heightCm", number: 3, label: "Hoe lang ben je in centimeters?", role: "stat", type: "number", min: 100, max: 230 },
-  { key: "province", number: 4, label: "Uit welke provincie kom je?", role: "stat", type: "single", encoding: "nominal", options: PROVINCES },
+  { key: "province", number: 4, label: "In welke provincie woon je?", role: "stat", type: "single", encoding: "nominal", options: PROVINCES },
   { key: "borrelCount", number: 5, label: "Hoeveel borrels heb jij inmiddels op je naam staan?", role: "stat", type: "number", min: 0, max: 1000 },
   { key: "rsvp", number: 6, label: "Kom je borrelen zaterdag 29 augustus?", role: "stat", type: "single", encoding: "none", options: RSVP },
   { key: "tallStruggle", number: 7, label: "Wat is jouw grootste lange-mensen-struggle?", role: "cluster", type: "single", encoding: "nominal", options: TALL_STRUGGLE },
   { key: "planeSeat", number: 8, label: "Waar zit jij het liefst in een vliegtuig?", role: "cluster", type: "single", encoding: "nominal", options: PLANE_SEAT },
-  { key: "heightQuestionFreq", number: 9, label: 'Hoe vaak krijg jij de vraag "Hoe lang ben jij?"?', role: "cluster", type: "single", encoding: "ordinal", options: HEIGHT_QUESTION_FREQ },
+  { key: "heightQuestionFreq", number: 9, label: "Hoe vaak krijg jij de vraag 'Hoe lang ben jij?'?", role: "cluster", type: "single", encoding: "ordinal", options: HEIGHT_QUESTION_FREQ },
   { key: "tallAdvantage", number: 10, label: "Wat is het grootste voordeel van lang zijn?", role: "cluster", type: "single", encoding: "nominal", options: TALL_ADVANTAGE },
-  { key: "borrelArrival", number: 11, label: "Hoe laat ben jij normaal op een borrel?", role: "cluster", type: "single", encoding: "ordinal", options: BORREL_ARRIVAL },
-  { key: "borrelEnding", number: 12, label: "Hoe eindigt jouw gemiddelde Kompanenborrel?", role: "cluster", type: "single", encoding: "nominal", options: BORREL_ENDING },
+  { key: "borrelArrival", number: 11, label: "Wanneer maak jij meestal je entree op een borrel?", role: "cluster", type: "single", encoding: "ordinal", options: BORREL_ARRIVAL },
+  { key: "borrelEnding", number: 12, label: "Hoe eindigt jouw gemiddelde kompanenborrel?", role: "cluster", type: "single", encoding: "nominal", options: BORREL_ENDING },
   { key: "idealBorrel", number: 13, label: "Wat is jouw ideale borrel?", role: "cluster", type: "single", encoding: "nominal", options: IDEAL_BORREL },
   { key: "borrelRole", number: 14, label: "Op een borrel ben ik meestal…", role: "cluster", type: "single", encoding: "nominal", options: BORREL_ROLE },
-  { key: "planSpontaneous", number: 15, label: "Plannen of spontaan?", role: "cluster", type: "single", encoding: "binary", options: PLAN_SPONTANEOUS },
-  { key: "cityNature", number: 16, label: "Stad of natuur?", role: "cluster", type: "single", encoding: "binary", options: CITY_NATURE },
-  { key: "festivalTerrace", number: 17, label: "Festival of terras?", role: "cluster", type: "single", encoding: "binary", options: FESTIVAL_TERRACE },
-  { key: "earlyBedLate", number: 18, label: "Vroeg naar bed of doorgaan?", role: "cluster", type: "single", encoding: "binary", options: EARLY_BED_LATE },
-  { key: "cuisine", number: 19, label: "Favoriete keuken?", role: "cluster", type: "single", encoding: "nominal", options: CUISINE },
-  { key: "morningEvening", number: 20, label: "Ochtend- of avondmens?", role: "cluster", type: "single", encoding: "binary", options: MORNING_EVENING },
-  { key: "kompaanIfSentence", number: 21, label: 'Maak de zin af: "Je weet dat je een Kompaan bent als…"', role: "showcase", type: "open" },
-  { key: "ultimateKompaanTrait", number: 22, label: "Welke eigenschap MOET de ultieme Kompaan volgens jou hebben?", role: "showcase", type: "open" },
-  { key: "headBump", number: 23, label: "Hoe vaak stoot je je hoofd?", role: "stat", type: "single", encoding: "ordinal", options: HEAD_BUMP },
-  { key: "weatherReaction", number: 24, label: 'Jouw standaard reactie op "hoe is het weer daarboven?"', role: "cluster", type: "single", encoding: "nominal", options: WEATHER_REACTION },
-  { key: "drink", number: 25, label: "Jouw vaste borrel-drankje?", role: "cluster", type: "single", encoding: "nominal", options: DRINK },
-  { key: "appGroupRole", number: 26, label: "Jouw rol in de app-groep?", role: "cluster", type: "single", encoding: "nominal", options: APP_GROUP_ROLE },
-  { key: "danceSideline", number: 27, label: "Dansvloer of zijlijn?", role: "cluster", type: "single", encoding: "binary", options: DANCE_SIDELINE },
-  { key: "heightRemark", number: 28, label: "Meest gehoorde lengte-opmerking waar je klaar mee bent?", role: "showcase", type: "open" },
+  { key: "drink", number: 15, label: "Wat is jouw vaste borreldrankje?", role: "cluster", type: "single", encoding: "nominal", options: DRINK },
+  { key: "earlyBedLate", number: 16, label: "Je zegt: 'ik doe deze borrel rustig aan'. Wat betekent dat?", role: "cluster", type: "single", encoding: "nominal", options: EARLY_BED_LATE },
+  { key: "borrelSuperpower", number: 17, label: "Kies je borrel-superkracht", role: "cluster", type: "single", encoding: "nominal", options: BORREL_SUPERPOWER },
+  { key: "cityNature", number: 18, label: "Kies je habitat", role: "cluster", type: "single", encoding: "nominal", options: CITY_NATURE },
+  { key: "planSpontaneous", number: 19, label: "Afspraken plannen of spontaan afspreken?", role: "cluster", type: "single", encoding: "binary", options: PLAN_SPONTANEOUS },
+  { key: "festivalTerrace", number: 20, label: "Waar vinden we jou op een vrije zomerdag?", role: "cluster", type: "single", encoding: "binary", options: FESTIVAL_TERRACE },
+  { key: "cuisine", number: 21, label: "Wat is je lievelingskeuken?", role: "cluster", type: "single", encoding: "nominal", options: CUISINE },
+  { key: "kompaanIfSentence", number: 22, label: "Maak de zin af: Je weet dat je een Kompaan bent als…", role: "showcase", type: "open" },
+  { key: "heightRemark", number: 23, label: "Welke lengte-opmerking mag wat jou betreft per direct met pensioen?", role: "showcase", type: "open" },
 ] as const;
 
-/** Ordered CSV column headers (Q1..Q28), used by the parser and generator. */
+/** Ordered CSV column headers, used by the parser and generator. */
 export const CSV_COLUMNS: readonly SurveyResponseKey[] = QUESTIONS.map((q) => q.key);
