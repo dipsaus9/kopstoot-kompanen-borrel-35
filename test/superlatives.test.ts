@@ -81,4 +81,14 @@ describe("getSuperlatives", () => {
       }
     }
   });
+
+  it("surfaces the newest respondents first (so new answers appear)", () => {
+    const key = "kompaanIfSentence";
+    // The live sheet appends new rows, so the newest answer is the last one.
+    const newestWithAnswer = [...responses]
+      .reverse()
+      .find((r) => String(r[key]).trim() !== "");
+    const firstOfKey = superlatives.quotes.find((q) => q.id.startsWith(key));
+    expect(firstOfKey?.author).toBe(newestWithAnswer?.name);
+  });
 });
