@@ -52,7 +52,7 @@ const ANSWER_CONFIG: readonly AnswerConfig[] = [
   { key: "idealBorrel", emoji: "✨", caption: "Ideale borrel" },
   { key: "borrelEnding", emoji: "🌙", caption: "Zo eindigt de borrel" },
   { key: "tallStruggle", emoji: "📏", caption: "Grootste lange-mensen-struggle" },
-  { key: "appGroupRole", emoji: "📱", caption: "Rol in de app-groep" },
+  { key: "borrelSuperpower", emoji: "⚡", caption: "Gekozen borrel-superkracht" },
 ];
 
 /** Round a mean to a clean whole-number headline. */

@@ -49,17 +49,19 @@ describe("getAggregate", () => {
 
   it("returns the modal answer for each closed stat/cluster question", () => {
     // borrelRole is a closed cluster question; make one option a strict majority.
+    const organisator =
+      "De regelaar: heeft pleisters, een powerbank en weet waar iedereen is";
     const responses = [
-      makeResponse({ borrelRole: "De organisator" }),
-      makeResponse({ borrelRole: "De organisator" }),
-      makeResponse({ borrelRole: "De sociale butterfly" }),
+      makeResponse({ borrelRole: organisator }),
+      makeResponse({ borrelRole: organisator }),
+      makeResponse({ borrelRole: "De social butterfly: praat met iedereen" }),
     ];
 
     const { modes } = aggregateResponses(responses);
     const role = modes.borrelRole;
 
     expect(role).toBeDefined();
-    expect(role?.option).toBe("De organisator");
+    expect(role?.option).toBe(organisator);
     expect(role?.count).toBe(2);
     expect(role?.share).toBeCloseTo(2 / 3);
   });

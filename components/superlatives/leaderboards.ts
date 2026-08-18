@@ -3,9 +3,9 @@
  *
  * `getSuperlatives()` turns the canonical {@link SurveyResponse} set into the
  * playful-records payload: a curated set of {@link Leaderboard}s celebrating
- * extremes and fun cuts of the club (tallest, most borrels, head-bump champion,
- * earliest/latest arriver, most-asked "hoe lang ben jij?") plus a
- * {@link ShowcaseQuote} strip of the three free-text answers.
+ * extremes and fun cuts of the club (tallest, most borrels, earliest/latest
+ * arriver, most-asked "hoe lang ben jij?") plus a {@link ShowcaseQuote} strip of
+ * the free-text answers.
  *
  * Everything is computed here at build/server time over `getResponses()` and
  * handed to the presentational components as plain, serialisable arrays — there
@@ -16,11 +16,7 @@
 
 import { getResponses } from "@/lib/data";
 import type { SurveyResponse, SurveyResponseKey } from "@/lib/data";
-import {
-  BORREL_ARRIVAL,
-  HEAD_BUMP,
-  HEIGHT_QUESTION_FREQ,
-} from "@/lib/data/schema";
+import { BORREL_ARRIVAL, HEIGHT_QUESTION_FREQ } from "@/lib/data/schema";
 
 /** One ranked person on a leaderboard. */
 export interface LeaderboardEntry {
@@ -122,15 +118,6 @@ const CATEGORIES: readonly Category[] = [
     hueVar: "--brand-ochre",
     metric: (r) => r.borrelCount,
     display: (r) => `${Math.round(r.borrelCount)} borrels`,
-  },
-  {
-    id: "hoofdstoot-kampioen",
-    emoji: "🤕",
-    title: "Hoofdstoot-kampioenen",
-    blurb: "Wie stoot het vaakst zijn hoofd tegen de wereld?",
-    hueVar: "--brand-wine",
-    metric: (r) => ordinalScore(HEAD_BUMP, r.headBump),
-    display: (r) => r.headBump,
   },
   {
     id: "vroege-vogels",

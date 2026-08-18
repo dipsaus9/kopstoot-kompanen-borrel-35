@@ -112,13 +112,12 @@ const ANSWER_CONFIG: readonly Omit<PersonAnswer, "value">[] = [
   { key: "idealBorrel", emoji: "✨", caption: "Ideale borrel" },
   { key: "borrelEnding", emoji: "🌙", caption: "Zo eindigt de borrel" },
   { key: "tallStruggle", emoji: "📏", caption: "Grootste lange-mensen-struggle" },
-  { key: "appGroupRole", emoji: "📱", caption: "Rol in de app-groep" },
+  { key: "borrelSuperpower", emoji: "⚡", caption: "Gekozen borrel-superkracht" },
 ];
 
 /** The free-text showcase questions, shown as the person's own quotes. */
 const QUOTE_CONFIG: readonly { key: SurveyResponseKey; label: string }[] = [
   { key: "kompaanIfSentence", label: "Je weet dat je een Kompaan bent als…" },
-  { key: "ultimateKompaanTrait", label: "De ultieme Kompaan-eigenschap" },
   { key: "heightRemark", label: "Lengte-opmerking waar ik klaar mee ben" },
 ];
 
