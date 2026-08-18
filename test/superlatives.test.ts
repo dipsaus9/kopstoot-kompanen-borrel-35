@@ -59,6 +59,20 @@ describe("getSuperlatives", () => {
     expect(board?.entries[0].value).toBe(`${maxBorrels} borrels`);
   });
 
+  it("ranks the youngest board by ascending age", () => {
+    const board = superlatives.leaderboards.find((b) => b.id === "jongste");
+    expect(board).toBeDefined();
+    const minAge = Math.min(...responses.map((r) => Math.round(r.age)));
+    expect(board?.entries[0].value).toBe(`${minAge} jaar`);
+  });
+
+  it("ranks the oldest board by descending age", () => {
+    const board = superlatives.leaderboards.find((b) => b.id === "oudste");
+    expect(board).toBeDefined();
+    const maxAge = Math.max(...responses.map((r) => Math.round(r.age)));
+    expect(board?.entries[0].value).toBe(`${maxAge} jaar`);
+  });
+
   it("showcases the three open-answer questions with attributed quotes", () => {
     expect(superlatives.quotes.length).toBeGreaterThan(0);
     const ids = new Set(superlatives.quotes.map((q) => q.id));
