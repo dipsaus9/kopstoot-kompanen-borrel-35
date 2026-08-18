@@ -14,7 +14,7 @@ const HEADER = [
   "Hoe jong ben je?",
   "Hoe lang ben je in centimeters? (je lichaamslengte dus)",
   "In welke provincie woon je?",
-  "Hoeveel borrels heb jij inmiddels op je naam staan?",
+  "Hoeveelste borrel wordt dit voor jou?",
   "Kom je borrelen zaterdag 29 augustus?",
   "Wat is jouw grootste lange-mensen-struggle?",
   "Waar zit jij het liefst in een vliegtuig?",
@@ -40,8 +40,8 @@ const HEADER = [
 /** A row whose answers exercise every kind of normalisation. */
 const VALID_ROW = [
   "14-8-2026 18:58:52",
-  "Testpersoon", // real name — dropped in favour of the nickname
-  "Tester",
+  "Testpersoon", // real name — used as the display name when unique
+  "Tester", // nickname — only appended to disambiguate shared real names
   "30",
   "185",
   "Utrecht",
@@ -81,8 +81,8 @@ describe("parseLiveResponses", () => {
     expect(rows).toHaveLength(1);
   });
 
-  it("picks the nickname column for the name (not the real name)", () => {
-    expect(rows[0].name).toBe("Tester");
+  it("uses the real name (not the nickname) when it is unique", () => {
+    expect(rows[0].name).toBe("Testpersoon");
   });
 
   it("parses numeric stats and Dutch ordinal borrel counts", () => {
@@ -122,6 +122,61 @@ describe("parseLiveResponses", () => {
   it("returns an empty array for a header-only or empty CSV", () => {
     expect(parseLiveResponses(toCsv([HEADER]))).toHaveLength(0);
     expect(parseLiveResponses("")).toHaveLength(0);
+  });
+});
+
+describe("form-drift normalisation fixes", () => {
+  /** Parse one row built from VALID_ROW with the given cell overrides. */
+  const parseOne = (overrides: Record<number, string>) => {
+    const cells = VALID_ROW.map((c, i) =>
+      i in overrides ? overrides[i] : c,
+    );
+    return parseLiveResponses(toCsv([HEADER, cells]))[0];
+  };
+
+  it("reads the newcomer borrel-count option as 1", () => {
+    // "Hoeveelste borrel wordt dit voor jou?" dropdown choice for first-timers.
+    expect(
+      parseOne({ 6: "Eerste maar ik zit al in de community" }).borrelCount,
+    ).toBe(1);
+  });
+
+  it("aliases the apostrophe-less arrival option back to canonical", () => {
+    expect(
+      parseOne({ 12: "Ik kom eraan!' terwijl ik nog thuis ben" }).borrelArrival,
+    ).toBe("'Ik kom eraan!' terwijl ik nog thuis ben");
+  });
+
+  it("falls back off-list cuisines to Anders instead of dropping the row", () => {
+    expect(parseOne({ 22: "Surinaams" }).cuisine).toBe("Anders");
+    expect(parseOne({ 22: "VEGAN BURGERS" }).cuisine).toBe("Anders");
+  });
+});
+
+describe("real-name display with nickname disambiguation", () => {
+  /** VALID_ROW with real name (col 1) and nickname (col 2) overridden. */
+  const rowWithName = (real: string, nick: string) =>
+    VALID_ROW.map((c, i) => (i === 1 ? real : i === 2 ? nick : c));
+
+  it("appends the nickname only when the real name is shared", () => {
+    const rows = parseLiveResponses(
+      toCsv([
+        HEADER,
+        rowWithName("Sam", "Sammie"),
+        rowWithName("Sam", "Sambal"),
+        rowWithName("Robin", "Rob"),
+      ]),
+    );
+    const names = rows.map((r) => r.name);
+    // The two Sams get their nickname in parentheses; unique Robin stays bare.
+    expect(names).toContain("Sam (Sammie)");
+    expect(names).toContain("Sam (Sambal)");
+    expect(names).toContain("Robin");
+  });
+
+  it("falls back to the nickname when the real name is blank", () => {
+    const [row] = parseLiveResponses(toCsv([HEADER, rowWithName("", "Nicky")]));
+    expect(row.name).toBe("Nicky");
   });
 });
 

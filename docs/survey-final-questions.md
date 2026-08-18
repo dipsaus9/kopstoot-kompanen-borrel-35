@@ -28,7 +28,7 @@ Dutch question text is preserved as it will appear in the form; annotations are 
 | 2 | Hoe jong ben je? | number | ● | leeftijd in hele jaren | stat | ✓ |
 | 3 | Hoe lang ben je in centimeters? | number | ● | lichaamslengte in cm (3 cijfers, ~100–230) | stat | ✓ |
 | 4 | Uit welke provincie kom je? | single | ● | Groningen · Friesland · Drenthe · Overijssel · Flevoland · Gelderland · Utrecht · Noord-Holland · Zuid-Holland · Zeeland · Noord-Brabant · Limburg · Buiten Nederland | stat | ✓ |
-| 5 | Hoeveel borrels heb jij inmiddels op je naam staan? | number | ● | aantal (hele getallen) | stat | ✓ |
+| 5 | Hoeveelste borrel wordt dit voor jou? | number | ● | aantal (hele getallen) | stat | ✓ |
 | 6 | Kom je borrelen zaterdag 29 augustus? | single | ● | Uiteraard. Mijn kleedje ligt al klaar! · Ik ben nog in onderhandeling met mijn verantwoordelijkheden… · Ik wil graag, maar durf nog niet (app Biko, Jolie, Iris, Cait of Emma) · Ik moet de haren op mijn hoofd tellen · Ik ben verhinderd door een ernstig geval van slechte prioriteiten | stat (RSVP) | — |
 
 **Notes**
