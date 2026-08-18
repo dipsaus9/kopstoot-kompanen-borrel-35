@@ -57,9 +57,9 @@ interface ClusterSummary {
   readonly name: null;
   /**
    * The cluster's centroid in encoded feature space, row-aligned with
-   * `featureLabels`. Consumed by `lib/aggregate/archetype.ts` to assign ANY
-   * response (including live respondents never in this baked clustering) to its
-   * nearest fixed type by Euclidean distance.
+   * `featureLabels`. Provenance only — runtime archetype resolution is now
+   * signature-based (`lib/aggregate/archetype.ts`), not distance-to-centroid;
+   * this stays as the raw material behind each type's `signature`.
    */
   readonly centroid: readonly number[];
   /** Dominant answer per cluster question — the naming raw material. */
@@ -96,10 +96,12 @@ function dominantAnswer(
 }
 
 async function main(): Promise<void> {
-  // The baked clustering DEFINES the six fixed types (their names + art live in
-  // `content/archetypes`), so it must stay deterministic — cluster the committed
-  // mock CSV, never the live sheet. Live respondents are assigned to the nearest
-  // of these frozen centroids at render time (`lib/aggregate/archetype.ts`).
+  // The baked clustering is naming raw material only: it surfaces each cluster's
+  // dominant-answer signature so a human can author the six fixed types (names,
+  // art and `signature` in `content/archetypes`). Runtime resolution is
+  // signature-based, not distance-to-centroid (`lib/aggregate/archetype.ts`), so
+  // this stays deterministic over the committed `data/responses.csv` (now the
+  // real Google-Form export — refresh it via `import-live.ts`).
   const responses = parseResponses(readFileSync(SOURCE_PATH, "utf8"));
   const { matrix, dimensions, featureLabels } = encodeResponses(responses);
 

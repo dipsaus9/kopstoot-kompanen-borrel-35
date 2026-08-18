@@ -19,9 +19,11 @@
  *      the committed mock — a live outage must never break the build or render.
  *
  * Every schema field maps to a real form column, so there are no synthetic
- * defaults. Some form columns (timestamp, the real-name field, consent
- * checkboxes, the open "grootste zonde" and "tips/tops" remarks) have no schema
- * field and are simply dropped.
+ * defaults. The `name` field takes the real name ("Hoe heet je?"); the nickname
+ * column is only appended in parentheses to disambiguate people who share a real
+ * name (and is the fallback when the real name is blank). Other form columns
+ * (timestamp, consent checkboxes, the open "grootste zonde" and "tips/tops"
+ * remarks) have no schema field and are simply dropped.
  */
 
 import { SHEET_CSV_URL } from "@/lib/config";
@@ -130,6 +132,9 @@ const TENS: Readonly<Record<string, number>> = {
 /** Parse a Dutch ordinal word (or a plain number) to its integer, or `""`. */
 const dutchOrdinal: Normaliser = (raw) => {
   const s = raw.toLowerCase().trim().replace(/\s+/g, "");
+  // Newcomer dropdown choice on "Hoeveelste borrel wordt dit voor jou?": this is
+  // their first borrel, so it counts as 1 (the bare ordinal parse can't read it).
+  if (s.startsWith("eerstemaarikzitalindecommunity")) return "1";
   if (ORDINALS[s] !== undefined) return String(ORDINALS[s]);
   if (s.includes("-en-")) {
     const [unit, tensWord] = s.split("-en-");
@@ -154,18 +159,22 @@ interface FieldMapping {
 }
 
 const MAPPINGS: readonly FieldMapping[] = [
-  // Prefer the "bijnaam / hoe mogen we je noemen" column over the real name.
-  { key: "name", header: "bijnaam", normalise: identity },
+  // Display the real name ("Hoe heet je?"); the nickname is only appended, in
+  // parentheses, to disambiguate people who share a real name (see the dedup
+  // pass in parseLiveResponses). Falls back to the nickname if the real name is
+  // blank.
+  { key: "name", header: "hoe heet je", normalise: identity },
   { key: "age", header: "hoe jong ben je", normalise: numeric },
   { key: "heightCm", header: "hoe lang ben je in centimeters", normalise: numeric },
   { key: "province", header: "provincie", normalise: optionMatcher(PROVINCES) },
-  { key: "borrelCount", header: "hoeveel borrels", normalise: dutchOrdinal },
+  { key: "borrelCount", header: "hoeveelste borrel", normalise: dutchOrdinal },
   { key: "rsvp", header: "kom je borrelen", normalise: optionMatcher(RSVP) },
   { key: "tallStruggle", header: "lange-mensen-struggle", normalise: firstOf(TALL_STRUGGLE) },
   { key: "planeSeat", header: "vliegtuig", normalise: optionMatcher(PLANE_SEAT) },
   { key: "heightQuestionFreq", header: "hoe vaak krijg jij de vraag", normalise: optionMatcher(HEIGHT_QUESTION_FREQ) },
   { key: "tallAdvantage", header: "grootste voordeel van lang", normalise: optionMatcher(TALL_ADVANTAGE) },
-  { key: "borrelArrival", header: "wanneer maak jij meestal je entree", normalise: optionMatcher(BORREL_ARRIVAL) },
+  // The form dropped the schema option's leading apostrophe, so alias it back.
+  { key: "borrelArrival", header: "wanneer maak jij meestal je entree", normalise: optionMatcher(BORREL_ARRIVAL, { "Ik kom eraan!' terwijl ik nog thuis ben": "'Ik kom eraan!' terwijl ik nog thuis ben" }) },
   { key: "borrelEnding", header: "hoe eindigt jouw gemiddelde", normalise: optionMatcher(BORREL_ENDING) },
   { key: "idealBorrel", header: "ideale borrel", normalise: optionMatcher(IDEAL_BORREL) },
   { key: "borrelRole", header: "op een borrel ben ik meestal", normalise: optionMatcher(BORREL_ROLE) },
@@ -175,8 +184,10 @@ const MAPPINGS: readonly FieldMapping[] = [
   { key: "cityNature", header: "kies je habitat", normalise: optionMatcher(CITY_NATURE) },
   { key: "planSpontaneous", header: "plannen of spontaan afspreken", normalise: optionMatcher(PLAN_SPONTANEOUS) },
   { key: "festivalTerrace", header: "vrije zomerdag", normalise: optionMatcher(FESTIVAL_TERRACE) },
-  // The form spells this option "ALLES" (uppercase); the schema canonical is "Alles".
-  { key: "cuisine", header: "lievelingskeuken", normalise: optionMatcher(CUISINE, { ALLES: "Alles" }) },
+  // The form spells "Alles" uppercase; any off-list cuisine (Surinaams, a typed
+  // "Anders, namelijk…") falls back to the "Anders" option instead of dropping
+  // the whole respondent.
+  { key: "cuisine", header: "lievelingskeuken", normalise: (raw) => optionMatcher(CUISINE, { ALLES: "Alles" })(raw) || "Anders" },
   { key: "kompaanIfSentence", header: "je weet dat je een kompaan bent", normalise: identity },
   { key: "heightRemark", header: "met pensioen", normalise: identity },
 ];
@@ -195,8 +206,14 @@ export function parseLiveResponses(csvText: string): SurveyResponse[] {
     const index = header.findIndex((h) => h.includes(mapping.header));
     if (index !== -1) columnByKey.set(mapping.key, index);
   }
+  const nickIndex = header.findIndex((h) => h.includes("bijnaam"));
 
-  const out: SurveyResponse[] = [];
+  // Parse each row, keeping the nickname beside the record so the dedup pass
+  // below can disambiguate shared real names without re-reading the CSV.
+  const parsed: {
+    record: Record<string, string | number>;
+    nickname: string;
+  }[] = [];
   rows.slice(1).forEach((cells, i) => {
     // Skip fully blank rows (trailing newline, cleared submissions).
     if (cells.every((c) => c.trim() === "")) return;
@@ -207,18 +224,36 @@ export function parseLiveResponses(csvText: string): SurveyResponse[] {
       raw[mapping.key] = index === undefined ? "" : mapping.normalise(cells[index] ?? "");
     }
 
+    const nickname = nickIndex === -1 ? "" : (cells[nickIndex] ?? "").trim();
+    // Fall back to the nickname when the real-name cell is blank.
+    if (raw.name === "") raw.name = nickname;
+
     try {
       const record: Record<string, string | number> = {};
       for (const field of QUESTIONS) {
         record[field.key] = validateCell(field, raw[field.key] ?? "", i + 2);
       }
-      out.push(record as unknown as SurveyResponse);
+      parsed.push({ record, nickname });
     } catch {
       // Unmappable / invalid row — drop it rather than fail the whole dataset.
     }
   });
 
-  return out;
+  // Disambiguate shared real names: only when a real name occurs more than once
+  // do we append that person's nickname in parentheses (e.g. "Gijs (Biko)").
+  const nameCounts = new Map<string, number>();
+  for (const { record } of parsed) {
+    const name = String(record.name);
+    nameCounts.set(name, (nameCounts.get(name) ?? 0) + 1);
+  }
+  for (const { record, nickname } of parsed) {
+    const name = String(record.name);
+    if ((nameCounts.get(name) ?? 0) > 1 && nickname && nickname !== name) {
+      record.name = `${name} (${nickname})`;
+    }
+  }
+
+  return parsed.map(({ record }) => record as unknown as SurveyResponse);
 }
 
 /**

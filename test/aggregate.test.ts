@@ -13,7 +13,6 @@ import { getResponses, QUESTIONS } from "@/lib/data";
 import type { SurveyResponse } from "@/lib/data";
 import type { QuestionField } from "@/lib/data/schema";
 import { ARCHETYPES } from "@/content/archetypes";
-import archetypeData from "@/scripts/archetypes/archetypes.json";
 
 /** Build a valid response, defaulting every closed answer to its first option. */
 function makeResponse(overrides: Partial<SurveyResponse> = {}): SurveyResponse {
@@ -159,33 +158,67 @@ describe("computeMatch", () => {
 });
 
 describe("resolveArchetype", () => {
-  it("resolves a response to its cluster's named archetype", async () => {
-    const responses = await getResponses();
-    const assignments = archetypeData.assignments as ReadonlyArray<{
-      readonly cluster: number;
-    }>;
-
-    responses.forEach((response, index) => {
-      const archetype = resolveArchetype(response);
-      const expected = ARCHETYPES.find(
-        (a) => a.sourceClusterId === assignments[index].cluster,
-      );
-      expect(expected).toBeDefined();
-      expect(archetype.id).toBe(expected!.id);
-      expect(archetype.sourceClusterId).toBe(assignments[index].cluster);
+  // A response whose every signature-keyed answer is an option NO archetype
+  // scores on, so each test can add only the defining answers it means to test
+  // without stray signature hits tilting the result. The one unavoidable
+  // baseline is planSpontaneous (binary): "Plannen" gives the park professional
+  // a single point, which every targeted signature below is built to clear.
+  const neutral = (overrides: Partial<SurveyResponse> = {}): SurveyResponse =>
+    makeResponse({
+      festivalTerrace: "Terras",
+      planSpontaneous: "Plannen",
+      idealBorrel: "Themaborrel",
+      borrelArrival: "Keurig op tijd",
+      borrelEnding: "Bij de snackbar of El Greco",
+      borrelRole: "De wandelende podcast: stopt simpelweg niet met praten",
+      drink: "Water, hydratatiekoning(in) that I am",
+      earlyBedLate: "Dat zei ik vorige keer ook...",
+      cityNature: "Natuur",
+      borrelSuperpower: "Altijd zichtbaar op de groepsfoto",
+      ...overrides,
     });
+
+  it("maps a Salmari drinker to the Salmari-Soldaat", () => {
+    expect(
+      resolveArchetype(neutral({ drink: "Salmari. Geen verdere vragen." })).id,
+    ).toBe("salmari-soldaat");
   });
 
-  it("resolves the first respondent (Gijs, cluster 0) to the park professional", async () => {
-    const [gijs] = await getResponses();
-    expect(resolveArchetype(gijs).id).toBe("parkborrelprofessional");
+  it("maps an after-going night owl to the Lange Nachtbraker", () => {
+    const owl = neutral({
+      borrelEnding:
+        "Op een after waarvan ik het bestaan twee uur geleden nog niet kende",
+      earlyBedLate:
+        "Helemaal niets. In mijn woordenboek is dit een betekenisloze zin.",
+    });
+    expect(resolveArchetype(owl).id).toBe("lange-nachtbraker");
   });
 
-  it("assigns any response never in the baked clustering to a fixed type", () => {
-    // A freshly built response (a stand-in for a live respondent) has no baked
-    // assignment, yet nearest-centroid still maps it onto one of the six fixed
-    // archetypes instead of throwing.
-    const archetype = resolveArchetype(makeResponse());
-    expect(ARCHETYPES).toContainEqual(archetype);
+  it("maps a wijn-drinking early sleeper to the Bedtijd-Baron", () => {
+    const baron = neutral({
+      drink: "Wijn",
+      earlyBedLate: "Lekker vroeg onder de wol en morgen fris en fruitig",
+    });
+    expect(resolveArchetype(baron).id).toBe("bedtijd-baron");
+  });
+
+  it("maps a festival-going party spontaan to the Festival-Flamingo", () => {
+    const flamingo = neutral({
+      festivalTerrace: "Festival",
+      idealBorrel: "Feestborrel",
+    });
+    expect(resolveArchetype(flamingo).id).toBe("festival-flamingo");
+  });
+
+  it("is deterministic: same response always resolves the same type", () => {
+    const response = makeResponse();
+    expect(resolveArchetype(response).id).toBe(resolveArchetype(response).id);
+  });
+
+  it("resolves every real response to one of the six fixed types", async () => {
+    const responses = await getResponses();
+    responses.forEach((response) => {
+      expect(ARCHETYPES).toContainEqual(resolveArchetype(response));
+    });
   });
 });

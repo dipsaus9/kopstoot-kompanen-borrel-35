@@ -282,7 +282,7 @@ export const QUESTIONS: readonly QuestionField[] = [
   { key: "age", number: 2, label: "Hoe jong ben je?", role: "stat", type: "number", min: 16, max: 120 },
   { key: "heightCm", number: 3, label: "Hoe lang ben je in centimeters?", role: "stat", type: "number", min: 100, max: 230 },
   { key: "province", number: 4, label: "In welke provincie woon je?", role: "stat", type: "single", encoding: "nominal", options: PROVINCES },
-  { key: "borrelCount", number: 5, label: "Hoeveel borrels heb jij inmiddels op je naam staan?", role: "stat", type: "number", min: 0, max: 1000 },
+  { key: "borrelCount", number: 5, label: "Hoeveelste borrel wordt dit voor jou?", role: "stat", type: "number", min: 0, max: 1000 },
   { key: "rsvp", number: 6, label: "Kom je borrelen zaterdag 29 augustus?", role: "stat", type: "single", encoding: "none", options: RSVP },
   { key: "tallStruggle", number: 7, label: "Wat is jouw grootste lange-mensen-struggle?", role: "cluster", type: "single", encoding: "nominal", options: TALL_STRUGGLE },
   { key: "planeSeat", number: 8, label: "Waar zit jij het liefst in een vliegtuig?", role: "cluster", type: "single", encoding: "nominal", options: PLANE_SEAT },
