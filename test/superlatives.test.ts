@@ -2,6 +2,7 @@ import { beforeAll, describe, expect, it } from "vitest";
 
 import { getSuperlatives } from "@/components/superlatives";
 import { getResponses } from "@/lib/data";
+import { ARCHETYPES } from "@/content/archetypes";
 
 describe("getSuperlatives", () => {
   let superlatives: Awaited<ReturnType<typeof getSuperlatives>>;
@@ -57,6 +58,38 @@ describe("getSuperlatives", () => {
       ...responses.map((r) => Math.round(r.borrelCount)),
     );
     expect(board?.entries[0].value).toBe(`${maxBorrels} borrels`);
+  });
+
+  it("summarises the club with headline stats", () => {
+    expect(superlatives.stats.length).toBe(2);
+
+    const biggest = superlatives.stats.find((s) => s.id === "grootste-groep");
+    expect(biggest).toBeDefined();
+    // The value is a real archetype name and the caption cites the total.
+    const names = new Set(ARCHETYPES.map((a) => a.name));
+    expect(names.has(biggest!.value)).toBe(true);
+    expect(biggest!.caption).toContain(`van de ${responses.length}`);
+
+    const avg = superlatives.stats.find((s) => s.id === "gemiddelde-kompaan");
+    expect(avg).toBeDefined();
+    const avgAge = Math.round(
+      responses.reduce((sum, r) => sum + r.age, 0) / responses.length,
+    );
+    expect(avg!.value).toBe(`${avgAge} jaar`);
+  });
+
+  it("ranks the youngest board by ascending age", () => {
+    const board = superlatives.leaderboards.find((b) => b.id === "jongste");
+    expect(board).toBeDefined();
+    const minAge = Math.min(...responses.map((r) => Math.round(r.age)));
+    expect(board?.entries[0].value).toBe(`${minAge} jaar`);
+  });
+
+  it("ranks the oldest board by descending age", () => {
+    const board = superlatives.leaderboards.find((b) => b.id === "oudste");
+    expect(board).toBeDefined();
+    const maxAge = Math.max(...responses.map((r) => Math.round(r.age)));
+    expect(board?.entries[0].value).toBe(`${maxAge} jaar`);
   });
 
   it("showcases the three open-answer questions with attributed quotes", () => {

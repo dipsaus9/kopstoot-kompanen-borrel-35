@@ -12,6 +12,7 @@
 import { LeaderboardTile } from "./leaderboard-tile";
 import type { Superlatives } from "./leaderboards";
 import { QuoteStrip } from "./quote-strip";
+import { StatTile } from "./stat-tile";
 
 export interface SuperlativesViewProps {
   /** The precomputed superlatives payload to render. */
@@ -19,7 +20,7 @@ export interface SuperlativesViewProps {
 }
 
 export function SuperlativesView({ superlatives }: SuperlativesViewProps) {
-  const { count, leaderboards, quotes } = superlatives;
+  const { count, stats, leaderboards, quotes } = superlatives;
 
   return (
     <div className="flex flex-col gap-stack-lg">
@@ -35,6 +36,22 @@ export function SuperlativesView({ superlatives }: SuperlativesViewProps) {
           een handvol eretitels en de mooiste antwoorden in hun eigen woorden.
         </p>
       </header>
+
+      {stats.length > 0 && (
+        <section aria-labelledby="stats-heading">
+          <h2
+            id="stats-heading"
+            className="mb-stack-md text-headline font-black tracking-heading text-foreground"
+          >
+            In één oogopslag
+          </h2>
+          <div className="grid grid-cols-1 gap-stack-md sm:grid-cols-2">
+            {stats.map((stat) => (
+              <StatTile key={stat.id} stat={stat} />
+            ))}
+          </div>
+        </section>
+      )}
 
       <section aria-labelledby="records-heading">
         <h2
