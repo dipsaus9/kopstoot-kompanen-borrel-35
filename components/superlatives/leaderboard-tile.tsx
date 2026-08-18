@@ -65,12 +65,14 @@ export function LeaderboardTile({ leaderboard }: LeaderboardTileProps) {
               >
                 {entry.rank}
               </span>
-              <span className="min-w-0 flex-1 truncate text-body font-bold leading-body text-foreground">
-                {entry.name}
-              </span>
-              <span className="min-w-0 max-w-[55%] break-words text-right text-body font-black leading-body tabular-nums text-primary">
-                {entry.value}
-              </span>
+              <div className="flex min-w-0 flex-1 flex-col">
+                <span className="break-words text-body font-bold leading-body text-foreground">
+                  {entry.name}
+                </span>
+                <span className="break-words text-body font-black leading-body tabular-nums text-primary">
+                  {entry.value}
+                </span>
+              </div>
             </li>
           ))}
         </ol>
