@@ -82,6 +82,16 @@ describe("getSuperlatives", () => {
     }
   });
 
+  it("includes every non-empty showcase answer (no per-question cap)", () => {
+    const showcaseKeys = ["kompaanIfSentence", "heightRemark"] as const;
+    const nonEmpty = showcaseKeys.reduce(
+      (total, key) =>
+        total + responses.filter((r) => String(r[key]).trim() !== "").length,
+      0,
+    );
+    expect(superlatives.quotes.length).toBe(nonEmpty);
+  });
+
   it("surfaces the newest respondents first (so new answers appear)", () => {
     const key = "kompaanIfSentence";
     // The live sheet appends new rows, so the newest answer is the last one.
