@@ -212,25 +212,26 @@ const QUOTE_CONFIG: readonly {
   },
 ];
 
-/** How many quotes, at most, to show per showcase question in the strip. */
-const QUOTES_PER_QUESTION = 4;
-
 /**
- * Collect the showcase quote strip: up to {@link QUOTES_PER_QUESTION} non-empty
- * answers per question, interleaved round-robin so every showcase question is
- * represented (rather than one long block from a single question).
+ * Collect the showcase quote strip: every non-empty answer per question,
+ * interleaved round-robin so both showcase questions stay represented (rather
+ * than one long block from a single question).
+ *
+ * Newest respondents first: the live sheet appends new submissions at the end,
+ * so we walk the responses in reverse — otherwise a newly added answer would
+ * sort to the very bottom of the strip instead of showing up near the top.
  */
 function buildQuotes(
   responses: readonly SurveyResponse[],
 ): readonly ShowcaseQuote[] {
+  const newestFirst = [...responses].reverse();
   const perQuestion = QUOTE_CONFIG.map((config) =>
-    responses
+    newestFirst
       .map((response) => ({
         author: response.name,
         text: String(response[config.key]).trim(),
       }))
       .filter((row) => row.text !== "")
-      .slice(0, QUOTES_PER_QUESTION)
       .map((row, index) => ({
         id: `${config.key}-${index}`,
         emoji: config.emoji,
