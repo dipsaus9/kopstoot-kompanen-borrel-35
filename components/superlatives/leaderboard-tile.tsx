@@ -68,7 +68,7 @@ export function LeaderboardTile({ leaderboard }: LeaderboardTileProps) {
               <span className="min-w-0 flex-1 truncate text-body font-bold leading-body text-foreground">
                 {entry.name}
               </span>
-              <span className="shrink-0 text-body font-black leading-body tabular-nums text-primary">
+              <span className="min-w-0 max-w-[55%] break-words text-right text-body font-black leading-body tabular-nums text-primary">
                 {entry.value}
               </span>
             </li>
