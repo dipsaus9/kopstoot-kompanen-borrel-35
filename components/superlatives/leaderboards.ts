@@ -18,6 +18,8 @@
 
 import { getResponses } from "@/lib/data";
 import type { SurveyResponse, SurveyResponseKey } from "@/lib/data";
+import { resolveArchetype } from "@/lib/aggregate";
+import { ARCHETYPES } from "@/content/archetypes";
 
 /** One ranked person on a leaderboard. */
 export interface LeaderboardEntry {
@@ -59,10 +61,26 @@ export interface ShowcaseQuote {
   readonly text: string;
 }
 
+/** One at-a-glance headline stat about the whole club. */
+export interface ShowcaseStat {
+  /** Stable slug (React key). */
+  readonly id: string;
+  /** Emoji badge. */
+  readonly emoji: string;
+  /** Eyebrow label above the value. */
+  readonly label: string;
+  /** The big headline value (e.g. an archetype name, "31 jaar"). */
+  readonly value: string;
+  /** Supporting line under the value. */
+  readonly caption: string;
+}
+
 /** The full superlatives payload for the /superlatieven view. */
 export interface Superlatives {
   /** Number of responses the records are drawn from. */
   readonly count: number;
+  /** At-a-glance headline stats about the whole club. */
+  readonly stats: readonly ShowcaseStat[];
   /** The curated superlative leaderboards, in reading order. */
   readonly leaderboards: readonly Leaderboard[];
   /** The showcase quote strip (non-empty answers only). */
@@ -233,15 +251,71 @@ function buildQuotes(
   return quotes;
 }
 
+/** Arithmetic mean of the numbers, or 0 for an empty list. */
+function mean(numbers: readonly number[]): number {
+  if (numbers.length === 0) return 0;
+  return numbers.reduce((sum, n) => sum + n, 0) / numbers.length;
+}
+
 /**
- * The full superlatives payload — leaderboards and the showcase quote strip —
- * computed over the whole dataset at build/server time only (no runtime fetch,
- * no browser access).
+ * At-a-glance headline stats about the whole club: the biggest archetype group
+ * (which "typetje" the most Kompanen resolve to) and the average Kompaan
+ * (mean age and height). Empty when there are no responses.
+ */
+function buildStats(
+  responses: readonly SurveyResponse[],
+): readonly ShowcaseStat[] {
+  if (responses.length === 0) return [];
+  const total = responses.length;
+
+  // Tally each response's archetype; pick the largest group, breaking ties by
+  // ARCHETYPES declaration order so the winner is deterministic.
+  const counts = new Map<string, number>();
+  for (const response of responses) {
+    const { id } = resolveArchetype(response);
+    counts.set(id, (counts.get(id) ?? 0) + 1);
+  }
+  let biggest = ARCHETYPES[0];
+  let biggestCount = 0;
+  for (const archetype of ARCHETYPES) {
+    const size = counts.get(archetype.id) ?? 0;
+    if (size > biggestCount) {
+      biggestCount = size;
+      biggest = archetype;
+    }
+  }
+
+  const avgAge = Math.round(mean(responses.map((r) => r.age)));
+  const avgHeight = Math.round(mean(responses.map((r) => r.heightCm)));
+
+  return [
+    {
+      id: "grootste-groep",
+      emoji: "🎭",
+      label: "Grootste groep",
+      value: biggest.name,
+      caption: `${biggestCount} van de ${total} Kompanen`,
+    },
+    {
+      id: "gemiddelde-kompaan",
+      emoji: "📊",
+      label: "De gemiddelde Kompaan",
+      value: `${avgAge} jaar`,
+      caption: `en gemiddeld ${avgHeight} cm lang`,
+    },
+  ];
+}
+
+/**
+ * The full superlatives payload — headline stats, leaderboards and the showcase
+ * quote strip — computed over the whole dataset at build/server time only (no
+ * runtime fetch, no browser access).
  */
 export async function getSuperlatives(): Promise<Superlatives> {
   const responses = await getResponses();
   return {
     count: responses.length,
+    stats: buildStats(responses),
     leaderboards: CATEGORIES.map((category) =>
       buildLeaderboard(responses, category),
     ),
