@@ -134,11 +134,24 @@ describe("form-drift normalisation fixes", () => {
     return parseLiveResponses(toCsv([HEADER, cells]))[0];
   };
 
-  it("reads the newcomer borrel-count option as 1", () => {
-    // "Hoeveelste borrel wordt dit voor jou?" dropdown choice for first-timers.
+  it("reads newcomer borrel-count answers (leading ordinal) as that number", () => {
+    // First-timers phrase it freely; a leading ordinal word wins over the trail.
     expect(
       parseOne({ 6: "Eerste maar ik zit al in de community" }).borrelCount,
     ).toBe(1);
+    expect(
+      parseOne({ 6: "Eerste; ik zit nog in de wachtkamer" }).borrelCount,
+    ).toBe(1);
+    expect(parseOne({ 6: "Tweede borrel al" }).borrelCount).toBe(2);
+  });
+
+  it("maps a comma-containing option sent with curly quotes", () => {
+    // The form emits curly ‘’ where the schema option uses straight '.
+    const canonical =
+      "'Jeetje, wat ben jij lang!', bedankt, was me nog niet opgevallen";
+    const asSentByForm =
+      "‘Jeetje, wat ben jij lang!’, bedankt, was me nog niet opgevallen";
+    expect(parseOne({ 8: asSentByForm }).tallStruggle).toBe(canonical);
   });
 
   it("aliases the apostrophe-less arrival option back to canonical", () => {
