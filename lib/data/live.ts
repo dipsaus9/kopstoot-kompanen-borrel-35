@@ -13,7 +13,7 @@
  *      {@link validateCell} the mock parser uses. Rows that cannot be mapped or
  *      fail validation are **skipped**, never thrown on.
  *   2. `loadLiveResponses()` — async. Fetch the export at request time with Next
- *      ISR (hourly revalidation) and hand the text to the parser. Any network /
+ *      ISR (5-minute revalidation) and hand the text to the parser. Any network /
  *      non-200 / parse failure resolves to `null` so the caller can fall back to
  *      the committed mock — a live outage must never break the build or render.
  *
@@ -281,7 +281,7 @@ export function parseLiveResponses(csvText: string): SurveyResponse[] {
 }
 
 /**
- * Fetch and parse the live responses with Next ISR (hourly revalidation).
+ * Fetch and parse the live responses with Next ISR (5-minute revalidation).
  * Returns `null` on any network / non-200 / parse failure so the caller can
  * fall back to the committed mock — the render must never depend on the sheet
  * being reachable. Skipped entirely under the unit-test runner so tests stay
@@ -291,7 +291,7 @@ export async function loadLiveResponses(): Promise<SurveyResponse[] | null> {
   if (process.env.VITEST || process.env.NODE_ENV === "test") return null;
 
   try {
-    const response = await fetch(SHEET_CSV_URL, { next: { revalidate: 3600 } });
+    const response = await fetch(SHEET_CSV_URL, { next: { revalidate: 300 } });
     if (!response.ok) {
       console.warn(
         `[data] live sheet returned ${response.status}; falling back to mock.`,
