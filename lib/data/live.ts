@@ -58,10 +58,13 @@ import {
  *  empty result makes {@link validateCell} reject the row, which we skip. */
 type Normaliser = (raw: string) => string;
 
-/** Strip emoji, variation selectors and ZWJ, then trim surrounding whitespace. */
+/** Strip emoji, fold typographic quotes to ASCII (the form emits curly ‘’ “”
+ *  while the schema options use straight ' "), collapse whitespace, then trim. */
 function clean(raw: string): string {
   return raw
     .replace(/[\p{Extended_Pictographic}️‍]/gu, "")
+    .replace(/[‘’‚‛]/g, "'")
+    .replace(/[“”„‟]/g, '"')
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -87,10 +90,16 @@ function optionMatcher(
   };
 }
 
-/** Multi-select column: pick the first comma-separated token that maps. */
+/** Multi-select column: pick the first selected option that maps. Tries the
+ *  whole answer first (so an option that itself contains ", " — e.g. "'Jeetje,
+ *  wat ben jij lang!', bedankt, was me nog niet opgevallen" — matches by exact
+ *  or prefix before we naively split), then falls back to comma-separated
+ *  tokens. */
 function firstOf(options: readonly string[], aliases = {}): Normaliser {
   const match = optionMatcher(options, aliases);
   return (raw) => {
+    const whole = match(raw);
+    if (whole) return whole;
     for (const token of raw.split(", ")) {
       const mapped = match(token);
       if (mapped) return mapped;
@@ -129,12 +138,14 @@ const TENS: Readonly<Record<string, number>> = {
   tachtig: 80, negentig: 90,
 };
 
+/** Ordinal words longest-first, so a leading ordinal is matched greedily. */
+const ORDINAL_WORDS_DESC = Object.keys(ORDINALS).sort(
+  (a, b) => b.length - a.length,
+);
+
 /** Parse a Dutch ordinal word (or a plain number) to its integer, or `""`. */
 const dutchOrdinal: Normaliser = (raw) => {
   const s = raw.toLowerCase().trim().replace(/\s+/g, "");
-  // Newcomer dropdown choice on "Hoeveelste borrel wordt dit voor jou?": this is
-  // their first borrel, so it counts as 1 (the bare ordinal parse can't read it).
-  if (s.startsWith("eerstemaarikzitalindecommunity")) return "1";
   if (ORDINALS[s] !== undefined) return String(ORDINALS[s]);
   if (s.includes("-en-")) {
     const [unit, tensWord] = s.split("-en-");
@@ -142,6 +153,12 @@ const dutchOrdinal: Normaliser = (raw) => {
     if (UNITS[unit] !== undefined && tens !== undefined) {
       return String(tens + UNITS[unit]);
     }
+  }
+  // A leading ordinal word with trailing free text — the newcomer dropdown
+  // choices "Eerste maar ik zit al in de community" / "Eerste; ik zit nog in de
+  // wachtkamer" all mean this is their first borrel, so count it as that ordinal.
+  for (const word of ORDINAL_WORDS_DESC) {
+    if (s.startsWith(word)) return String(ORDINALS[word]);
   }
   return numeric(raw);
 };
@@ -214,9 +231,11 @@ export function parseLiveResponses(csvText: string): SurveyResponse[] {
     record: Record<string, string | number>;
     nickname: string;
   }[] = [];
+  let considered = 0; // non-blank submissions seen (denominator for the summary)
   rows.slice(1).forEach((cells, i) => {
     // Skip fully blank rows (trailing newline, cleared submissions).
     if (cells.every((c) => c.trim() === "")) return;
+    considered += 1;
 
     const raw: Record<string, string> = {};
     for (const mapping of MAPPINGS) {
@@ -234,8 +253,16 @@ export function parseLiveResponses(csvText: string): SurveyResponse[] {
         record[field.key] = validateCell(field, raw[field.key] ?? "", i + 2);
       }
       parsed.push({ record, nickname });
-    } catch {
-      // Unmappable / invalid row — drop it rather than fail the whole dataset.
+    } catch (error) {
+      // Unmappable / invalid row — drop it rather than fail the whole dataset,
+      // but log WHO fell out and WHY so form drift (a renamed option, a new
+      // answer) is visible in the server logs instead of silently shrinking the
+      // dataset. Stays quiet under the test runner.
+      if (process.env.VITEST !== "true" && process.env.NODE_ENV !== "test") {
+        const who = raw.name || nickname || `rij ${i + 2}`;
+        const reason = error instanceof Error ? error.message : String(error);
+        console.warn(`[data] respondent overgeslagen — ${who}: ${reason}`);
+      }
     }
   });
 
@@ -251,6 +278,17 @@ export function parseLiveResponses(csvText: string): SurveyResponse[] {
     if ((nameCounts.get(name) ?? 0) > 1 && nickname && nickname !== name) {
       record.name = `${name} (${nickname})`;
     }
+  }
+
+  const skipped = considered - parsed.length;
+  if (
+    skipped > 0 &&
+    process.env.VITEST !== "true" &&
+    process.env.NODE_ENV !== "test"
+  ) {
+    console.warn(
+      `[data] ${skipped} van ${considered} respondenten overgeslagen (zie regels hierboven).`,
+    );
   }
 
   return parsed.map(({ record }) => record as unknown as SurveyResponse);
